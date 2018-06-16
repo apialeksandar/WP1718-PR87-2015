@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="proba.css">
+		<script src="Scripts/jquery-1.10.2.js"></script>
+		<script type="text/javascript">
+		function openPage(pageName, elmnt, color) {
+		// Hide all elements with class="tabcontent" by default */
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		// Remove the background color of all tablinks/buttons
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].style.backgroundColor = "";
+		}
+
+		// Show the specific tab content
+		document.getElementById(pageName).style.display = "block";
+
+		// Add the specific color to the button used to open the tab content
+		elmnt.style.backgroundColor = color;
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+	</script>
+	</head>
+	<body>
+		<h1>VOZAC</h1>
+	<!-- Tab links -->
+	
+		<button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
+		<button class="tablink" onclick="openPage('My Profile', this)">My Profile</button>
+		<button class="tablink" onclick="openPage('Lokacija', this)">Lokacija</button>
+		<button class="tablink" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
+
+		<div id="Pocetna" class="tabcontent">
+			Voznje: <input type="text" name="voznje">
+		</div>
+
+		<div id="My Profile" class="tabcontent">
+		  <h3>My Profile</h3>
+			<p>
+				<table>
+					<tr>
+						<th colspan="2" align="center">Vaši podaci</th>
+					</tr>
+					<tr>
+						<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td>
+					</tr>
+					<tr>
+						<th>Lozinka: </th><td><input type="text" name="lozinka"></td>
+					</tr>
+					<tr>
+						<th>Ime: </th><td><input type="text" name="ime"></td>
+					</tr>
+					<tr>
+						<th>Prezime: </th><td><input type="text" name="prezime"></td>
+					</tr>
+					<tr>
+
+						<th>Pol: </th><td><input type="text" name="pol"></td>
+					</tr>
+					<tr>
+						<th>JMBG: </th><td><input type="text" name="jmbg"></td>
+					</tr>
+					<tr>
+						<th>Kontakt telefon: </th><td><input type="text" name="kontaktTelefon"></td>
+					</tr>
+					<tr>
+						<th>E-mail: </th><td><input type="text" name="email"></td>
+					</tr>
+					<tr>
+						<th>Uloga: </th><td><input type="text" name="uloga"></td>
+					</tr>
+					<tr>
+						<th>Voznje: </th><td><input type="text" name="voznje"></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
+					</tr>
+				</table>
+			</p>
+		</div>
+		<div id="Lokacija" class="tabcontent">
+			Vasa trenutna lokacija: <input type="text" name="lokacija">
+			<input type="submit" value="Sacuvaj">
+		</div>
+		<div id="Trenutna voznja" class="tabcontent">
+			Vasa trenutna lokacija: <input type="text" name="lokacija">
+			Status voznje: <select>
+							<option value="Neuspesna">Neuspesna</option>
+							<option value="Uspesna">Uspesna</option>
+						</select>
+			<input type="submit" value="Sacuvaj">
+		</div>
+</body>
+</html>

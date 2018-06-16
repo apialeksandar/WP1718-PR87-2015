@@ -11,5 +11,14 @@ namespace WebAPI.Models
         public int Broj { get; set; }
         public string NaseljenoMesto { get; set; }
         public string PozivniBrojMesta { get; set; }
+
+        public Adresa() { }
+        public Adresa(string ulica, int broj, string naseljenoMesto, string pozivniBrojMesta)
+        {
+            Ulica = ulica;
+            Broj = broj;
+            NaseljenoMesto = naseljenoMesto;
+            PozivniBrojMesta = pozivniBrojMesta;
+        }
     }
 }

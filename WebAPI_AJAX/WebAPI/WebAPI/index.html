@@ -1,41 +1,62 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-    <script src="Scripts/jquery-1.10.2.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("p").click(function () {
-                alert($(this).text());
-            });
-            $("#load-products").click(function () {
-                $.get("/api/products", function (data, status) {
-                    let tableOfProducts = "<table border='1'>";
-                    for (product in data) {
-                        tableOfProducts += `<tr><td>${data[product].Id}</td><td>${data[product].Name}</td></tr>`;
-                    }
-                    tableOfProducts += "</table>";
-                    $("#content").html(tableOfProducts);
-                });
-            });
-        });
-    </script>
-</head>
-<body>
-    <h1>INDEX!</h1>
-    <p>tekst para 1</p>
-    <p>tekst para 2</p>
-    <p>tekst para 3</p>
-    <p>tekst para 4</p>
-    <p>tekst para 5</p>
-    <button id="load-products">Load products</button>
-    <div id="content"></div>
-    <hr/>
-    Add new product:<br/>
-    <form method="post" action="/api/products">
-        name: <input type="text" name="name"/><br/>
-        <input type="submit" />
-    </form>
-</body>
+	<head>
+	</head>
+	<body>
+		<form method="post" action="/api/login">
+			<table>
+				<tr>
+					<th colspan="5" align="center">Prijava</th>
+				</tr>
+				<tr>
+					<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td><th>Lozinka: </th><td><input type="password" name="lozinka"></td><td><input type="submit" value="Prijavi se"></td>
+				</tr>
+			</table>
+		</form>
+		<form method="post" action="/api/register">
+			<table>
+				<tr>
+					<th colspan="2" align="center">Registracija</th>
+				</tr>
+				<tr>
+					<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td>
+				</tr>
+				<tr>
+					<th>Lozinka: </th><td><input type="password" name="lozinka"></td>
+				</tr>
+				<tr>
+					<th>Ime: </th>
+					<td><input type="text" name="ime"></td>
+				</tr>
+				<tr>
+					<th>Prezime: </th>
+					<td><input type="text" name="prezime"></td>
+				</tr>
+				<tr>
+					<th>Pol: </th>
+					<td>
+						<select>
+							<option value="Muski">Muski</option>
+							<option value="Zenski">Zenski</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>JMBG: </th>
+					<td><input type="text" name="jmbg"></td>
+				</tr>
+				<tr>
+					<th>Kontakt telefon: </th>
+					<td><input type="text" name="kontaktTelefon"></td>
+				</tr>
+				<tr>
+					<th>E-mail: </th>
+					<td><input type="email" name="email"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit" value="Registruj se"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
 </html>

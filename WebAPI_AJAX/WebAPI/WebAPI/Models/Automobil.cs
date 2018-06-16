@@ -13,5 +13,15 @@ namespace WebAPI.Models
         public string BrojRegistarskeOznake { get; set; }
         public int BrojTaksiVozila { get; set; }
         public TipAutomobila TipAutomobila { get; set; }
+
+        public Automobil() { }
+        public Automobil(Vozac vozac, DateTime godisteAutomobila, string brojRegistarskeOznake, int brojTaksiVozila, TipAutomobila tipAutomobila)
+        {
+            Vozac = vozac;
+            GodisteAutomobila = godisteAutomobila;
+            BrojRegistarskeOznake = brojRegistarskeOznake;
+            BrojTaksiVozila = BrojTaksiVozila;
+            TipAutomobila = tipAutomobila;
+        }
     }
 }
