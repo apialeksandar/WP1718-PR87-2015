@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return null;
+            return Redirect("http://localhost:10482/HtmlError.html");
         }
     }
 }

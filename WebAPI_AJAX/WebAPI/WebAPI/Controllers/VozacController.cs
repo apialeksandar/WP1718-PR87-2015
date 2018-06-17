@@ -21,23 +21,5 @@ namespace WebAPI.Controllers
         {
             return UlogovaniKorisnici.Vozac;
         }
-
-        public RedirectResult NapraviVozaca([FromBody]Vozac vozac)
-        {
-            Vozac vozacP = new Vozac(vozac.KorisnickoIme, vozac.Lozinka, vozac.Ime, vozac.Prezime, vozac.Pol, vozac.Jmbg, vozac.KontaktTelefon, vozac.Email, vozac.Uloga, null, null);
-            foreach(Automobil automobil in Automobili.Vozila)
-            {
-                if(automobil.Slobodan)
-                {
-                    vozacP.Automobil = automobil;
-                    automobil.Slobodan = false;
-                }
-            }
-
-            vozacP.Lokacija = new Lokacija("44°49'04.127", "44°49'04.127", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000"));
-
-            Vozaci.Vozacii.Add(vozacP);
-            return Redirect("http://localhost:10482/HtmlDispecer.html");
-        }
     }
 }

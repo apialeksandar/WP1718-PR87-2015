@@ -11,10 +11,12 @@ namespace WebAPI.Models
 
         public static void Create()
         {
-            /*for(int i = 0; i < 50; i++)
+            Vozila = new List<Automobil>();
+
+            for(int i = 0; i < 20; i++)
             {
                 Vozila.Add(new Automobil(new Vozac(), (1900 + i).ToString(), "NS" + (170 + i).ToString() + "-TX", i + 1, Enumerations.TipAutomobila.PutnickiAutomobil));
-            }*/
+            }
         }
     }
 }
