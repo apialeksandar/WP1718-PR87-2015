@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Taksi sluzba</title>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="proba.css">
 	<script src="Scripts/jquery-1.10.2.js"></script>
@@ -28,18 +28,89 @@
 	}
 
 	// Get the element with id="defaultOpen" and click on it
-	document.getElementById("defaultOpen").click();
+	document.getElementById("pocetna").click();
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 $("#Myprofile").click(function () {
+				$.get("/api/dispecer", function (data, status) {
+					$("#korisnickoIme").val(data.KorisnickoIme);
+					$("#ime").val(data.Ime);
+					$("#prezime").val(data.Prezime);
+					$("#pol").val(document.getElementById(data.Pol));
+					$("#kontaktTelefon").val(data.KontaktTelefon);
+					$("#lozinka").val(data.Lozinka);
+					$("#jmbg").val(data.Jmbg);
+					$("#email").val(data.Email);
+					$("#uloga").val(data.Uloga);
+					$("#voznje").val(data.VoznjeKorisnika);
+				});
+			});
+		});
 	</script>
 </head>
 <body>
 	<h1>DISPECER</h1>
 	<!-- Tab links -->
 
-	<button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
-	<button class="tablink" onclick="openPage('My Profile', this)">My Profile</button>
+	<button class="tablink" onclick="openPage('Pocetna', this)" id="pocetna">Pocetna</button>
+	<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
 	<button class="tablink" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
 	<button class="tablink" onclick="openPage('Obradi voznju', this)">Obradi voznju</button>
+	<button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
 
+	<div id="Napravi vozaca" class="tabcontent">
+		<p>
+			<form action="api/vozac" method="napraviVozaca">
+				<table>
+					<tr>
+						<th colspan="2" align="center">Podaci vozaca</th>
+					</tr>
+					<tr>
+						<th>Korisnicko ime: </th>
+						<td><input type="text" name="korisnickoIme" id="korisnickoIme"></td>
+					</tr>
+					<tr>
+						<th>Lozinka: </th>
+						<td><input type="text" name="lozinka" id="lozinka"></td>
+					</tr>
+					<tr>
+						<th>Ime: </th>
+						<td><input type="text" name="ime" id="ime"></td>
+					</tr>
+					<tr>
+						<th>Prezime: </th>
+						<td><input type="text" name="prezime" id="prezime"></td>
+					</tr>
+					<tr>
+
+						<th>Pol: </th>
+						<td>
+							<select id="pol" name="pol">
+								<option value="Muski" id="Muski">Muski</option>
+								<option value="Zenski" id="Zenski">Zenski</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>JMBG: </th>
+						<td><input type="text" name="jmbg" id="jmbg"></td>
+					</tr>
+					<tr>
+						<th>Kontakt telefon: </th>
+						<td><input type="text" name="kontaktTelefon" id="kontaktTelefon"></td>
+					</tr>
+					<tr>
+						<th>E-mail: </th>
+						<td><input type="text" name="email" id="email"></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
+					</tr>
+				</table>
+			</form>
+		</p>
+	</div>
 
 	<div id="Pocetna" class="tabcontent">
 		Voznje: <input type="text" name="voznje">
@@ -48,56 +119,69 @@
 	<div id="My Profile" class="tabcontent">
 		<h3>My Profile</h3>
 		<p>
-			<table>
-				<tr>
-					<th colspan="2" align="center">Vaši podaci</th>
-				</tr>
-				<tr>
-					<th>Korisnicko ime: </th>
-					<td><input type="text" name="korisnickoIme"></td>
-				</tr>
-				<tr>
-					<th>Lozinka: </th>
-					<td><input type="text" name="lozinka"></td>
-				</tr>
-				<tr>
-					<th>Ime: </th>
-					<td><input type="text" name="ime"></td>
-				</tr>
-				<tr>
-					<th>Prezime: </th>
-					<td><input type="text" name="prezime"></td>
-				</tr>
-				<tr>
+			<form action="api/dispecer" method="post">
+				<table>
+					<tr>
+						<th colspan="2" align="center">Vaši podaci</th>
+					</tr>
+					<tr>
+						<th>Korisnicko ime: </th>
+						<td><input type="text" name="korisnickoIme" id="korisnickoIme"></td>
+					</tr>
+					<tr>
+						<th>Lozinka: </th>
+						<td><input type="text" name="lozinka" id="lozinka"></td>
+					</tr>
+					<tr>
+						<th>Ime: </th>
+						<td><input type="text" name="ime" id="ime"></td>
+					</tr>
+					<tr>
+						<th>Prezime: </th>
+						<td><input type="text" name="prezime" id="prezime"></td>
+					</tr>
+					<tr>
 
-					<th>Pol: </th>
-					<td><input type="text" name="pol"></td>
-				</tr>
-				<tr>
-					<th>JMBG: </th>
-					<td><input type="text" name="jmbg"></td>
-				</tr>
-				<tr>
-					<th>Kontakt telefon: </th>
-					<td><input type="text" name="kontaktTelefon"></td>
-				</tr>
-				<tr>
-					<th>E-mail: </th>
-					<td><input type="text" name="email"></td>
-				</tr>
-				<tr>
-					<th>Uloga: </th>
-					<td><input type="text" name="uloga"></td>
-				</tr>
-				<tr>
-					<th>Voznje: </th>
-					<td><input type="text" name="voznje"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
-				</tr>
-			</table>
-		</p>
+						<th>Pol: </th>
+						<td>
+							<select id="pol" name="pol">
+								<option value="Muski" id="Muski">Muski</option>
+								<option value="Zenski" id="Zenski">Zenski</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>JMBG: </th>
+						<td><input type="text" name="jmbg" id="jmbg"></td>
+					</tr>
+					<tr>
+						<th>Kontakt telefon: </th>
+						<td><input type="text" name="kontaktTelefon" id="kontaktTelefon"></td>
+					</tr>
+					<tr>
+						<th>E-mail: </th>
+						<td><input type="text" name="email" id="email"></td>
+					</tr>
+					<tr>
+						<th>Uloga: </th>
+						<td>
+							<select id="uloga" name="uloga">
+								<option value="Musterija">Musterija</option>
+								<option value="Vozac">Vozac</option>
+								<option value="Dispecer">Dispecer</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>Voznje: </th>
+						<td><input type="text" name="voznje"></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
+					</tr>
+				</table>
+			</form>
+</p>
 	</div>
 	<div id="Formiraj voznju" class="tabcontent">
 		Unesite lokaciju: <input type="text" name="lokacija">

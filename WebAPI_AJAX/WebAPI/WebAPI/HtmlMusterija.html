@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Taksi sluzba</title>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="proba.css">
 	<script src="Scripts/jquery-1.10.2.js"></script>
@@ -25,10 +25,10 @@
 
 		// Add the specific color to the button used to open the tab content
 		elmnt.style.backgroundColor = color;
+
+		//document.getElementById("Home").click();
 	}
 
-	// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -37,7 +37,7 @@
 					$("#korisnickoIme").val(data.KorisnickoIme);
 					$("#ime").val(data.Ime);
 					$("#prezime").val(data.Prezime);
-					$("#pol").val(data.Pol);
+					$("#pol").val(document.getElementById(data.Pol)); 
 					$("#kontaktTelefon").val(data.KontaktTelefon);
 					$("#lozinka").val(data.Lozinka);
 					$("#jmbg").val(data.Jmbg);
@@ -53,14 +53,14 @@
 	<h1>MUSTERIJA</h1>
 	<!-- Tab links -->
 
-	<button class="tablink" onclick="openPage('Pocetna', this)" id="Pocetna">Pocetna</button>
+	<button class="tablink" onclick="openPage('Pocetna', this)" id="Home">Pocetna</button>
 	<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
 	<button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
 
 	<div id="My Profile" class="tabcontent">
 		<h3>My Profile</h3>
 		<p>
-			<form action="api/musterija">
+			<form action="api/musterija" method="post">
 				<table>
 					<tr>
 						<th colspan="2" align="center">Vaši podaci</th>
@@ -86,8 +86,8 @@
 						<th>Pol: </th>
 						<td>
 							<select id="pol" name="pol">
-								<option value="Muski">Muski</option>
-								<option value="Zenski">Zenski</option>
+								<option value="Muski" id="Muski">Muski</option>
+								<option value="Zenski" id="Zenski">Zenski</option>
 							</select>
 						</td>
 					</tr>

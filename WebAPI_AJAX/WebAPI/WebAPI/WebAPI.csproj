@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Automobil.cs" />
+    <Compile Include="Models\Automobili.cs" />
     <Compile Include="Models\Dispecer.cs" />
     <Compile Include="Models\Komentar.cs" />
     <Compile Include="Models\Korisnici.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Enumerations\Uloga.cs" />
     <Compile Include="Models\UlogovaniKorisnici.cs" />
     <Compile Include="Models\Vozac.cs" />
+    <Compile Include="Models\Vozaci.cs" />
     <Compile Include="Models\Voznja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

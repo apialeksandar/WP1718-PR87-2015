@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>Taksi sluzba</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="proba.css">
 		<script src="Scripts/jquery-1.10.2.js"></script>
@@ -30,6 +30,24 @@
 	// Get the element with id="defaultOpen" and click on it
 	document.getElementById("defaultOpen").click();
 	</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			 $("#Myprofile").click(function () {
+				$.get("/api/vozac", function (data, status) {
+					$("#korisnickoIme").val(data.KorisnickoIme);
+					$("#ime").val(data.Ime);
+					$("#prezime").val(data.Prezime);
+					$("#pol").val(document.getElementById(data.Pol));
+					$("#kontaktTelefon").val(data.KontaktTelefon);
+					$("#lozinka").val(data.Lozinka);
+					$("#jmbg").val(data.Jmbg);
+					$("#email").val(data.Email);
+					$("#uloga").val(data.Uloga);
+					$("#voznje").val(data.VoznjeKorisnika);
+				});
+			});
+		});
+		</script>
 	</head>
 	<body>
 		<h1>VOZAC</h1>
@@ -52,32 +70,52 @@
 						<th colspan="2" align="center">Vaši podaci</th>
 					</tr>
 					<tr>
-						<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td>
+						<th>Korisnicko ime: </th>
+						<td><input type="text" name="korisnickoIme" id="korisnickoIme"></td>
 					</tr>
 					<tr>
-						<th>Lozinka: </th><td><input type="text" name="lozinka"></td>
+						<th>Lozinka: </th>
+						<td><input type="text" name="lozinka" id="lozinka"></td>
 					</tr>
 					<tr>
-						<th>Ime: </th><td><input type="text" name="ime"></td>
+						<th>Ime: </th>
+						<td><input type="text" name="ime" id="ime"></td>
 					</tr>
 					<tr>
-						<th>Prezime: </th><td><input type="text" name="prezime"></td>
+						<th>Prezime: </th>
+						<td><input type="text" name="prezime" id="prezime"></td>
 					</tr>
 					<tr>
 
-						<th>Pol: </th><td><input type="text" name="pol"></td>
+						<th>Pol: </th>
+						<td>
+							<select id="pol" name="pol">
+								<option value="Muski" id="Muski">Muski</option>
+								<option value="Zenski" id="Zenski">Zenski</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
-						<th>JMBG: </th><td><input type="text" name="jmbg"></td>
+						<th>JMBG: </th>
+						<td><input type="text" name="jmbg" id="jmbg"></td>
 					</tr>
 					<tr>
-						<th>Kontakt telefon: </th><td><input type="text" name="kontaktTelefon"></td>
+						<th>Kontakt telefon: </th>
+						<td><input type="text" name="kontaktTelefon" id="kontaktTelefon"></td>
 					</tr>
 					<tr>
-						<th>E-mail: </th><td><input type="text" name="email"></td>
+						<th>E-mail: </th>
+						<td><input type="text" name="email" id="email"></td>
 					</tr>
 					<tr>
-						<th>Uloga: </th><td><input type="text" name="uloga"></td>
+						<th>Uloga: </th>
+						<td>
+							<select id="uloga" name="uloga">
+								<option value="Musterija">Musterija</option>
+								<option value="Vozac">Vozac</option>
+								<option value="Dispecer">Dispecer</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>Voznje: </th><td><input type="text" name="voznje"></td>

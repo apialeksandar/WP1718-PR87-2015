@@ -20,6 +20,8 @@ namespace WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Korisnici.Create();
+            Automobili.Create();
+            Vozaci.Create();
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WebAPI.Models
+{
+    public class Automobili
+    {
+        public static List<Automobil> Vozila { get; set; }
+
+        public static void Create()
+        {
+            /*for(int i = 0; i < 50; i++)
+            {
+                Vozila.Add(new Automobil(new Vozac(), (1900 + i).ToString(), "NS" + (170 + i).ToString() + "-TX", i + 1, Enumerations.TipAutomobila.PutnickiAutomobil));
+            }*/
+        }
+    }
+}
