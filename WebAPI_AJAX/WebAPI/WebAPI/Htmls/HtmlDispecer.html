@@ -1,9 +1,39 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿<head>
+	<style>
+		/* Set height of body and the document to 100% to enable "full page tabs" */
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		  font-family: Arial;
+		}
+
+		/* Style tab links */
+		.tablink {
+		  background-color: #555;
+		  color: white;
+		  float: left;
+		  border: none;
+		  outline: none;
+		  cursor: pointer;
+		  padding: 14px 16px;
+		  font-size: 17px;
+		  width: 25%;
+		}
+
+		.tablink:hover {
+		  background-color: #777;
+		}
+
+		/* Style the tab content (and add height:100% for full page content) */
+		.tabcontent {
+		  color: black;
+		  display: none;
+		  padding: 100px 20px;
+		  height: 100%;
+		}
+	</style>
 	<title>Taksi sluzba</title>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" href="proba.css" type="text/css">
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
 
@@ -207,4 +237,3 @@
 		<input type="submit" value="Dodeli">
 	</div>
 </body>
-</html>
