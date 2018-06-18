@@ -20,6 +20,17 @@ function loadVozac() {
     $("#logdiv").load("./Htmls/HtmlVozac.html");
 }
 
+function addVozac() {
+    $.post('/api/dodajVozaca/', $('form#addVozac').serialize())
+    .done(function (status, data, xhr) {
+        alert(data);
+        loadDispecer();
+    })
+    .fail(function (jqXHR, textStatus) {
+        alert(jqXHR.responseJSON["Message"]);
+    });
+}
+
 function register()
 {
     $.post('/api/register/', $('form#reg').serialize())
@@ -326,5 +337,59 @@ function validateVozac() {
             }
         },
         submitHandler: function (form) { editVozac() }
+    });
+}
+
+function validateVozac2() {
+    $("#addVozac").validate({
+        rules: {
+            korisnickoIme: {
+                required: true,
+                minlength: 4
+            },
+            lozinka: {
+                required: true,
+                minlength: 5
+            },
+            ime: "required",
+            prezime: "required",
+            email: {
+                email: true
+            },
+            jmbg: {
+                required: true,
+                number: true,
+                minlength: 13,
+                maxlength: 13
+            },
+            kontaktTelefon: {
+                number: true
+            }
+        },
+        messages: {
+            korisnickoIme: {
+                required: "Obavezno polje",
+                minlength: "Korisnicko ime mora imati minimum 4 karaktera"
+            },
+            lozinka: {
+                required: "Obavezno polje",
+                minlength: "Lozinka mora imati minimum 5 karaktera"
+            },
+            ime: "Obavezno polje",
+            prezime: "Obavezno polje",
+            email: {
+                email: "Morate uneti validnu email adresu"
+            },
+            jmbg: {
+                required: "Obavezno polje",
+                number: "Morate uneti broj",
+                minlength: "JMBG mora biti broj od 13 cifara",
+                maxlength: "JMBG mora biti broj od 13 cifara"
+            },
+            kontaktTelefon: {
+                number: "Morate uneti broj"
+            }
+        },
+        submitHandler: function (form) { addVozac() }
     });
 }

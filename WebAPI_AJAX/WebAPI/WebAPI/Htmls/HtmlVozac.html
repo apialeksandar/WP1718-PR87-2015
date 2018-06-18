@@ -36,7 +36,12 @@
 					$("#korisnickoIme2").val(data.KorisnickoIme);
 					$("#ime2").val(data.Ime);
 					$("#prezime2").val(data.Prezime);
-					$("#pol2").val(document.getElementById(data.Pol));
+					if (data.Pol == 0) {
+						$("#Muski").attr("selected", "true");
+					}
+					else {
+						$("#Zenski").attr("selected", "true");
+					}
 					$("#kontaktTelefon2").val(data.KontaktTelefon);
 					$("#lozinka2").val(data.Lozinka);
 					$("#jmbg2").val(data.Jmbg);

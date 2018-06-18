@@ -16,6 +16,11 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Vozac))]
         public IHttpActionResult Post(Vozac vozac)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             Vozac vozacP = new Vozac(vozac.KorisnickoIme, vozac.Lozinka, vozac.Ime, vozac.Prezime, vozac.Pol, vozac.Jmbg, vozac.KontaktTelefon, vozac.Email, Uloga.Vozac, null, null);
             foreach (Automobil automobil in Automobili.Vozila)
             {
@@ -25,13 +30,14 @@ namespace WebAPI.Controllers
                     automobil.Slobodan = false;
                     automobil.Vozac = vozacP;
                     vozacP.Automobil = automobil;
+                    break;
                 }
             }
 
             vozacP.Lokacija = new Lokacija("44°49'04.127", "44°49'04.127", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000"));
 
             Korisnici.Vozaci.Add(vozacP);
-            return Redirect("http://localhost:10482/HtmlDispecer.html");
+            return CreatedAtRoute("DefaultApi", new { korisnickoIme = vozac.KorisnickoIme }, vozac);
         }
     }
 }
