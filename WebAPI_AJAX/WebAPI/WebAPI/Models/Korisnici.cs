@@ -8,17 +8,17 @@ namespace WebAPI.Models
 {
     public class Korisnici
     {
-        public static List<Korisnik> Musterije { get; set; }
-        public static List<Korisnik> Dispeceri { get; set; }
-        public static List<Korisnik> Vozaci { get; set; }
+        public static List<Musterija> Musterije { get; set; }
+        public static List<Dispecer> Dispeceri { get; set; }
+        public static List<Vozac> Vozaci { get; set; }
 
         public static void Create()
         {
-            Musterije = new List<Korisnik>();
-            Dispeceri = new List<Korisnik>();
-            Vozaci = new List<Korisnik>();
+            Musterije = new List<Musterija>();
+            Dispeceri = new List<Dispecer>();
+            Vozaci = new List<Vozac>();
 
-            Musterije.Add(new Musterija("musterija", "123", "Mušterija", "Mušterić", Enumerations.Pol.Zenski, "0365995931198", "+381654009687", "musterija@yahoo.com", Enumerations.Uloga.Musterija));
+            Musterije.Add(new Musterija("musterija", "12345", "Mušterija", "Mušterić", Enumerations.Pol.Zenski, "0365995931198", "+381654009687", "musterija@yahoo.com", Enumerations.Uloga.Musterija));
 
             string[] lines = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\dispeceri.txt");
 

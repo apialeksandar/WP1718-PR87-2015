@@ -1,63 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<title>Taksi sluzba - logovanje i registracija</title>
+		<title>Taksi sluzba</title>
+		<meta charset="utf-8" />
+		<script src="Scripts/jquery-1.10.2.js"></script>
+		<script src="Scripts/myFunctions.js"></script>
+		<script src="Scripts/jquery.validate.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function ()
+			{
+				loadStart();
+			});
+		</script>
 	</head>
 	<body>
-		<form method="post" action="/api/login">
-			<table>
-				<tr>
-					<th colspan="5" align="center">Prijava</th>
-				</tr>
-				<tr>
-					<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td><th>Lozinka: </th><td><input type="password" name="lozinka"></td><td><input type="submit" value="Prijavi se"></td>
-				</tr>
-			</table>
-		</form>
-		<form method="post" action="/api/register">
-			<table>
-				<tr>
-					<th colspan="2" align="center">Registracija</th>
-				</tr>
-				<tr>
-					<th>Korisnicko ime: </th><td><input type="text" name="korisnickoIme"></td>
-				</tr>
-				<tr>
-					<th>Lozinka: </th><td><input type="password" name="lozinka"></td>
-				</tr>
-				<tr>
-					<th>Ime: </th>
-					<td><input type="text" name="ime"></td>
-				</tr>
-				<tr>
-					<th>Prezime: </th>
-					<td><input type="text" name="prezime"></td>
-				</tr>
-				<tr>
-					<th>Pol: </th>
-					<td>
-						<select>
-							<option value="Muski">Muski</option>
-							<option value="Zenski">Zenski</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>JMBG: </th>
-					<td><input type="text" name="jmbg"></td>
-				</tr>
-				<tr>
-					<th>Kontakt telefon: </th>
-					<td><input type="text" name="kontaktTelefon"></td>
-				</tr>
-				<tr>
-					<th>E-mail: </th>
-					<td><input type="email" name="email"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" value="Registruj se"></td>
-				</tr>
-			</table>
-		</form>
+		<div id="logdiv">
+		</div>
+		<div id="regdiv">
+		</div>
 	</body>
 </html>

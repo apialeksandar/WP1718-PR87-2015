@@ -185,20 +185,19 @@
     <Compile Include="Enumerations\Uloga.cs" />
     <Compile Include="Models\UlogovaniKorisnici.cs" />
     <Compile Include="Models\Vozac.cs" />
-    <Compile Include="Models\Vozaci.cs" />
     <Compile Include="Models\Voznja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlDispecer.html" />
-    <Content Include="HtmlError.html" />
-    <Content Include="HtmlMusterija.html" />
-    <Content Include="HtmlVozac.html" />
+    <Content Include="Htmls\HtmlDispecer.html" />
+    <Content Include="Htmls\HtmlError.html" />
+    <Content Include="Htmls\HtmlLogin.html" />
+    <Content Include="Htmls\HtmlMusterija.html" />
+    <Content Include="Htmls\HtmlRegistracija.html" />
+    <Content Include="Htmls\HtmlVozac.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -224,7 +223,10 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\myFunctions.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -235,7 +237,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -250,7 +251,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>

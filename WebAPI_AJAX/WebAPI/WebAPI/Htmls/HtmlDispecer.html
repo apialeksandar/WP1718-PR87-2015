@@ -3,8 +3,10 @@
 <head>
 	<title>Taksi sluzba</title>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="proba.css">
+	<link rel="stylesheet" href="proba.css" type="text/css">
 	<script src="Scripts/jquery-1.10.2.js"></script>
+	<script src="Scripts/jquery.validate.js"></script>
+
 	<script type="text/javascript">
 		function openPage(pageName, elmnt, color) {
 		// Hide all elements with class="tabcontent" by default */
@@ -28,22 +30,28 @@
 	}
 
 	// Get the element with id="defaultOpen" and click on it
-	document.getElementById("pocetna").click();
+	//document.getElementById("pocetna").click();
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			 $("#Myprofile").click(function () {
 				$.get("/api/dispecer", function (data, status) {
-					$("#korisnickoIme").val(data.KorisnickoIme);
-					$("#ime").val(data.Ime);
-					$("#prezime").val(data.Prezime);
-					$("#pol").val(document.getElementById(data.Pol));
-					$("#kontaktTelefon").val(data.KontaktTelefon);
-					$("#lozinka").val(data.Lozinka);
-					$("#jmbg").val(data.Jmbg);
-					$("#email").val(data.Email);
-					$("#uloga").val(data.Uloga);
-					$("#voznje").val(data.VoznjeKorisnika);
+					$("#korisnickoIme1").val(data.KorisnickoIme);
+					$("#ime1").val(data.Ime);
+					$("#prezime1").val(data.Prezime);
+					$("#kontaktTelefon1").val(data.KontaktTelefon);
+					$("#lozinka1").val(data.Lozinka);
+					$("#jmbg1").val(data.Jmbg);
+					$("#email1").val(data.Email);
+					$("#uloga1").val(data.Uloga);
+					$("#voznje1").val(data.VoznjeKorisnika);
+
+					if (data.Pol == 0) {
+						$("#Muski1").attr("selected", "true");
+					}
+					else {
+						$("#Zenski1").attr("selected", "true");
+					}
 				});
 			});
 		});
@@ -61,7 +69,7 @@
 
 	<div id="Napravi vozaca" class="tabcontent">
 		<p>
-			<form action="api/dodajVozaca" method="post">
+			<form method="post">
 				<table>
 					<tr>
 						<th colspan="2" align="center">Podaci vozaca</th>
@@ -72,7 +80,7 @@
 					</tr>
 					<tr>
 						<th>Lozinka: </th>
-						<td><input type="text" name="lozinka" id="lozinka"></td>
+						<td><input type="password" name="lozinka" id="lozinka"></td>
 					</tr>
 					<tr>
 						<th>Ime: </th>
@@ -103,6 +111,11 @@
 					<tr>
 						<th>E-mail: </th>
 						<td><input type="text" name="email" id="email"></td>
+					</tr>
+					<tr>
+						<td>
+							<input type="hidden" id="uloga">
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
@@ -119,57 +132,52 @@
 	<div id="My Profile" class="tabcontent">
 		<h3>My Profile</h3>
 		<p>
-			<form action="api/dispecer" method="post">
+			<form method="post" id="editDis">
 				<table>
 					<tr>
 						<th colspan="2" align="center">Vaši podaci</th>
 					</tr>
 					<tr>
 						<th>Korisnicko ime: </th>
-						<td><input type="text" name="korisnickoIme" id="korisnickoIme"></td>
+						<td><input type="text" name="korisnickoIme" id="korisnickoIme1" readonly></td>
 					</tr>
 					<tr>
 						<th>Lozinka: </th>
-						<td><input type="text" name="lozinka" id="lozinka"></td>
+						<td><input type="text" name="lozinka" id="lozinka1"></td>
 					</tr>
 					<tr>
 						<th>Ime: </th>
-						<td><input type="text" name="ime" id="ime"></td>
+						<td><input type="text" name="ime" id="ime1"></td>
 					</tr>
 					<tr>
 						<th>Prezime: </th>
-						<td><input type="text" name="prezime" id="prezime"></td>
+						<td><input type="text" name="prezime" id="prezime1"></td>
 					</tr>
 					<tr>
 
 						<th>Pol: </th>
 						<td>
-							<select id="pol" name="pol">
-								<option value="Muski" id="Muski">Muski</option>
-								<option value="Zenski" id="Zenski">Zenski</option>
+							<select id="pol1" name="pol">
+								<option value="Muski" id="Muski1">Muski</option>
+								<option value="Zenski" id="Zenski1">Zenski</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>JMBG: </th>
-						<td><input type="text" name="jmbg" id="jmbg"></td>
+						<td><input type="text" name="jmbg" id="jmbg1"></td>
 					</tr>
 					<tr>
 						<th>Kontakt telefon: </th>
-						<td><input type="text" name="kontaktTelefon" id="kontaktTelefon"></td>
+						<td><input type="text" name="kontaktTelefon" id="kontaktTelefon1"></td>
 					</tr>
 					<tr>
 						<th>E-mail: </th>
-						<td><input type="text" name="email" id="email"></td>
+						<td><input type="text" name="email" id="email1"></td>
 					</tr>
 					<tr>
-						<th>Uloga: </th>
 						<td>
-							<select id="uloga" name="uloga">
-								<option value="Musterija">Musterija</option>
-								<option value="Vozac">Vozac</option>
-								<option value="Dispecer">Dispecer</option>
-							</select>
+							<input type="hidden" id="uloga1" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -181,6 +189,9 @@
 					</tr>
 				</table>
 			</form>
+			<script>
+				validateDispecer();
+			</script>
 </p>
 	</div>
 	<div id="Formiraj voznju" class="tabcontent">

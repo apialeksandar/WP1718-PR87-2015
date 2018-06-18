@@ -1,0 +1,50 @@
+﻿
+<form id="reg" method="post">
+	<table>
+		<tr>
+			<th colspan="2" align="center">Registracija</th>
+		</tr>
+		<tr>
+			<th>Korisnicko ime: </th>
+			<td><input type="text" name="korisnickoIme"></td>
+		</tr>
+		<tr>
+			<th>Lozinka: </th>
+			<td><input type="password" name="lozinka"></td>
+		</tr>
+		<tr>
+			<th>Ime: </th>
+			<td><input type="text" name="ime"></td>
+		</tr>
+		<tr>
+			<th>Prezime: </th>
+			<td><input type="text" name="prezime"></td>
+		</tr>
+		<tr>
+			<th>Pol: </th>
+			<td>
+				<select name="pol">
+					<option value="Muski">Muski</option>
+					<option value="Zenski">Zenski</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>JMBG: </th>
+			<td><input type="text" name="jmbg"></td>
+		</tr>
+		<tr>
+			<th>Kontakt telefon: </th>
+			<td><input type="text" name="kontaktTelefon"></td>
+		</tr>
+		<tr>
+			<th>E-mail: </th>
+			<td><input type="email" name="email"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" value="Registruj se" id="registerbutton"></td>
+		</tr>
+	</table>
+</form>
+
+<script>validateRegister()</script>

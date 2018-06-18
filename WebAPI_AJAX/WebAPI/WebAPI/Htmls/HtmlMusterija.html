@@ -3,8 +3,10 @@
 <head>
 	<title>Taksi sluzba</title>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="proba.css">
+	<link href="proba.css" rel="stylesheet" type="text/css">
 	<script src="Scripts/jquery-1.10.2.js"></script>
+	<script src="Scripts/jquery.validate.js"></script>
+
 	<script type="text/javascript">
 		function openPage(pageName, elmnt, color) {
 		// Hide all elements with class="tabcontent" by default */
@@ -37,13 +39,19 @@
 					$("#korisnickoIme").val(data.KorisnickoIme);
 					$("#ime").val(data.Ime);
 					$("#prezime").val(data.Prezime);
-					$("#pol").val(document.getElementById(data.Pol)); 
 					$("#kontaktTelefon").val(data.KontaktTelefon);
 					$("#lozinka").val(data.Lozinka);
 					$("#jmbg").val(data.Jmbg);
 					$("#email").val(data.Email);
 					$("#uloga").val(data.Uloga);
 					$("#voznje").val(data.VoznjeKorisnika);
+
+					if (data.Pol == 0) {
+						$("#Muski").attr("selected", "true");
+					}
+					else {
+						$("#Zenski").attr("selected", "true");
+					}
 				});
 			});
 		});
@@ -60,14 +68,14 @@
 	<div id="My Profile" class="tabcontent">
 		<h3>My Profile</h3>
 		<p>
-			<form action="api/musterija" method="post">
+			<form method="post" id="editMus">
 				<table>
 					<tr>
 						<th colspan="2" align="center">Vaši podaci</th>
 					</tr>
 					<tr>
 						<th>Korisnicko ime: </th>
-						<td><input type="text" id="korisnickoIme" name="korisnickoIme"></td>
+						<td><input type="text" id="korisnickoIme" name="korisnickoIme" readonly></td>
 					</tr>
 					<tr>
 						<th>Lozinka: </th>
@@ -104,13 +112,8 @@
 						<td><input type="text" id="email" name="email"></td>
 					</tr>
 					<tr>
-						<th>Uloga: </th>
 						<td>
-							<select id="uloga" name="uloga">
-								<option value="Musterija">Musterija</option>
-								<option value="Vozac">Vozac</option>
-								<option value="Dispecer">Dispecer</option>
-							</select>
+							<input type="hidden" id="uloga">
 						</td>
 					</tr>
 					<tr>
@@ -118,6 +121,9 @@
 					</tr>
 				</table>
 			</form>
+			<script>
+				validateMusterija();
+			</script>
 		</p>
 	</div>
 	<div id="Zahtev za voznju" class="tabcontent">

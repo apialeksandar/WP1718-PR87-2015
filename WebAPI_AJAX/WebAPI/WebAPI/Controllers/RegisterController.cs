@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 using WebAPI.Models;
 
@@ -11,8 +12,14 @@ namespace WebAPI.Controllers
 {
     public class RegisterController : ApiController
     {
-        public RedirectResult Post([FromBody]Korisnik korisnik)
+        [ResponseType(typeof(Korisnik))]
+        public IHttpActionResult Post(Musterija korisnik)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             int dPom = 0;
             int vPom = 0;
             int mPom = 0;
@@ -42,46 +49,16 @@ namespace WebAPI.Controllers
                     if(Korisnici.Musterije.Count == mPom)
                     {
                         Korisnici.Musterije.Add(korisnik);
-                        return Redirect("http://localhost:10482/index.html");
+                        return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
                     }
                     else
-                        return Redirect("http://localhost:10482/HtmlError.html");
+                        return BadRequest("Korisnik vec postoji");
                 }
                 else
-                    return Redirect("http://localhost:10482/HtmlError.html");
+                    return BadRequest("Korisnik vec postoji");
             }
             else
-                return Redirect("http://localhost:10482/HtmlError.html");
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if (!Korisnici.Dispeceri.Contains(korisnik))
-            {
-                if(!Korisnici.Vozaci.Contains(korisnik))
-                {
-                    if(!Korisnici.Musterije.Contains(korisnik))
-                    {
-                        
-                    }
-                        
-                    else
-                        return Redirect("http://localhost:10482/HtmlError.html");
-                }
-                return Redirect("http://localhost:10482/HtmlError.html");
-
-            }
-            else
-                return Redirect("http://localhost:10482/HtmlError.html");
+                return BadRequest("Korisnik vec postoji");
         }
     }
 }

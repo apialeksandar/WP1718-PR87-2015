@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 using WebAPI.Models;
 
@@ -11,8 +12,14 @@ namespace WebAPI.Controllers
 {
     public class MusterijaController : ApiController
     {
-        public RedirectResult Post([FromBody]Korisnik korisnik)
+        [ResponseType(typeof(Musterija))]
+        public IHttpActionResult Post(Musterija korisnik)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             UlogovaniKorisnici.Musterija = new Musterija(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga);
             
             foreach(Musterija musterija in Korisnici.Musterije)
@@ -25,7 +32,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Redirect("http://localhost:10482/HtmlMusterija.html");
+            return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
         }
 
         public Musterija Get()

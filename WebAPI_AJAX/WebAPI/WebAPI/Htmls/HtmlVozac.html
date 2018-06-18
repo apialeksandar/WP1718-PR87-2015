@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Taksi sluzba</title>
+		<meta charset="utf-8" />
+		<link href="proba.css" rel="stylesheet" type="text/css">
+		<script src="Scripts/jquery-1.10.2.js"></script>
+		<script src="Scripts/jquery.validate.js"></script>
+
+		<script type="text/javascript">
+		function openPage(pageName, elmnt, color) {
+		// Hide all elements with class="tabcontent" by default */
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		// Remove the background color of all tablinks/buttons
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].style.backgroundColor = "";
+		}
+
+		// Show the specific tab content
+		document.getElementById(pageName).style.display = "block";
+
+		// Add the specific color to the button used to open the tab content
+		elmnt.style.backgroundColor = color;
+	}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 $("#Myprofile").click(function () {
+				$.get("/api/vozac", function (data, status) {
+					$("#korisnickoIme2").val(data.KorisnickoIme);
+					$("#ime2").val(data.Ime);
+					$("#prezime2").val(data.Prezime);
+					$("#pol2").val(document.getElementById(data.Pol));
+					$("#kontaktTelefon2").val(data.KontaktTelefon);
+					$("#lozinka2").val(data.Lozinka);
+					$("#jmbg2").val(data.Jmbg);
+					$("#email2").val(data.Email);
+					$("#uloga2").val(data.Uloga);
+					$("#voznje2").val(data.VoznjeKorisnika);
+					$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
+					$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
+					$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
+					$("#tipAutomobila").val(data.Automobil.TipAutomobila);
+				});
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<h1>VOZAC</h1>
+	<!-- Tab links -->
+	
+		<button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
+		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
+		<button class="tablink" onclick="openPage('Lokacija', this)">Lokacija</button>
+		<button class="tablink" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
+
+		<div id="Pocetna" class="tabcontent">
+			Voznje: <input type="text" name="voznje">
+		</div>
+
+		<div id="My Profile" class="tabcontent">
+		  <h3>My Profile</h3>
+			<p>
+				<form method="post" id="editVoz">
+					<table>
+						<tr>
+							<th colspan="2" align="center">Vaši podaci</th>
+						</tr>
+						<tr>
+							<th>Korisnicko ime: </th>
+							<td><input type="text" name="korisnickoIme" id="korisnickoIme2"></td>
+						</tr>
+						<tr>
+							<th>Lozinka: </th>
+							<td><input type="text" name="lozinka" id="lozinka2"></td>
+						</tr>
+						<tr>
+							<th>Ime: </th>
+							<td><input type="text" name="ime" id="ime2"></td>
+						</tr>
+						<tr>
+							<th>Prezime: </th>
+							<td><input type="text" name="prezime" id="prezime2"></td>
+						</tr>
+						<tr>
+
+							<th>Pol: </th>
+							<td>
+								<select id="pol2" name="pol">
+									<option value="Muski" id="Muski">Muski</option>
+									<option value="Zenski" id="Zenski">Zenski</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>JMBG: </th>
+							<td><input type="text" name="jmbg" id="jmbg2"></td>
+						</tr>
+						<tr>
+							<th>Kontakt telefon: </th>
+							<td><input type="text" name="kontaktTelefon" id="kontaktTelefon2"></td>
+						</tr>
+						<tr>
+							<th>E-mail: </th>
+							<td><input type="text" name="email" id="email2"></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="hidden" id="uloga2" readonly>
+							</td>
+						</tr>
+						<tr>
+							<th>Godiste vozila: </th>
+							<td><input type="text" readonly id="godisteAutomobila"></td>
+						</tr>
+						<tr>
+							<th>Broj registarske oznake: </th>
+							<td><input type="text" readonly id="brojRegistarskeOznake"></td>
+						</tr>
+						<tr>
+							<th>Broj taksi vozila: </th>
+							<td><input type="text" readonly id="brojTaksiVozila"></td>
+						</tr>
+						<tr>
+							<th>Tip vozila: </th>
+							<td><input type="text" readonly id="tipAutomobila"></td>
+						</tr>
+						<tr>
+							<th>Voznje: </th>
+							<td><input type="text" name="voznje"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
+						</tr>
+					</table>
+				</form>
+				<script>
+				validateVozac();
+				</script>
+			</p>
+		</div>
+		<div id="Lokacija" class="tabcontent">
+			Vasa trenutna lokacija: <input type="text" name="lokacija">
+			<input type="submit" value="Sacuvaj">
+		</div>
+		<div id="Trenutna voznja" class="tabcontent">
+			Vasa trenutna lokacija: <input type="text" name="lokacija">
+			Status voznje: <select>
+							<option value="Neuspesna">Neuspesna</option>
+							<option value="Uspesna">Uspesna</option>
+						</select>
+			<input type="submit" value="Sacuvaj">
+		</div>
+</body>
+</html>
