@@ -167,6 +167,7 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
+    <Compile Include="Controllers\ZahtevVoznjeController.cs" />
     <Compile Include="Enumerations\Ocena.cs" />
     <Compile Include="Enumerations\StatusVoznje.cs" />
     <Compile Include="Enumerations\TipAutomobila.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\UlogovaniKorisnici.cs" />
     <Compile Include="Models\Vozac.cs" />
     <Compile Include="Models\Voznja.cs" />
+    <Compile Include="Models\Voznje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

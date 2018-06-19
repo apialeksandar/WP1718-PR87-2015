@@ -99,6 +99,51 @@ function validateRegister() {
     });
 }
 
+function zahtevVoznje() {
+    $.post('/api/zahtevVoznje/', $('form#zahtevVoznje').serialize())
+    .done(function (status, data, xhr) {
+        alert(data);
+        loadMusterija();
+    })
+    .fail(function (jqXHR, textStatus) {
+        alert(jqXHR.responseJSON["Message"]);
+    });
+}
+
+function validateZahtevVoznje() {
+    $("#zahtevVoznje").validate({
+        rules: {
+            ulica: {
+                required: true
+            },
+            broj: {
+                required: true
+            },
+            naseljenoMesto: {
+                required: true
+            },
+            pozivniBrojMesta: {
+                required: true
+            }
+        },
+        messages: {
+            ulica: {
+                required: "Obavezno polje",
+            },
+            broj: {
+                required: "Obavezno polje",
+            },
+            naseljenoMesto: {
+                required: "Obavezno polje",
+            },
+            pozivniBrojMesta: {
+                required: "Obavezno polje",
+            }
+        },
+        submitHandler: function (form) { zahtevVoznje() }
+    });
+}
+
 function logIn()
 {
     $.post('/api/login', $('form#logIn').serialize())
@@ -171,6 +216,20 @@ function validateEditLokacijaVozac() {
             },
             pozivniBrojMesta: {
                 required: true
+            }
+        },
+        messages: {
+            ulica: {
+                required: "Obavezno polje",
+            },
+            broj: {
+                required: "Obavezno polje",
+            },
+            naseljenoMesto: {
+                required: "Obavezno polje",
+            },
+            pozivniBrojMesta: {
+                required: "Obavezno polje",
             }
         },
         submitHandler: function (form) { editLokacijaVozac() }

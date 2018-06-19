@@ -11,16 +11,16 @@ namespace WebAPI.Models
         public DateTime DatumIVremePorudzbine { get; set; }
         public Lokacija LokacijaNaKojuTaksiDolazi { get; set; }
         public TipAutomobila ZeljeniTipAutomobila { get; set; }
-        public Musterija MusterijaZaKojuJeKreiranaVoznja { get; set; }
+        public string MusterijaZaKojuJeKreiranaVoznja { get; set; }
         public Lokacija Odrediste { get; set; }
-        public Dispecer Dispecer { get; set; }
-        public Vozac Vozac { get; set; }
+        public string Dispecer { get; set; }
+        public string Vozac { get; set; }
         public double Iznos { get; set; }
         public Komentar Komentar { get; set; }
         public StatusVoznje StatusVoznje { get; set; }
 
         public Voznja() { }
-        public Voznja(DateTime datumIVremePorudzbine, Lokacija lokacijaNaKojuTaksiDolazi, TipAutomobila zeljeniTipAutomobila, Musterija musterijaZaKojuJeKreiranaVoznja, Lokacija odrediste, Dispecer dispecer, Vozac vozac, double iznos, Komentar komentar, StatusVoznje statusVoznje)
+        public Voznja(DateTime datumIVremePorudzbine, Lokacija lokacijaNaKojuTaksiDolazi, TipAutomobila zeljeniTipAutomobila, string musterijaZaKojuJeKreiranaVoznja, Lokacija odrediste, string dispecer, string vozac, double iznos, Komentar komentar, StatusVoznje statusVoznje)
         {
             DatumIVremePorudzbine = datumIVremePorudzbine;
             LokacijaNaKojuTaksiDolazi = lokacijaNaKojuTaksiDolazi;

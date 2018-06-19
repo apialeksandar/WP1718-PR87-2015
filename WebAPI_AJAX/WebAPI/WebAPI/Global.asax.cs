@@ -21,6 +21,7 @@ namespace WebAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Korisnici.Create();
             Automobili.Create();
+            Voznje.Create();
         }
     }
 }
