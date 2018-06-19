@@ -20,7 +20,17 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            UlogovaniKorisnici.Vozac = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga, korisnik.Lokacija, korisnik.Automobil);
+            Automobil a = new Automobil();
+
+            foreach(Vozac v in Korisnici.Vozaci)
+            {
+                if(v.KorisnickoIme.Equals(korisnik.KorisnickoIme))
+                {
+                    a = v.Automobil;
+                }
+            }
+
+            UlogovaniKorisnici.Vozac = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga, korisnik.Lokacija, a);
             return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
         }
 

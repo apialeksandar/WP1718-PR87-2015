@@ -109,7 +109,7 @@ function logIn()
                 loadMusterija()
             else if (recievedObject.Uloga == 1)
                 loadDispecer();
-            else if(recievedObject.Uloga == 2)
+            else
                 loadVozac();
         })
         .fail(function (jqXHR) {

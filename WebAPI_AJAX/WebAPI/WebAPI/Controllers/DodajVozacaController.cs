@@ -28,9 +28,13 @@ namespace WebAPI.Controllers
                 {
                     vozacP.Automobil = automobil;
                     automobil.Slobodan = false;
-                    automobil.Vozac = vozacP;
+                    automobil.Vozac = vozacP.KorisnickoIme;
                     vozacP.Automobil = automobil;
                     break;
+                }
+                else
+                {
+                    return BadRequest("Ne postoje slobodna vozila!");
                 }
             }
 

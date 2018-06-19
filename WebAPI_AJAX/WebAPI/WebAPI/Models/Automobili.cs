@@ -15,7 +15,7 @@ namespace WebAPI.Models
 
             for(int i = 0; i < 20; i++)
             {
-                Vozila.Add(new Automobil(new Vozac(), (1900 + i).ToString(), "NS" + (170 + i).ToString() + "-TX", i + 1, Enumerations.TipAutomobila.PutnickiAutomobil));
+                Vozila.Add(new Automobil("", (2000 + i).ToString(), "NS" + (170 + i).ToString() + "-TX", i + 1, Enumerations.TipAutomobila.PutnickiAutomobil));
             }
         }
     }

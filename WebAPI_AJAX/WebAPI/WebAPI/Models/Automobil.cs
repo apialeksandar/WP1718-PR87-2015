@@ -8,7 +8,7 @@ namespace WebAPI.Models
 {
     public class Automobil
     {
-        public Vozac Vozac { get; set; }
+        public string Vozac { get; set; }
         public string GodisteAutomobila { get; set; }
         public string BrojRegistarskeOznake { get; set; }
         public int BrojTaksiVozila { get; set; }
@@ -16,12 +16,12 @@ namespace WebAPI.Models
         public bool Slobodan { get; set; }
 
         public Automobil() { }
-        public Automobil(Vozac vozac, string godisteAutomobila, string brojRegistarskeOznake, int brojTaksiVozila, TipAutomobila tipAutomobila)
+        public Automobil(string vozac, string godisteAutomobila, string brojRegistarskeOznake, int brojTaksiVozila, TipAutomobila tipAutomobila)
         {
             Vozac = vozac;
             GodisteAutomobila = godisteAutomobila;
             BrojRegistarskeOznake = brojRegistarskeOznake;
-            BrojTaksiVozila = BrojTaksiVozila;
+            BrojTaksiVozila = brojTaksiVozila;
             TipAutomobila = tipAutomobila;
             Slobodan = true;
         }

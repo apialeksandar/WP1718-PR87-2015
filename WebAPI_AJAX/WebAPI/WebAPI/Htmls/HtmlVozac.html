@@ -83,7 +83,12 @@
 					$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
 					$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
 					$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
-					$("#tipAutomobila").val(data.Automobil.TipAutomobila);
+					if (data.Automobil.TipAutomobila == 0) {
+						$("#putnickiAutomobil").attr("selected", "true");
+					}
+					else if(data.Automobil.TipAutomobila == 1) {
+						$("#kombiVozilo").attr("selected", "true");
+					}
 				});
 			});
 		});
@@ -127,7 +132,6 @@
 							<td><input type="text" name="prezime" id="prezime2"></td>
 						</tr>
 						<tr>
-
 							<th>Pol: </th>
 							<td>
 								<select id="pol2" name="pol">
@@ -150,24 +154,29 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="hidden" id="uloga2" readonly>
+								<input type="hidden" id="uloga" name="uloga" value="Vozac">
 							</td>
 						</tr>
 						<tr>
 							<th>Godiste vozila: </th>
-							<td><input type="text" readonly id="godisteAutomobila"></td>
+							<td><input type="text" readonly id="godisteAutomobila" name="godisteAutomobila"></td>
 						</tr>
 						<tr>
 							<th>Broj registarske oznake: </th>
-							<td><input type="text" readonly id="brojRegistarskeOznake"></td>
+							<td><input type="text" readonly id="brojRegistarskeOznake" name="brojRegistarskeOznake"></td>
 						</tr>
 						<tr>
 							<th>Broj taksi vozila: </th>
-							<td><input type="text" readonly id="brojTaksiVozila"></td>
+							<td><input type="text" readonly id="brojTaksiVozila" name="brojTaksiVozila"></td>
 						</tr>
 						<tr>
 							<th>Tip vozila: </th>
-							<td><input type="text" readonly id="tipAutomobila"></td>
+							<td>
+								<select id="tipAutomobila" name="tipAutomobila">
+									<option id="putnickiAutomobil">Putnicki Automobil</option>
+									<option id="kombiVozilo">Kombi Vozilo</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th>Voznje: </th>
