@@ -145,6 +145,39 @@ function validateLogin()
     });
 }
 
+function editLokacijaVozac()
+{
+    $.post('/api/lokacija/', $('form#editLokacija').serialize())
+    .done(function (status, data, xhr) {
+        alert(data);
+        loadVozac();
+    })
+    .fail(function (jqXHR, textStatus) {
+        alert(jqXHR.responseJSON["Message"]);
+    });
+}
+
+function validateEditLokacijaVozac() {
+    $("#editLokacija").validate({
+        rules: {
+            ulica: {
+                required: true
+            },
+            broj: {
+                required: true
+            },
+            naseljenoMesto: {
+                required: true
+            },
+            pozivniBrojMesta: {
+                required: true
+            }
+        },
+        submitHandler: function (form) { editLokacijaVozac() }
+    });
+}
+
+
 function editMus() {
     $.post('/api/musterija/', $('form#editMus').serialize())
     .done(function (status, data, xhr) {

@@ -21,6 +21,7 @@ namespace WebAPI.Controllers
             }
 
             Automobil a = new Automobil();
+            Lokacija l = new Lokacija();
 
             foreach(Vozac v in Korisnici.Vozaci)
             {
@@ -30,7 +31,15 @@ namespace WebAPI.Controllers
                 }
             }
 
-            UlogovaniKorisnici.Vozac = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga, korisnik.Lokacija, a);
+            foreach(Vozac v in Korisnici.Vozaci)
+            {
+                if (v.KorisnickoIme.Equals(korisnik.KorisnickoIme))
+                {
+                    l = v.Lokacija;
+                }
+            }
+
+            UlogovaniKorisnici.Vozac = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga, l, a);
             return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
         }
 

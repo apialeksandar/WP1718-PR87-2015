@@ -89,8 +89,49 @@
 					else if(data.Automobil.TipAutomobila == 1) {
 						$("#kombiVozilo").attr("selected", "true");
 					}
+					$("#xKoordinata").val(data.Lokacija.XKoordinata);
+					$("#yKoordinata").val(data.Lokacija.YKoordinata);
+					$("#ulica").val(data.Lokacija.Adresa.Ulica);
+					$("#broj").val(data.Lokacija.Adresa.Broj);
+					$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
+					$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
 				});
-			});
+			 });
+
+			 $("#trenutnaLokacija").click(function () {
+			 	$.get("/api/vozac", function (data, status) {
+			 		$("#korisnickoIme2").val(data.KorisnickoIme);
+			 		$("#ime2").val(data.Ime);
+			 		$("#prezime2").val(data.Prezime);
+			 		if (data.Pol == 0) {
+			 			$("#Muski").attr("selected", "true");
+			 		}
+			 		else {
+			 			$("#Zenski").attr("selected", "true");
+			 		}
+			 		$("#kontaktTelefon2").val(data.KontaktTelefon);
+			 		$("#lozinka2").val(data.Lozinka);
+			 		$("#jmbg2").val(data.Jmbg);
+			 		$("#email2").val(data.Email);
+			 		$("#uloga2").val(data.Uloga);
+			 		$("#voznje2").val(data.VoznjeKorisnika);
+			 		$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
+			 		$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
+			 		$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
+			 		if (data.Automobil.TipAutomobila == 0) {
+			 			$("#putnickiAutomobil").attr("selected", "true");
+			 		}
+			 		else if (data.Automobil.TipAutomobila == 1) {
+			 			$("#kombiVozilo").attr("selected", "true");
+			 		}
+			 		$("#xKoordinata").val(data.Lokacija.XKoordinata);
+			 		$("#yKoordinata").val(data.Lokacija.YKoordinata);
+			 		$("#ulica").val(data.Lokacija.Adresa.Ulica);
+			 		$("#broj").val(data.Lokacija.Adresa.Broj);
+			 		$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
+			 		$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
+			 	});
+			 });
 		});
 		</script>
 	</head>
@@ -100,7 +141,7 @@
 	
 		<button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
 		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
-		<button class="tablink" onclick="openPage('Lokacija', this)">Lokacija</button>
+		<button class="tablink" onclick="openPage('Lokacija', this)" id="trenutnaLokacija">Lokacija</button>
 		<button class="tablink" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
 
 		<div id="Pocetna" class="tabcontent">
@@ -193,8 +234,45 @@
 			</p>
 		</div>
 		<div id="Lokacija" class="tabcontent">
-			Vasa trenutna lokacija: <input type="text" name="lokacija">
-			<input type="submit" value="Sacuvaj">
+			<p>
+				<form action="post" id="editLokacija">
+					<table>
+						<tr>
+							<th colspan="2" align="center">Vasa trenutna lokacija</th>
+						</tr>
+						<tr>
+							<th>XKoordinata: </th>
+							<td><input type="text" id="xKoordinata" name="xKoordinata" readonly></td>
+						</tr>
+						<tr>
+							<th>YKoordinata: </th>
+							<td><input type="text" id="yKoordinata" name="yKoordinata" required></td>
+						</tr>
+						<tr>
+							<th>Ulica: </th>
+							<td><input type="text" id="ulica" name="Adresa.ulica"></td>
+						</tr>
+						<tr>
+							<th>Broj: </th>
+							<td><input type="text" id="broj" name="Adresa.broj"></td>
+						</tr>
+						<tr>
+							<th>Naseljeno mesto: </th>
+							<td><input type="text" id="naseljenoMesto" name="Adresa.naseljenoMesto"></td>
+						</tr>
+						<tr>
+							<th>Pozivni broj mesta: </th>
+							<td><input type="text" id="pozivniBrojMesta" name="Adresa.pozivniBrojMesta"></td>
+						</tr>
+						<tr>
+							<td><input type="submit" value="Promeni"></td>
+						</tr>
+				</table>
+			</form>
+				<script>validateEditLokacijaVozac();</script>
+		</p>
+
+			
 		</div>
 		<div id="Trenutna voznja" class="tabcontent">
 			Vasa trenutna lokacija: <input type="text" name="lokacija">

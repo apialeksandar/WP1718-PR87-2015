@@ -32,6 +32,8 @@ namespace WebAPI.Models
                 p = Pol.Zenski;
 
             Dispeceri.Add(new Dispecer(lines[0], lines[1], lines[2], lines[3], p, lines[5], lines[6], lines[7], Uloga.Dispecer));
+
+            Vozaci.Add(new Vozac("vozac", "vozac", "vozac", "vozac", Pol.Muski, "2405996820189", "066064958", "vozac@gmail.com", Uloga.Vozac, new Lokacija("44°49'04.127", "44°49'04.127", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000")), new Automobil("vozac", "2005", "NS108-TX", 10, TipAutomobila.PutnickiAutomobil)));
         }
     }
 }
