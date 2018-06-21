@@ -10,6 +10,7 @@ namespace WebAPI.Models
     {
         public Lokacija Lokacija { get; set; }
         public Automobil Automobil { get; set; }
+        public bool Slobodan { get; set; }
 
         public Vozac() { }
         public Vozac(string korisnickoIme, string lozinka, string ime, string prezime, Pol pol, string jmbg, string kontaktTelefon, string email, Uloga uloga, Lokacija lokacija, Automobil automobil)
@@ -26,6 +27,7 @@ namespace WebAPI.Models
             Voznje = new List<Voznja>();
             Lokacija = lokacija;
             Automobil = automobil;
+            Slobodan = true;
         }
     }
 }

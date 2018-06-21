@@ -25,42 +25,5 @@ namespace WebAPI.Controllers
             }
             return ret;
         }
-
-        /*[ResponseType(typeof(void))]
-        public IHttpActionResult Post(Korisnik korisnik)
-        {
-            string temp = korisnik.Ime;
-            Voznja tempVoznja = null;
-            List<Voznja> lista = new List<Voznja>();
-
-            int index = int.Parse(korisnik.Ime);
-
-            
-            foreach (Voznja voz in UlogovaniKorisnici.Musterija.Voznje)
-            {
-                if (voz.StatusVoznje.Equals(StatusVoznje.NaCekanju))
-                {
-                    lista.Add(voz);
-                }
-            }
-
-            tempVoznja = lista[index];
-
-            foreach (Voznja voz in UlogovaniKorisnici.Musterija.Voznje)
-            {
-                if (tempVoznja.DatumIVremePorudzbine.Equals(voz.DatumIVremePorudzbine))
-                {
-                    voz.StatusVoznje = StatusVoznje.Otkazana;
-                    foreach (Voznja voz1 in Voznje.SveVoznje)
-                    {
-                        if (tempVoznja.DatumIVremePorudzbine.Equals(voz1.DatumIVremePorudzbine))
-                        {
-                            voz1.StatusVoznje = StatusVoznje.Otkazana;
-                        }
-                    }
-                }
-            }
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
     }
 }
