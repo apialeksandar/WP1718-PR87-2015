@@ -26,17 +26,12 @@ namespace WebAPI.Controllers
             return ret;
         }
 
-        [ResponseType(typeof(void))]
+        /*[ResponseType(typeof(void))]
         public IHttpActionResult Post(Korisnik korisnik)
         {
             string temp = korisnik.Ime;
-            //string k = korisnik.Lokacija2; // ulogovani korisnik za koga se menja voznja
             Voznja tempVoznja = null;
             List<Voznja> lista = new List<Voznja>();
-
-            //string opcija = temp.Substring(0, 6);
-
-            //string[] i = temp.Split('_');
 
             int index = int.Parse(korisnik.Ime);
 
@@ -66,6 +61,6 @@ namespace WebAPI.Controllers
                 }
             }
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
     }
 }

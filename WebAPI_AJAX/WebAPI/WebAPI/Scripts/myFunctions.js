@@ -20,6 +20,12 @@ function loadVozac() {
     $("#logdiv").load("./Htmls/HtmlVozac.html");
 }
 
+function loadKomentar(pom) {
+    $("#regdiv").hide();
+    $("#logdiv").load("./Htmls/HtmlKomentar.html");
+    //$("#tempInput").val(pom);
+}
+
 function addVozac() {
     $.post('/api/dodajVozaca/', $('form#addVozac').serialize())
     .done(function (status, data, xhr) {

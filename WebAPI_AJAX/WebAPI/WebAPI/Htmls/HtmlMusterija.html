@@ -39,8 +39,10 @@
 
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
+	<script src="Scripts/globalVar.js"></script>
 
 	<script type="text/javascript">
+
 		function openPage(pageName, elmnt, color) {
 		// Hide all elements with class="tabcontent" by default */
 		var i, tabcontent, tablinks;
@@ -62,18 +64,47 @@
 		elmnt.style.backgroundColor = color;
 		}
 
-		function pom(i)
+		function obrisi(i)
 		{
 			var pom = i;
+			globalSet(pom);
 
-			$.ajax({
+			/*$.ajax({
 				url: 'api/voznje/post',
 				method: 'POST',
 				data: {
 					Ime: pom,
-					//Lokacija2: korisnik
 				}
-			});
+			});*/
+
+			loadKomentar();
+		}
+
+		function izmeni(i)
+		{
+			var pom = i;
+
+				$.ajax({
+					url: 'api/izmeniVoznju/post',
+					method: 'POST',
+					data: {
+						Ime: pom,
+					},
+					success: function (data)
+					{
+						$("#ulica").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						$("#broj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						$("#naseljenoMesto").val(data.LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						$("#pozivniBroj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.PozivniBrojMesta)
+						if (data.ZeljeniTipAutomobila == 0) {
+							$("#putnickiAutomobil").attr("selected", "true");
+						}
+						else {
+							$("#kombiVozilo").attr("selected", "true");
+						}
+					},
+				});
+
 		}
 
 	</script>
@@ -117,9 +148,6 @@
 			 	$.get("/api/voznje", function (data, status) 
 			 	{
 			 		var i;
-			 		var o;
-			 		var iz;
-			 		var korisnik;
 
 			 		for (i = 0; i < data.length; i++)
 			 		{
@@ -131,33 +159,9 @@
 			 			var txt6 = $("<td></td>").text(data[i].Dispecer);
 			 			var txt7 = $("<td></td>").text(data[i].Iznos);
 			 			var txt8 = $("<td></td>").text(data[i].StatusVoznje);
-			 			var txt9 = $("<input type=\"submit\" value=\"izmeni\">").attr("id", "izmeni_" + i);
-			 			var txt10 = $("<input type=\"submit\" value=\"obrisi\" onclick=\"pom(" + i + ")\">").attr("id", "obrisi_" + i);
+			 			var txt9 = $("<input type=\"submit\" value=\"izmeni\" onclick=\"izmeni(" + i + ")\">").attr("id", "izmeni_" + i);
+			 			var txt10 = $("<input type=\"submit\" value=\"obrisi\" onclick=\"obrisi(" + i + ")\">").attr("id", "obrisi_" + i);
 			 			$("#tabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9, txt10, "</tr>");
-
-			 			korisnik = data[i].Musterija;
-			 			iz = "izmeni_" + i;
-			 			o = "obrisi_" + i;
-			 			//$("#izmeni_" + i).click(function () {
-			 			//	$.ajax({
-			 			//		url: 'api/voznje/post',
-			 			//		method: 'POST',
-			 			//		data: {
-			 			//			KorisnickoImeVozaca: iz,
-			 			//			Lokacija2: korisnik
-			 			//		}
-			 			//	});
-			 			//});
-			 			//$("#obrisi_" + i).click(function () {
-			 			//	$.ajax({
-			 			//		url: 'api/voznje/post',
-			 			//		method: 'POST',
-			 			//		data: {
-			 			//			Ime: o,
-			 			//			//Lokacija2: korisnik
-			 			//		}
-			 			//	});
-			 			//});
 			 		}
 			 		
 			 	});
@@ -171,7 +175,7 @@
 	<h1>MUSTERIJA</h1>
 	<!-- Tab links -->
 
-	<button class="tablink" onclick="openPage('Pocetna', this)" id="PocetnA">Pocetna</button>
+	<button class="tablink" onclick="openPage('Pocetna', this)" id="PocetnA">Voznje na cekanju</button>
 	<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
 	<button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
 
@@ -260,9 +264,9 @@
 					<tr>
 						<th>Izaberite tip vozila: </th>
 						<td>
-							<select id="tipAutomobila" name="Automobil.tipAutomobila">
-								<option id="putnickiAutomobil">Putnicki Automobil</option>
-								<option id="kombiVozilo">Kombi Vozilo</option>
+							<select id="tipAutomobila" name="Automobil.TipAutomobil">
+								<option id="putnickiAutomobil" value="PutnickiAutomobil">Putnicki Automobil</option>
+								<option id="kombiVozilo" value="KombiVozilo">Kombi Vozilo</option>
 							</select>
 						</td>
 					</tr>
