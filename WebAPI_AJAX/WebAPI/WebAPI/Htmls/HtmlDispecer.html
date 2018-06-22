@@ -154,7 +154,7 @@
 				for (i = 0; i < data.length; i++) {
 					var txt1 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica + "\" id=\"ulica" + i + "\"></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 					var txt2 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj + "\" id=\"broj" + i + "\"></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-					var txt3 = $("<td><input type=\"checkbox\" id=\"check" + i + "\"></td>");
+					var txt3 = $("<td><input type=\"radio\" name=\"radioButton\"id=\"check" + i + "\"></td>");
 					$("#obradiVoznjuTabela").append("<tr>", txt1, txt2, txt3, "</tr>");
 				}
 			});
