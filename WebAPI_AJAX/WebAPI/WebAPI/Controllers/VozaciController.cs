@@ -32,12 +32,14 @@ namespace WebAPI.Controllers
             Adresa a = new Adresa(voznja.Ulica, int.Parse(voznja.Broj), voznja.NaseljenoMesto, voznja.PozivniBrojMesta);
             Lokacija l = new Lokacija("", "", a);
             Voznja v = new Voznja(DateTime.Now, l, voznja.ZeljeniTipAutomobila, "", null, UlogovaniKorisnici.Dispecer.KorisnickoIme, voznja.Vozac, -1, null, StatusVoznje.Formirana);
+            UlogovaniKorisnici.Dispecer.Voznje.Add(v);
 
             foreach(Vozac vozac in Korisnici.Vozaci)
             {
                 if (vozac.KorisnickoIme.Equals(voznja.Vozac))
                 {
                     vozac.Slobodan = false;
+                    vozac.Voznje.Add(v);
                     return Ok(vozac);
                 }   
             }

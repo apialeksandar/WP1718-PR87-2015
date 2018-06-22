@@ -169,6 +169,7 @@
     <Compile Include="Controllers\VozacController.cs" />
     <Compile Include="Controllers\VozaciController.cs" />
     <Compile Include="Controllers\VoznjeController.cs" />
+    <Compile Include="Controllers\VoznjeDispecerController.cs" />
     <Compile Include="Controllers\ZahtevVoznjeController.cs" />
     <Compile Include="Enumerations\Ocena.cs" />
     <Compile Include="Enumerations\StatusVoznje.cs" />
