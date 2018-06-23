@@ -168,6 +168,7 @@
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\TrenutnaVoznjaController.cs" />
+    <Compile Include="Controllers\UnosOdredistaController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
     <Compile Include="Controllers\VozaciController.cs" />
     <Compile Include="Controllers\VoznjeController.cs" />
@@ -208,6 +209,7 @@
     <Content Include="Htmls\HtmlLogin.html" />
     <Content Include="Htmls\HtmlMusterija.html" />
     <Content Include="Htmls\HtmlRegistracija.html" />
+    <Content Include="Htmls\HtmlUnosOdredista.html" />
     <Content Include="Htmls\HtmlVozac.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />

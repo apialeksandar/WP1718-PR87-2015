@@ -35,6 +35,13 @@ function loadKomentarVozac() {
     $("#logdiv").load("./Htmls/HtmlKomentarVozac.html");
 }
 
+function loadUnosOdredista()
+{
+    $("#regdiv").hide();
+    $("#errdiv").hide();
+    $("#logdiv").load("./Htmls/HtmlUnosOdredista.html");
+}
+
 function addVozac() {
     $.post('/api/dodajVozaca/', $('form#addVozac').serialize())
     .done(function (status, data, xhr) {

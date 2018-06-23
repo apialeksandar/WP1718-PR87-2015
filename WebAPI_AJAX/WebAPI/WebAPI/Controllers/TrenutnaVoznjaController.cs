@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         {
             foreach(Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
             {
-                if (voznja.StatusVoznje.Equals(StatusVoznje.Obradjena))
+                if (voznja.StatusVoznje.Equals(StatusVoznje.Obradjena) || voznja.StatusVoznje.Equals(StatusVoznje.Formirana))
                     return voznja;
             }
 

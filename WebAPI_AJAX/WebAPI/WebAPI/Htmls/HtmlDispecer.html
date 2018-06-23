@@ -129,15 +129,15 @@
 				});
 			 });
 
-			 $.get("/api/vozaci", function (data, status) {
-			 	var i;
+			 $("#formirajVoznju").click(function () {
+			 	$.get("/api/vozaci", function (data, status) {
+			 		var i;
 
-			 	for (i = 0; i < data.length; i++)
-			 	{
-			 		var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
-			 		$("#vozac").append(txt1);
-			 	}
-
+			 		for (i = 0; i < data.length; i++) {
+			 			var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
+			 			$("#vozac").append(txt1);
+			 		}
+			 	});
 			 });
 		});
 
@@ -176,7 +176,7 @@
 
 	<button class="tablink" onclick="openPage('Pocetna', this)" id="pocetna">Pocetna</button>
 	<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
-	<button class="tablink" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
+	<button class="tablink" onclick="openPage('Formiraj voznju', this)" id="formirajVoznju">Formiraj voznju</button>
 	<button class="tablink" onclick="openPage('Obradi voznju', this)" id="obradi">Obradi voznju</button>
 	<button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
 

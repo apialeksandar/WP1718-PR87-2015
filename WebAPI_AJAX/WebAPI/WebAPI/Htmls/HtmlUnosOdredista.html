@@ -1,0 +1,46 @@
+﻿<head>
+    <title></title>
+	<meta charset="utf-8" />
+	<script src="Scripts/jquery-1.10.2.js"></script>
+	<script src="Scripts/jquery.validate.js"></script>
+
+	<script type="text/javascript">
+		
+		function zavrsi()
+		{
+			$.ajax({
+				url: 'api/unosOdredista/post',
+				method: 'POST',
+				data: {
+					Ulica: document.getElementById("ulica").value,
+					Broj: document.getElementById("broj").value,
+					Iznos: document.getElementById("iznos").value,
+				},
+				success: function (data, status)
+				{
+					loadVozac();
+				},
+			});
+		}
+
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Iznos: </th>
+			<td><input type="text" id="iznos"></td>
+		</tr>
+		<tr>
+			<th>Ulica: </th>
+			<td><input type="text" id="ulica"></td>
+		</tr>
+		<tr>
+			<th>Broj: </th>
+			<td><input type="text" id="broj"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right"><input type="submit" value="Zavrsi voznju" onclick="zavrsi()"></td>
+		</tr>
+	</table>
+</body>
