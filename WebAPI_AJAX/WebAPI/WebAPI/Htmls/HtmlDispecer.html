@@ -139,6 +139,73 @@
 			 		}
 			 	});
 			 });
+
+			 $("#pocetna").click(function ()
+			 {
+			 	$("#mojeVoznje").empty();
+			 	var s1 = $("<th></th>").text("Ulica(pocetak)");
+			 	var s2 = $("<th></th>").text("Broj(pocetak)");
+			 	var s3 = $("<th></th>").text("Grad(pocetak)");
+			 	var s4 = $("<th></th>").text("Dispecer");
+			 	var s5 = $("<th></th>").text("Iznos");
+			 	var s6 = $("<th></th>").text("Status voznje");
+			 	var s7 = $("<th></th>").text("Vozac");
+			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+			 	var s9 = $("<th></th>").text("Broj(odrediste)");
+			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
+			 	$("#mojeVoznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+
+			 	$.get("/api/sveVoznjeDispecera", function (data, status) {
+			 		var i;
+
+			 		for (i = 0; i < data.length; i++) {
+			 			var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+			 			var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+			 			var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+			 			var txt4 = $("<td></td>").text(data[i].Dispecer);
+			 			var txt5 = $("<td></td>").text(data[i].Iznos);
+			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+			 			var txt7 = $("<td></td>").text(data[i].Vozac)
+			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
+			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+			 			$("#mojeVoznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+			 		}
+			 	});
+			 });
+
+			 $("#sveVoznje").click(function () {
+			 	$("#sveVoznjeee").empty();
+			 	var s1 = $("<th></th>").text("Ulica(pocetak)");
+			 	var s2 = $("<th></th>").text("Broj(pocetak)");
+			 	var s3 = $("<th></th>").text("Grad(pocetak)");
+			 	var s4 = $("<th></th>").text("Dispecer");
+			 	var s5 = $("<th></th>").text("Iznos");
+			 	var s6 = $("<th></th>").text("Status voznje");
+			 	var s7 = $("<th></th>").text("Vozac");
+			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+			 	var s9 = $("<th></th>").text("Broj(odrediste)");
+			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
+			 	$("#sveVoznjeee").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+
+			 	$.get("/api/sveVoznje", function (data, status) {
+			 		var i;
+
+			 		for (i = 0; i < data.length; i++) {
+			 			var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+			 			var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+			 			var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+			 			var txt4 = $("<td></td>").text(data[i].Dispecer);
+			 			var txt5 = $("<td></td>").text(data[i].Iznos);
+			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+			 			var txt7 = $("<td></td>").text(data[i].Vozac)
+			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
+			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+			 			$("#sveVoznjeee").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+			 		}
+			 	});
+			 });
 		});
 
 		$("#obradi").click(function ()
@@ -174,7 +241,8 @@
 	<h1>DISPECER</h1>
 	<!-- Tab links -->
 
-	<button class="tablink" onclick="openPage('Pocetna', this)" id="pocetna">Pocetna</button>
+	<button class="tablink" onclick="openPage('Pocetna', this)" id="pocetna">Moje voznje</button>
+	<button class="tablink" onclick="openPage('Sve voznje', this)" id="sveVoznje">Sve voznje</button>
 	<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
 	<button class="tablink" onclick="openPage('Formiraj voznju', this)" id="formirajVoznju">Formiraj voznju</button>
 	<button class="tablink" onclick="openPage('Obradi voznju', this)" id="obradi">Obradi voznju</button>
@@ -242,7 +310,8 @@
 	</div>
 
 	<div id="Pocetna" class="tabcontent">
-		Voznje: <input type="text" name="voznje">
+		<table id="mojeVoznje" border="1">
+		</table>
 	</div>
 
 	<div id="My Profile" class="tabcontent">
@@ -361,5 +430,10 @@
 		
 		</select>
 		<input type="submit" value="Obradi" onclick="obradi()">
+	</div>
+
+	<div class="tabcontent" id="Sve voznje">
+		<table id="sveVoznjeee" border="1">
+		</table>
 	</div>
 </body>

@@ -167,7 +167,10 @@
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SveVoznjeController.cs" />
+    <Compile Include="Controllers\SveVoznjeDispeceraController.cs" />
     <Compile Include="Controllers\SveVoznjeMusterijaController.cs" />
+    <Compile Include="Controllers\SveVoznjeVozacaController.cs" />
     <Compile Include="Controllers\TrenutnaVoznjaController.cs" />
     <Compile Include="Controllers\UnosOdredistaController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
