@@ -7,23 +7,32 @@
 function loadMusterija()
 {
     $("#regdiv").hide();
+    $("#errdiv").hide();
     $("#logdiv").load("./Htmls/HtmlMusterija.html");
 }
 
 function loadDispecer() {
     $("#regdiv").hide();
+    $("#errdiv").hide();
     $("#logdiv").load("./Htmls/HtmlDispecer.html");
 }
 
 function loadVozac() {
     $("#regdiv").hide();
+    $("#errdiv").hide();
     $("#logdiv").load("./Htmls/HtmlVozac.html");
 }
 
 function loadKomentar(pom) {
     $("#regdiv").hide();
+    $("#errdiv").hide();
     $("#logdiv").load("./Htmls/HtmlKomentar.html");
-    //$("#tempInput").val(pom);
+}
+
+function loadKomentarVozac() {
+    $("#regdiv").hide();
+    $("#errdiv").hide();
+    $("#logdiv").load("./Htmls/HtmlKomentarVozac.html");
 }
 
 function addVozac() {

@@ -14,6 +14,7 @@ namespace WebAPI.Models.Temp
         public string PozivniBrojMesta { get; set; }
         public string Vozac { get; set; }
         public TipAutomobila ZeljeniTipAutomobila { get; set; }
+        public StatusVoznje StatusVoznje { get; set; }
 
         public FormirajVoznju() { }
 

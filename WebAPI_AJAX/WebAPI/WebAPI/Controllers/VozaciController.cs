@@ -33,6 +33,7 @@ namespace WebAPI.Controllers
             Lokacija l = new Lokacija("", "", a);
             Voznja v = new Voznja(DateTime.Now, l, voznja.ZeljeniTipAutomobila, "", null, UlogovaniKorisnici.Dispecer.KorisnickoIme, voznja.Vozac, -1, null, StatusVoznje.Formirana);
             UlogovaniKorisnici.Dispecer.Voznje.Add(v);
+            Voznje.SveVoznje.Add(v);
 
             foreach(Vozac vozac in Korisnici.Vozaci)
             {

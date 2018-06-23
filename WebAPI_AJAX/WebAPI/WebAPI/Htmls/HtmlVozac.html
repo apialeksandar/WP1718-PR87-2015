@@ -59,7 +59,33 @@
 
 		// Add the specific color to the button used to open the tab content
 		elmnt.style.backgroundColor = color;
-	}
+		}
+
+		function zavrsiVoznju()
+		{
+			$.ajax({
+				url: 'api/trenutnaVoznja/post',
+				method: 'POST',
+				data: {
+					Ulica: document.getElementById("ulicaaa").value,
+					Broj: document.getElementById("brojjj").value,
+					StatusVoznje: document.getElementById("statusVoznjeee").value,
+				},
+				success: function (data, status) {
+					
+
+					if (data == 'komentar')
+					{
+						alert("USO2");
+						loadKomentarVozac();
+					}
+					else if(data == 'unos')
+					{
+
+					}
+				},
+			});
+		}
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -132,6 +158,14 @@
 			 		$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
 			 	});
 			 });
+
+			 $("#trenutnaVoznja").click(function () {
+			 	$.get("/api/trenutnaVoznja", function (data, status) {
+			 		$("#ulicaaa").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+			 		$("#brojjj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+			 		
+			 	});
+			 });
 		});
 		</script>
 	</head>
@@ -142,7 +176,7 @@
 		<button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
 		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
 		<button class="tablink" onclick="openPage('Lokacija', this)" id="trenutnaLokacija">Lokacija</button>
-		<button class="tablink" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
+		<button class="tablink" onclick="openPage('Trenutna voznja', this)" id="trenutnaVoznja">Trenutna voznja</button>
 
 		<div id="Pocetna" class="tabcontent">
 			Voznje: <input type="text" name="voznje">
@@ -233,6 +267,7 @@
 				</script>
 			</p>
 		</div>
+
 		<div id="Lokacija" class="tabcontent">
 			<p>
 				<form action="post" id="editLokacija">
@@ -274,13 +309,30 @@
 
 			
 		</div>
+
 		<div id="Trenutna voznja" class="tabcontent">
-			Vasa trenutna lokacija: <input type="text" name="lokacija">
-			Status voznje: <select>
-							<option value="Neuspesna">Neuspesna</option>
-							<option value="Uspesna">Uspesna</option>
+			<table>
+				<tr>
+					<th>Ulica: </th>
+					<td><input type="text" id="ulicaaa" name="ulicaaa" readonly></td>
+				</tr>
+				<tr>
+					<th>Broj: </th>
+					<td><input type="text" id="brojjj" name="brojjj" readonly></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<select id="statusVoznjeee" name="statusVoznjeee">
+							<option>Izaberi...</option>
+							<option id="uspesna">Uspesna</option>
+							<option id="neuspesna">Neuspesna</option>
 						</select>
-			<input type="submit" value="Sacuvaj">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right"><input type="submit" value="Zavrsi voznju" onclick="zavrsiVoznju()"></td>
+				</tr>
+			</table>
 		</div>
 </body>
 </html>

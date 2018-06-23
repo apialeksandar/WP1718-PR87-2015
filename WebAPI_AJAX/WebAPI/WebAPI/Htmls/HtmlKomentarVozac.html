@@ -1,14 +1,14 @@
 ﻿<head>
-    <title></title>
+	<title></title>
 	<meta charset="utf-8" />
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
 	<script src="Scripts/globalVar.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function() 
+		$(document).ready(function()
 		{
-			$.get("/api/musterija", function (data, status)
+			$.get("/api/vozac", function (data, status)
 			{
 				$("#korisnickoIme").val(data.KorisnickoIme);
 			});
@@ -16,24 +16,21 @@
 
 		function posalji()
 		{
-			var pom = globalReturn();
-			$("#global").val(globalReturn());
-
 			$.ajax({
-				url: 'api/komentar/post',
+				url: 'api/komentarVozac/post',
 				method: 'POST',
 				data: {
 					Opis: $("#opis1").val(),
 					OcenaVoznje: $("#ocenaVoznje1").val(),
-					KorisnikKojiJeOstavioKomentar: $("#global").val(),
+					KorisnikKojiJeOstavioKomentar: $("#korisnickoIme").val(),
 				},
 				success: function ()
 				{
-					loadMusterija();
+					loadVozac();
 				},
 			});
 		}
-		
+
 	</script>
 </head>
 <body>
