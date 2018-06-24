@@ -48,6 +48,7 @@ namespace WebAPI.Controllers
                 {
                     if(Korisnici.Musterije.Count == mPom)
                     {
+                        korisnik.Voznje = new List<Voznja>();
                         Korisnici.Musterije.Add(korisnik);
                         return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
                     }

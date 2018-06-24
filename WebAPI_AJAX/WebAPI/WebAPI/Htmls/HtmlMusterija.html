@@ -99,9 +99,89 @@
 
 		}
 
+		function filtriraj() {
+			$.ajax({
+				url: 'api/filtrirajMusterija/post',
+				method: 'POST',
+				data: {
+					StatusVoznje: document.getElementById("sortStatusVoznja").value,
+				},
+				success: function (data) {
+					$("#sveVoznjeMusterijaTabela").empty();
+					var s1 = $("<th></th>").text("Ulica(pocetak)");
+					var s2 = $("<th></th>").text("Broj(pocetak)");
+					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s4 = $("<th></th>").text("Dispecer");
+					var s5 = $("<th></th>").text("Iznos");
+					var s6 = $("<th></th>").text("Status voznje");
+					var s7 = $("<th></th>").text("Vozac");
+					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+					var s9 = $("<th></th>").text("Broj(odrediste)");
+					var s10 = $("<th></th>").text("Grad(odrediste)");*/
+					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].Iznos);
+						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt7 = $("<td></td>").text(data[i].Vozac)
+						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
+						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+					}
+				}
+			});
+		}
+
+		function sortirajDatum()
+		{
+			$.ajax({
+				url: 'api/sortirajDatumMusterija/post',
+				method: 'POST',
+				success: function (data) {
+					$("#sveVoznjeMusterijaTabela").empty();
+					var s1 = $("<th></th>").text("Ulica(pocetak)");
+					var s2 = $("<th></th>").text("Broj(pocetak)");
+					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s4 = $("<th></th>").text("Dispecer");
+					var s5 = $("<th></th>").text("Iznos");
+					var s6 = $("<th></th>").text("Status voznje");
+					var s7 = $("<th></th>").text("Vozac");
+					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+					var s9 = $("<th></th>").text("Broj(odrediste)");
+					var s10 = $("<th></th>").text("Grad(odrediste)");*/
+					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].Iznos);
+						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt7 = $("<td></td>").text(data[i].Vozac)
+						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
+						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+					}
+				}
+			});
+		}
+
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).ready(function () {
+			jQuery('#Myprofile').click();			// HOME PAGE!!!!!!!!!!
+
 			 $("#Myprofile").click(function () {
 				$.get("/api/musterija", function (data, status) {
 					$("#korisnickoIme").val(data.KorisnickoIme);
@@ -123,7 +203,6 @@
 				});
 			 });
 
-			
 			 $("#PocetnA").click(function () {
 			 	$("#tabela").empty();
 			 	var s1 = $("<th></th>").text("Datum i vreme narudzbe");
@@ -210,6 +289,20 @@
 	<div id="Sve voznje" class="tabcontent">
 		<table id="sveVoznjeMusterijaTabela" border="1">
 		</table>
+		<select id="sortStatusVoznja">
+			<option value="Izaberi..." id="Izaberi...">Izaberi...</option>
+			<option value="NaCekanju" id="NaCekanju">NaCekanju</option>
+			<option value="Formirana" id="Formirana">Formirana</option>
+			<option value="Obradjena" id="Obradjena">Obradjena</option>
+			<option value="Prihvacena" id="Prihvacena">Prihvacena</option>
+			<option value="Otkazana" id="Otkazana">Otkazana</option>
+			<option value="Neuspesna" id="Neuspesna">Neuspesna</option>
+			<option value="Uspesna" id="Uspesna">Uspesna</option>
+		</select>
+		<br/>
+		<input type="submit" value="Filtriraj po statusu voznje" onclick="filtriraj()">
+		<br />
+		<input type="submit" value="Sortiraj po datumu" onclick="sortirajDatum()">
 	</div>
 
 	<div id="My Profile" class="tabcontent">
@@ -288,11 +381,11 @@
 					</tr>
 					<tr>
 						<th>Unesite mesto: </th>
-						<td><input type="text" id="naseljenoMesto" name="Lokacija.Adresa.naseljenoMesto"></td>
+						<td><input type="text" id="naseljenoMesto" name="Lokacija.Adresa.naseljenoMesto" value="Novi Sad" readonly></td>
 					</tr>
 					<tr>
 						<th>Unesite pozivni broj mesta: </th>
-						<td><input type="text" id="pozivniBroj" name="Lokacija.Adresa.pozivniBrojMesta"></td>
+						<td><input type="text" id="pozivniBroj" name="Lokacija.Adresa.pozivniBrojMesta" value="21000" readonly></td>
 					</tr>
 					<tr>
 						<th>Izaberite tip vozila: </th>
