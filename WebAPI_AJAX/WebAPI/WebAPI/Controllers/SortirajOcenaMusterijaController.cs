@@ -21,9 +21,16 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in temp)
                 {
-                    if ((int)voznja.Komentar.OcenaVoznje == i)
+                    if (voznja.Komentar == null)
                     {
-                        ret.Add(voznja);
+
+                    }
+                    else
+                    {
+                        if ((int)voznja.Komentar.OcenaVoznje == i)
+                        {
+                            ret.Add(voznja);
+                        }
                     }
                 }
             }

@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    pom = "od-do";
+                    ret = new List<Voznja>();
                 }
             }
 

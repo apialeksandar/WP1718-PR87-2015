@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    temp = "od-do";
+                    ret = new List<Voznja>();
                 }
             }
 
