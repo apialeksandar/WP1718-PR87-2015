@@ -171,6 +171,7 @@
     <Compile Include="Controllers\PretragaCenaVozacController.cs" />
     <Compile Include="Controllers\PretragaDatumMusterijaController.cs" />
     <Compile Include="Controllers\PretragaDatumVozacController.cs" />
+    <Compile Include="Controllers\PretragaImeIPrezimeController.cs" />
     <Compile Include="Controllers\PretragaOcenaMusterijaController.cs" />
     <Compile Include="Controllers\PretragaOcenaVozacController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
