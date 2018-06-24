@@ -166,6 +166,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
+    <Compile Include="Controllers\PretragaCenaMusterijaController.cs" />
     <Compile Include="Controllers\PretragaDatumMusterijaController.cs" />
     <Compile Include="Controllers\PretragaOcenaMusterijaController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />

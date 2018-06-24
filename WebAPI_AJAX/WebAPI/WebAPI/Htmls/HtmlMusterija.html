@@ -299,6 +299,48 @@
 			});
 		}
 
+		function pretraziCenu()
+		{
+			$.ajax({
+				url: 'api/pretragaCenaMusterija/post',
+				method: 'POST',
+				data: {
+					OdOcena: document.getElementById("odCena").value,
+					DoOcena: document.getElementById("doCena").value,
+				},
+				success: function (data) {
+					$("#sveVoznjeMusterijaTabela").empty();
+					var s1 = $("<th></th>").text("Ulica(pocetak)");
+					var s2 = $("<th></th>").text("Broj(pocetak)");
+					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s4 = $("<th></th>").text("Dispecer");
+					var s5 = $("<th></th>").text("Iznos");
+					var s6 = $("<th></th>").text("Status voznje");
+					var s7 = $("<th></th>").text("Vozac");
+					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+					var s9 = $("<th></th>").text("Broj(odrediste)");
+					var s10 = $("<th></th>").text("Grad(odrediste)");*/
+					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].Iznos);
+						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt7 = $("<td></td>").text(data[i].Vozac)
+						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
+						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+					}
+				}
+			});
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -465,6 +507,13 @@
 				<option value="5" id="ocenaDo5">5</option>
 			</select>
 			<input type="submit" value="Pretrazi" onclick="pretraziOcena()">
+		</p>
+		<p>
+			<label>OD: </label>
+			<input type="text" id="odCena" value="">
+			<label>DO: </label>
+			<input type="text" id="doCena" value="">
+			<input type="submit" value="Pretrazi" onclick="pretraziCenu()">
 		</p>
 	</div>
 
