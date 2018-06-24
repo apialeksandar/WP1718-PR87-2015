@@ -9,7 +9,7 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaDatumMusterijaController : ApiController
+    public class PretragaDatumVozacController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju datum)
         {
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
 
             if (temp.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (voznja.DatumIVremePorudzbine >= datum.Od)
                         ret.Add(voznja);
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
             }
             else if (temp.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (voznja.DatumIVremePorudzbine <= datum.Do)
                         ret.Add(voznja);
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
             }
             else if (temp.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (voznja.DatumIVremePorudzbine >= datum.Od && voznja.DatumIVremePorudzbine <= datum.Do)
                         ret.Add(voznja);

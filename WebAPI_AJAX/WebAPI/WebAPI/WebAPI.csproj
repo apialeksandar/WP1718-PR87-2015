@@ -160,6 +160,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DispecerController.cs" />
     <Compile Include="Controllers\DodajVozacaController.cs" />
+    <Compile Include="Controllers\FiltrirajVozacController.cs" />
     <Compile Include="Controllers\IzmeniVoznjuController.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KomentarVozacController.cs" />
@@ -167,12 +168,17 @@
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\PretragaCenaMusterijaController.cs" />
+    <Compile Include="Controllers\PretragaCenaVozacController.cs" />
     <Compile Include="Controllers\PretragaDatumMusterijaController.cs" />
+    <Compile Include="Controllers\PretragaDatumVozacController.cs" />
     <Compile Include="Controllers\PretragaOcenaMusterijaController.cs" />
+    <Compile Include="Controllers\PretragaOcenaVozacController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\FiltrirajMusterijaController.cs" />
     <Compile Include="Controllers\SortirajDatumMusterijaController.cs" />
+    <Compile Include="Controllers\SortirajDatumVozacController.cs" />
     <Compile Include="Controllers\SortirajOcenaMusterijaController.cs" />
+    <Compile Include="Controllers\SortirajOcenaVozacController.cs" />
     <Compile Include="Controllers\SveVoznjeController.cs" />
     <Compile Include="Controllers\SveVoznjeDispeceraController.cs" />
     <Compile Include="Controllers\SveVoznjeMusterijaController.cs" />

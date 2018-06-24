@@ -9,7 +9,7 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaOcenaMusterijaController : ApiController
+    public class PretragaOcenaVozacController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
@@ -39,9 +39,9 @@ namespace WebAPI.Controllers
 
             if (pom.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
-                    if(!(voznja.Komentar == null))
+                    if (!(voznja.Komentar == null))
                     {
                         if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
                             ret.Add(voznja);
@@ -50,24 +50,24 @@ namespace WebAPI.Controllers
             }
             else if (pom.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
-                    if (!(voznja.Komentar == null))
-                    {
-                        if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
-                            ret.Add(voznja);
-                    } 
+                        if (!(voznja.Komentar == null))
+                        {
+                            if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                ret.Add(voznja);
+                        }    
                 }
             }
             else if (pom.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
-                    if(!(voznja.Komentar == null))
-                    {
-                        if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
-                            ret.Add(voznja);
-                    }
+                        if (!(voznja.Komentar == null))
+                        {
+                            if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                ret.Add(voznja);
+                        } 
                 }
             }
 
