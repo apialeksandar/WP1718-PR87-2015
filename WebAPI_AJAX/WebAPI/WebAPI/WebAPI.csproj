@@ -166,9 +166,11 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
+    <Compile Include="Controllers\PretragaDatumMusterijaController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\FiltrirajMusterijaController.cs" />
     <Compile Include="Controllers\SortirajDatumMusterijaController.cs" />
+    <Compile Include="Controllers\SortirajOcenaMusterijaController.cs" />
     <Compile Include="Controllers\SveVoznjeController.cs" />
     <Compile Include="Controllers\SveVoznjeDispeceraController.cs" />
     <Compile Include="Controllers\SveVoznjeMusterijaController.cs" />

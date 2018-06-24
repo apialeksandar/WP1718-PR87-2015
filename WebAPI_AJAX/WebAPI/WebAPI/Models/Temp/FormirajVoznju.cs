@@ -16,6 +16,8 @@ namespace WebAPI.Models.Temp
         public TipAutomobila ZeljeniTipAutomobila { get; set; }
         public StatusVoznje StatusVoznje { get; set; }
         public string Iznos { get; set; }
+        public DateTime Od { get; set; }
+        public DateTime Do { get; set; }
 
         public FormirajVoznju() { }
 
