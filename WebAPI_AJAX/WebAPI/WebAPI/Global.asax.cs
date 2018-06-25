@@ -12,6 +12,10 @@ namespace WebAPI
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        protected void Application_PostAuthorizeRequest()
+        {
+            System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
+        }
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

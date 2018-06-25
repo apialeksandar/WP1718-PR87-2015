@@ -16,19 +16,26 @@
 
 		function posalji()
 		{
+			let korisnik =
+			{
+				Opis: `${$('#opis1').val()}`,
+				OcenaVoznje: `${$('#ocenaVoznje1').val()}`,
+				KorisnikKojiJeOstavioKomentar: `${$('#korisnickoIme').val()}`,
+			}
+
 			$.ajax({
-				url: 'api/komentarVozac/post',
+				url: '/api/komentarVozac/post',
 				method: 'POST',
-				data: {
-					Opis: $("#opis1").val(),
-					OcenaVoznje: $("#ocenaVoznje1").val(),
-					KorisnikKojiJeOstavioKomentar: $("#korisnickoIme").val(),
-				},
-				success: function ()
-				{
+				data: JSON.stringify(korisnik),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data) {
 					loadVozac();
 				},
-			});
+				error: function (jqXHR) {
+					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+				}
+			})
 		}
 
 	</script>

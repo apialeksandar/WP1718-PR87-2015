@@ -8,10 +8,14 @@
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
-			$.get("/api/musterija", function (data, status)
-			{
-				$("#korisnickoIme").val(data.KorisnickoIme);
-			});
+			$.ajax({
+				url: 'api/musterija/get',
+				method: 'GET',
+
+				success: function (data) {
+					$("#korisnickoIme").val(data.KorisnickoIme);
+				}
+			})
 		});
 
 		function posalji()
@@ -19,19 +23,27 @@
 			var pom = globalReturn();
 			$("#global").val(globalReturn());
 
+			let komentar =
+        {
+        	Opis: `${$('#opis1').val()}`,
+        	OcenaVoznje: `${$('#ocenaVoznje1').val()}`,
+        	KorisnikKojiJeOstavioKomentar: `${$('#global').val()}`,
+        }
+
 			$.ajax({
-				url: 'api/komentar/post',
+				url: '/api/komentar/post',
 				method: 'POST',
-				data: {
-					Opis: $("#opis1").val(),
-					OcenaVoznje: $("#ocenaVoznje1").val(),
-					KorisnikKojiJeOstavioKomentar: $("#global").val(),
-				},
-				success: function ()
-				{
+				data: JSON.stringify(komentar),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data) {
+					alert("INFO: Uspesno ste ostavili komentar.");
 					loadMusterija();
 				},
-			});
+				error: function (jqXHR) {
+					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+				}
+			})
 		}
 		
 	</script>

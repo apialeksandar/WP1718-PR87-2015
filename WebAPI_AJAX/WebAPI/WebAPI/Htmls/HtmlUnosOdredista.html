@@ -8,19 +8,26 @@
 		
 		function zavrsi()
 		{
+			let korisnik =
+			{
+				Ulica: `${$('#ulica').val()}`,
+				Broj: `${$('#broj').val()}`,
+				Iznos: `${$('#iznos').val()}`,
+			}
+
 			$.ajax({
-				url: 'api/unosOdredista/post',
+				url: '/api/unosOdredista/post',
 				method: 'POST',
-				data: {
-					Ulica: document.getElementById("ulica").value,
-					Broj: document.getElementById("broj").value,
-					Iznos: document.getElementById("iznos").value,
-				},
-				success: function (data, status)
-				{
+				data: JSON.stringify(korisnik),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data) {
 					loadVozac();
 				},
-			});
+				error: function (jqXHR) {
+					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+				}
+			})
 		}
 
 	</script>

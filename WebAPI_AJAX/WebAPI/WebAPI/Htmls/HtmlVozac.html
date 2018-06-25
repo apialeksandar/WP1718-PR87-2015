@@ -63,27 +63,31 @@
 
 		function zavrsiVoznju()
 		{
-			$.ajax({
-				url: 'api/trenutnaVoznja/post',
-				method: 'POST',
-				data: {
-					Ulica: document.getElementById("ulicaaa").value,
-					Broj: document.getElementById("brojjj").value,
-					StatusVoznje: document.getElementById("statusVoznjeee").value,
-				},
-				success: function (data, status) {
-					
+			let voznja =
+			{
+				Ulica: `${$('#ulicaaa').val()}`,
+				Broj: `${$('#brojjj').val()}`,
+				StatusVoznje: `${$('#statusVoznjeee').val()}`,
+			}
 
-					if (data == 'komentar')
-					{
+			$.ajax({
+				url: '/api/trenutnaVoznja/post',
+				method: 'POST',
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data) {
+					if (data == 'komentar') {
 						loadKomentarVozac();
 					}
-					else if(data == 'unos')
-					{
+					else if (data == 'unos') {
 						loadUnosOdredista();
 					}
 				},
-			});
+				error: function (jqXHR) {
+					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+				}
+			})
 		}
 
 		function filtriraj() {
@@ -325,40 +329,47 @@
 
 	</script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			 $("#Myprofile").click(function () {
-				$.get("/api/vozac", function (data, status) {
-					$("#korisnickoIme2").val(data.KorisnickoIme);
-					$("#ime2").val(data.Ime);
-					$("#prezime2").val(data.Prezime);
-					if (data.Pol == 0) {
-						$("#Muski").attr("selected", "true");
+		$(document).ready(function () {
+			jQuery('#mojeVoznje').click();
+
+			$("#Myprofile").click(function () {
+				$.ajax({
+					url: 'api/vozac/get',
+					method: 'GET',
+
+					success: function (data) {
+						$("#korisnickoIme2").val(data.KorisnickoIme);
+						$("#ime2").val(data.Ime);
+						$("#prezime2").val(data.Prezime);
+						if (data.Pol == 0) {
+							$("#Muski").attr("selected", "true");
+						}
+						else {
+							$("#Zenski").attr("selected", "true");
+						}
+						$("#kontaktTelefon2").val(data.KontaktTelefon);
+						$("#lozinka2").val(data.Lozinka);
+						$("#jmbg2").val(data.Jmbg);
+						$("#email2").val(data.Email);
+						$("#uloga2").val(data.Uloga);
+						$("#voznje2").val(data.VoznjeKorisnika);
+						$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
+						$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
+						$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
+						if (data.Automobil.TipAutomobila == 0) {
+							$("#putnickiAutomobil").attr("selected", "true");
+						}
+						else if (data.Automobil.TipAutomobila == 1) {
+							$("#kombiVozilo").attr("selected", "true");
+						}
+						$("#xKoordinata").val(data.Lokacija.XKoordinata);
+						$("#yKoordinata").val(data.Lokacija.YKoordinata);
+						$("#ulica").val(data.Lokacija.Adresa.Ulica);
+						$("#broj").val(data.Lokacija.Adresa.Broj);
+						$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
+						$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
 					}
-					else {
-						$("#Zenski").attr("selected", "true");
-					}
-					$("#kontaktTelefon2").val(data.KontaktTelefon);
-					$("#lozinka2").val(data.Lozinka);
-					$("#jmbg2").val(data.Jmbg);
-					$("#email2").val(data.Email);
-					$("#uloga2").val(data.Uloga);
-					$("#voznje2").val(data.VoznjeKorisnika);
-					$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
-					$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
-					$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
-					if (data.Automobil.TipAutomobila == 0) {
-						$("#putnickiAutomobil").attr("selected", "true");
-					}
-					else if(data.Automobil.TipAutomobila == 1) {
-						$("#kombiVozilo").attr("selected", "true");
-					}
-					$("#xKoordinata").val(data.Lokacija.XKoordinata);
-					$("#yKoordinata").val(data.Lokacija.YKoordinata);
-					$("#ulica").val(data.Lokacija.Adresa.Ulica);
-					$("#broj").val(data.Lokacija.Adresa.Broj);
-					$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
-					$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
-				});
+				})
 			 });
 
 			 $("#trenutnaLokacija").click(function () {
@@ -397,11 +408,15 @@
 			 });
 
 			 $("#trenutnaVoznja").click(function () {
-			 	$.get("/api/trenutnaVoznja", function (data, status) {
-			 		$("#ulicaaa").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
-			 		$("#brojjj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-			 		
-			 	});
+			 	$.ajax({
+			 		url: 'api/trenutnaVoznja/get',
+			 		method: 'GET',
+
+			 		success: function (data) {
+			 			$("#ulicaaa").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+			 			$("#brojjj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+			 		}
+			 	})
 			 });
 
 			 $("#mojeVoznje").click(function () {
@@ -478,8 +493,8 @@
 	
 		<button class="tablink" onclick="openPage('Pocetna', this)" id="mojeVoznje">Moje voznje</button>
 		<button class="tablink" onclick="openPage('Voznje na cekanju', this)" id="voznjeNaCekanju">Voznje na cekanju</button>
-		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
-		<button class="tablink" onclick="openPage('Lokacija', this)" id="trenutnaLokacija">Lokacija</button>
+		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">Moj profil</button>
+		<button class="tablink" onclick="openPage('Lokacija', this)" id="trenutnaLokacija">Trenutna lokacija</button>
 		<button class="tablink" onclick="openPage('Trenutna voznja', this)" id="trenutnaVoznja">Trenutna voznja</button>
 
 		<div id="Pocetna" class="tabcontent">
@@ -616,15 +631,6 @@
 							<td><input type="text" readonly id="brojTaksiVozila" name="brojTaksiVozila"></td>
 						</tr>
 						<tr>
-							<th>Tip vozila: </th>
-							<td>
-								<select id="tipAutomobila" name="tipAutomobila">
-									<option id="putnickiAutomobil">Putnicki Automobil</option>
-									<option id="kombiVozilo">Kombi Vozilo</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
 							<td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
 						</tr>
 					</table>
@@ -667,7 +673,7 @@
 							<td><input type="text" id="pozivniBrojMesta" name="Adresa.pozivniBrojMesta" readonly></td>
 						</tr>
 						<tr>
-							<td><input type="submit" value="Promeni"></td>
+							<td colspan="2" align="center"><input type="submit" value="Promeni"></td>
 						</tr>
 				</table>
 			</form>
@@ -697,7 +703,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="right"><input type="submit" value="Zavrsi voznju" onclick="zavrsiVoznju()"></td>
+					<td colspan="2" align="center"><input type="submit" value="Zavrsi voznju" onclick="zavrsiVoznju()"></td>
 				</tr>
 			</table>
 		</div>

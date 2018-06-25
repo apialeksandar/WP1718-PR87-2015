@@ -42,29 +42,64 @@ function loadUnosOdredista()
     $("#logdiv").load("./Htmls/HtmlUnosOdredista.html");
 }
 
-function addVozac() {
-    $.post('/api/dodajVozaca/', $('form#addVozac').serialize())
-    .done(function (status, data, xhr) {
-        alert(data);
-        loadDispecer();
+function addVozac()
+{
+    let vozac =
+        {
+            KorisnickoIme: `${$('#korisnickoIme2').val()}`,
+            Lozinka: `${$('#lozinka2').val()}`,
+            Ime: `${$('#ime2').val()}`,
+            Prezime: `${$('#prezime2').val()}`,
+            Pol: `${$('#pol2').val()}`,
+            Jmbg: `${$('#jmbg2').val()}`,
+            KontaktTelefon: `${$('#kontaktTelefon2').val()}`,
+            Email: `${$('#email2').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/dodajVozaca/post',
+        method: 'POST',
+        data: JSON.stringify(vozac),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste dodali vozaca.");
+            loadDispecer();
+        },
+        error: function (jqXHR) {
+            alert(jqXHR.responseJSON["Message"]);
+        }
     })
-    .fail(function (jqXHR, textStatus) {
-        alert(jqXHR.responseJSON["Message"]);
-    });
 }
 
 function register()
 {
-    $.post('/api/register/', $('form#reg').serialize())
-    .done(function (status, data, xhr)
-    {
-        alert(data);
-        loadStart();
+    let korisnik =
+        {
+            KorisnickoIme: `${$('#username').val()}`,
+            Lozinka: `${$('#password').val()}`,
+            Ime: `${$('#ime1').val()}`,
+            Prezime: `${$('#prezime1').val()}`,
+            Pol: `${$('#pol1').val()}`,
+            Jmbg: `${$('#jmbg1').val()}`,
+            KontaktTelefon: `${$('#kontaktTelefon1').val()}`,
+            Email: `${$('#email1').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/register/post',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste se registrovali.");
+            loadStart();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
     })
-    .fail(function (jqXHR, textStatus)
-    {
-        alert(jqXHR.responseJSON["Message"]);
-    });
 }
 
 function validateRegister() {
@@ -122,43 +157,49 @@ function validateRegister() {
 }
 
 function zahtevVoznje() {
-    $.post('/api/zahtevVoznje/', $('form#zahtevVoznje').serialize())
+
+    let voznja =
+        {
+            Ulica: `${$('#ulica').val()}`,
+            Broj: `${$('#broj').val()}`,
+            ZeljeniTipAutomobila: `${$('#tipAutomobila').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/zahtevVoznje/post',
+        method: 'POST',
+        data: JSON.stringify(voznja),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste zatrazili voznju.");
+            loadMusterija();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
+    })
+    /*$.post('/api/zahtevVoznje/', $('form#zahtevVoznje').serialize())
     .done(function (status, data, xhr) {
         alert(data);
         loadMusterija();
     })
     .fail(function (jqXHR, textStatus) {
         alert(jqXHR.responseJSON["Message"]);
-    });
+    });*/
 }
 
 function validateZahtevVoznje() {
     $("#zahtevVoznje").validate({
         rules: {
-            ulica: {
-                required: true
-            },
-            broj: {
-                required: true
-            },
-            naseljenoMesto: {
-                required: true
-            },
-            pozivniBrojMesta: {
-                required: true
-            }
+            ulica: "required",
+            broj: "required"
         },
         messages: {
             ulica: {
                 required: "Obavezno polje",
             },
             broj: {
-                required: "Obavezno polje",
-            },
-            naseljenoMesto: {
-                required: "Obavezno polje",
-            },
-            pozivniBrojMesta: {
                 required: "Obavezno polje",
             }
         },
@@ -168,8 +209,20 @@ function validateZahtevVoznje() {
 
 function logIn()
 {
-    $.post('/api/login', $('form#logIn').serialize())
-        .done(function (data, status, xhr) {
+    let korisnik =
+        {
+            KorisnickoIme: `${$('#korisnickoIme1').val()}`,
+            Lozinka: `${$('#lozinka1').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/login/post',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste se prijavili.");
             localStorage.setItem("ulogovan", JSON.stringify(data));
             let recievedObject = JSON.parse(localStorage.getItem("ulogovan"));
             if (recievedObject.Uloga == 0)
@@ -178,10 +231,11 @@ function logIn()
                 loadDispecer();
             else
                 loadVozac();
-        })
-        .fail(function (jqXHR) {
+        },
+        error: function (jqXHR) {
             $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
-        });
+        }
+    })
 }
 
 function validateLogin()
@@ -214,14 +268,35 @@ function validateLogin()
 
 function editLokacijaVozac()
 {
-    $.post('/api/lokacija/', $('form#editLokacija').serialize())
+
+    let lokacija =
+        {
+            Ulica: `${$('#ulica').val()}`,
+            Broj: `${$('#broj').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/lokacija/post',
+        method: 'POST',
+        data: JSON.stringify(lokacija),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste promenuli lokaciju.");
+            loadVozac();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
+    })
+    /*$.post('/api/lokacija/', $('form#editLokacija').serialize())
     .done(function (status, data, xhr) {
         alert(data);
         loadVozac();
     })
     .fail(function (jqXHR, textStatus) {
         alert(jqXHR.responseJSON["Message"]);
-    });
+    });*/
 }
 
 function validateEditLokacijaVozac() {
@@ -258,16 +333,34 @@ function validateEditLokacijaVozac() {
     });
 }
 
-
 function editMus() {
-    $.post('/api/musterija/', $('form#editMus').serialize())
-    .done(function (status, data, xhr) {
-        alert(data);
-        loadMusterija();
+
+    let korisnik =
+        {
+            KorisnickoIme: `${$('#korisnickoIme').val()}`,
+            Lozinka: `${$('#lozinka').val()}`,
+            Ime: `${$('#ime').val()}`,
+            Prezime: `${$('#prezime').val()}`,
+            Pol: `${$('#pol').val()}`,
+            Jmbg: `${$('#jmbg').val()}`,
+            KontaktTelefon: `${$('#kontaktTelefon').val()}`,
+            Email: `${$('#email').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/musterija/post',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste izmenili podatke.");
+            loadMusterija();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
     })
-    .fail(function (jqXHR, textStatus) {
-        alert(jqXHR.responseJSON["Message"]);
-    });
 }
 
 function validateMusterija() {
@@ -325,14 +418,41 @@ function validateMusterija() {
 }
 
 function editDispecer() {
-    $.post('/api/dispecer/', $('form#editDis').serialize())
+
+    let korisnik =
+        {
+            KorisnickoIme: `${$('#korisnickoIme1').val()}`,
+            Lozinka: `${$('#lozinka1').val()}`,
+            Ime: `${$('#ime1').val()}`,
+            Prezime: `${$('#prezime1').val()}`,
+            Pol: `${$('#pol1').val()}`,
+            Jmbg: `${$('#jmbg1').val()}`,
+            KontaktTelefon: `${$('#kontaktTelefon1').val()}`,
+            Email: `${$('#email1').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/dispecer/post',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste izmenili podatke.");
+            loadDispecer();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
+    })
+    /*$.post('/api/dispecer/', $('form#editDis').serialize())
     .done(function (status, data, xhr) {
         alert(data);
         loadDispecer();
     })
     .fail(function (jqXHR, textStatus) {
         alert(jqXHR.responseJSON["Message"]);
-    });
+    });*/
 }
 
 function validateDispecer() {
@@ -390,14 +510,32 @@ function validateDispecer() {
 }
 
 function editVozac() {
-    $.post('/api/vozac/', $('form#editVoz').serialize())
-    .done(function (status, data, xhr) {
-        alert(data);
-        loadVozac();
+    let korisnik =
+        {
+            KorisnickoIme: `${$('#korisnickoIme2').val()}`,
+            Lozinka: `${$('#lozinka2').val()}`,
+            Ime: `${$('#ime2').val()}`,
+            Prezime: `${$('#prezime2').val()}`,
+            Pol: `${$('#pol2').val()}`,
+            Jmbg: `${$('#jmbg2').val()}`,
+            KontaktTelefon: `${$('#kontaktTelefon2').val()}`,
+            Email: `${$('#email2').val()}`,
+        }
+
+    $.ajax({
+        url: '/api/vozac/post',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            alert("INFO: Uspesno ste izmenili podatke.");
+            loadVozac();
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
     })
-    .fail(function (jqXHR, textStatus) {
-        alert(jqXHR.responseJSON["Message"]);
-    });
 }
 
 function validateVozac() {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
@@ -15,7 +16,6 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Korisnik))]
         public IHttpActionResult Post(Korisnik korisnik)
         {
-
             foreach (Musterija k in Korisnici.Musterije)
             {
                 if (k.KorisnickoIme.Equals(korisnik.KorisnickoIme) && k.Lozinka.Equals(korisnik.Lozinka))
