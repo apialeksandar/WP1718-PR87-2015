@@ -20,6 +20,9 @@ namespace WebAPI.Models.Temp
         public DateTime Do { get; set; }
         public string OdOcena { get; set; }
         public string DoOcena { get; set; }
+        public string OdCena { get; set; }
+        public string DoCena { get; set; }
+        public string StatusVoznje1 { get; set; }
 
         public FormirajVoznju() { }
 
