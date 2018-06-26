@@ -318,6 +318,44 @@
 			})
 		}
 
+		function prihvatiVoznju()
+		{
+			$.ajax({
+				url: 'api/voznje/get',
+				method: 'GET',
+
+				success: function (data) {
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						if ($("#check" + i).prop('checked')) {
+							let voznja =
+							{
+								Ulica: `${data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica}`,
+								Broj: `${data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj}`,
+							}
+
+							$.ajax({
+								url: '/api/prihvatiVoznjuVozac/post',
+								method: 'POST',
+								data: JSON.stringify(voznja),
+								contentType: 'application/json; charset=utf-8',
+								dataType: 'json',
+								success: function (data) {
+									alert("INFO: Uspesno ste prihvatili voznju.");
+									loadVozac();
+								},
+								error: function (jqXHR) {
+									$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+									loadVozac();
+								}
+							})
+						}
+					}
+				}
+			})
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -361,122 +399,138 @@
 						$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
 					}
 				})
-			 });
+			});
 
-			 $("#trenutnaLokacija").click(function () {
-			 	$.get("/api/vozac", function (data, status) {
-			 		$("#korisnickoIme2").val(data.KorisnickoIme);
-			 		$("#ime2").val(data.Ime);
-			 		$("#prezime2").val(data.Prezime);
-			 		if (data.Pol == 0) {
-			 			$("#Muski").attr("selected", "true");
-			 		}
-			 		else {
-			 			$("#Zenski").attr("selected", "true");
-			 		}
-			 		$("#kontaktTelefon2").val(data.KontaktTelefon);
-			 		$("#lozinka2").val(data.Lozinka);
-			 		$("#jmbg2").val(data.Jmbg);
-			 		$("#email2").val(data.Email);
-			 		$("#uloga2").val(data.Uloga);
-			 		$("#voznje2").val(data.VoznjeKorisnika);
-			 		$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
-			 		$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
-			 		$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
-			 		if (data.Automobil.TipAutomobila == 0) {
-			 			$("#putnickiAutomobil").attr("selected", "true");
-			 		}
-			 		else if (data.Automobil.TipAutomobila == 1) {
-			 			$("#kombiVozilo").attr("selected", "true");
-			 		}
-			 		$("#xKoordinata").val(data.Lokacija.XKoordinata);
-			 		$("#yKoordinata").val(data.Lokacija.YKoordinata);
-			 		$("#ulica").val(data.Lokacija.Adresa.Ulica);
-			 		$("#broj").val(data.Lokacija.Adresa.Broj);
-			 		$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
-			 		$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
-			 	});
-			 });
+			$("#trenutnaLokacija").click(function () {
+				$.get("/api/vozac", function (data, status) {
+					$("#korisnickoIme2").val(data.KorisnickoIme);
+					$("#ime2").val(data.Ime);
+					$("#prezime2").val(data.Prezime);
+					if (data.Pol == 0) {
+						$("#Muski").attr("selected", "true");
+					}
+					else {
+						$("#Zenski").attr("selected", "true");
+					}
+					$("#kontaktTelefon2").val(data.KontaktTelefon);
+					$("#lozinka2").val(data.Lozinka);
+					$("#jmbg2").val(data.Jmbg);
+					$("#email2").val(data.Email);
+					$("#uloga2").val(data.Uloga);
+					$("#voznje2").val(data.VoznjeKorisnika);
+					$("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
+					$("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
+					$("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
+					if (data.Automobil.TipAutomobila == 0) {
+						$("#putnickiAutomobil").attr("selected", "true");
+					}
+					else if (data.Automobil.TipAutomobila == 1) {
+						$("#kombiVozilo").attr("selected", "true");
+					}
+					$("#xKoordinata").val(data.Lokacija.XKoordinata);
+					$("#yKoordinata").val(data.Lokacija.YKoordinata);
+					$("#ulica").val(data.Lokacija.Adresa.Ulica);
+					$("#broj").val(data.Lokacija.Adresa.Broj);
+					$("#naseljenoMesto").val(data.Lokacija.Adresa.NaseljenoMesto);
+					$("#pozivniBrojMesta").val(data.Lokacija.Adresa.PozivniBrojMesta);
+				});
+			});
 
-			 $("#trenutnaVoznja").click(function () {
-			 	$.ajax({
-			 		url: 'api/trenutnaVoznja/get',
-			 		method: 'GET',
+			$("#trenutnaVoznja").click(function () {
+				$.ajax({
+					url: 'api/trenutnaVoznja/get',
+					method: 'GET',
 
-			 		success: function (data) {
-			 			$("#ulicaaa").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
-			 			$("#brojjj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-			 		}
-			 	})
-			 });
+					success: function (data) {
+						$("#ulicaaa").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						$("#brojjj").val(data.LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+					}
+				})
+			});
 
-			 $("#mojeVoznje").click(function () {
-			 	$("#voznje").empty();
-			 	var s1 = $("<th></th>").text("Ulica(pocetak)");
-			 	var s2 = $("<th></th>").text("Broj(pocetak)");
-			 	var s3 = $("<th></th>").text("Grad(pocetak)");
-			 	var s4 = $("<th></th>").text("Dispecer");
-			 	var s5 = $("<th></th>").text("Iznos");
-			 	var s6 = $("<th></th>").text("Status voznje");
-			 	var s7 = $("<th></th>").text("Vozac");
-			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
+			$("#mojeVoznje").click(function () {
+				$("#voznje").empty();
+				var s1 = $("<th></th>").text("Ulica(pocetak)");
+				var s2 = $("<th></th>").text("Broj(pocetak)");
+				var s3 = $("<th></th>").text("Grad(pocetak)");
+				var s4 = $("<th></th>").text("Dispecer");
+				var s5 = $("<th></th>").text("Iznos");
+				var s6 = $("<th></th>").text("Status voznje");
+				var s7 = $("<th></th>").text("Vozac");
+				/*var s8 = $("<th></th>").text("Ulica(odrediste)");
 			 	var s9 = $("<th></th>").text("Broj(odrediste)");
 			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
-			 	$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+				$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
-			 	$.get("/api/sveVoznjeVozaca", function (data, status) {
-			 		var i;
+				$.get("/api/sveVoznjeVozaca", function (data, status) {
+					var i;
 
-			 		for (i = 0; i < data.length; i++) {
-			 			var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
-			 			var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-			 			var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
-			 			var txt4 = $("<td></td>").text(data[i].Dispecer);
-			 			var txt5 = $("<td></td>").text(data[i].Iznos);
-			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-			 			var txt7 = $("<td></td>").text(data[i].Vozac)
-			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].Iznos);
+						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt7 = $("<td></td>").text(data[i].Vozac)
+						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
 			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
 			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
-			 			$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
-			 		}
-			 	});
-			 });
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+					}
+				});
+			});
 
-			 $("#voznjeNaCekanju").click(function () {
-			 	$("#voznjeCekanje").empty();
-			 	var s1 = $("<th></th>").text("Ulica(pocetak)");
-			 	var s2 = $("<th></th>").text("Broj(pocetak)");
-			 	var s3 = $("<th></th>").text("Grad(pocetak)");
-			 	var s4 = $("<th></th>").text("Dispecer");
-			 	var s5 = $("<th></th>").text("Iznos");
-			 	var s6 = $("<th></th>").text("Status voznje");
-			 	var s7 = $("<th></th>").text("Vozac");
-			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-			 	var s9 = $("<th></th>").text("Broj(odrediste)");
-			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
-			 	$("#voznjeCekanje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+			$("#voznjeNaCekanju").click(function () {
+				$("#voznjeCekanje").empty();
+				var s1 = $("<th></th>").text("Ulica(pocetak)");
+				var s2 = $("<th></th>").text("Broj(pocetak)");
+				var s3 = $("<th></th>").text("Grad(pocetak)");
+				var s4 = $("<th></th>").text("Dispecer");
+				var s5 = $("<th></th>").text("Iznos");
+				var s6 = $("<th></th>").text("Status voznje");
+				var s7 = $("<th></th>").text("Vozac");
+				$("#voznjeCekanje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
-			 	$.get("/api/voznje", function (data, status) {
-			 		var i;
+				$.get("/api/voznje", function (data, status) {
+					var i;
 
-			 		for (i = 0; i < data.length; i++) {
-			 			var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
-			 			var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-			 			var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
-			 			var txt4 = $("<td></td>").text(data[i].Dispecer);
-			 			var txt5 = $("<td></td>").text(data[i].Iznos);
-			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-			 			var txt7 = $("<td></td>").text(data[i].Vozac)
-			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
-			 			$("#voznjeCekanje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
-			 		}
-			 	});
-			 });
-		});
-		</script>
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].Iznos);
+						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt7 = $("<td></td>").text(data[i].Vozac)
+						$("#voznjeCekanje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+					}
+				});
+			});
+
+			$("#prihvati").click(function () {
+				$("#prihvatiVoznjuTabela").empty();
+				$("#prihvatiVoznjuTabela").append("<tr><th colspan=\"3\" align=\"center\">Voznje na cekanju</th></tr>");
+				$("#prihvatiVoznjuTabela").append("<tr><th >Ulica</th><th>Broj</th><th></th></tr>");
+
+				$.ajax({
+					url: 'api/voznje/get',
+					method: 'GET',
+
+					success: function (data) {
+						var i;
+
+						for (i = 0; i < data.length; i++) {
+							var txt1 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica + "\" id=\"ulica" + i + "\"></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+							var txt2 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj + "\" id=\"broj" + i + "\"></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+							var txt3 = $("<td><input type=\"radio\" name=\"radioButton\"id=\"check" + i + "\"></td>");
+							$("#prihvatiVoznjuTabela").append("<tr>", txt1, txt2, txt3, "</tr>");
+						}
+					}
+				})
+			});
+
+		});</script>
 	</head>
 	<body>
 		<h1>VOZAC</h1>
@@ -484,6 +538,7 @@
 	
 		<button class="tablink" onclick="openPage('Pocetna', this)" id="mojeVoznje">Moje voznje</button>
 		<button class="tablink" onclick="openPage('Voznje na cekanju', this)" id="voznjeNaCekanju">Voznje na cekanju</button>
+		<button class="tablink" onclick="openPage('Prihvati voznju', this)" id="prihvati">Prihvati voznju</button>
 		<button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">Moj profil</button>
 		<button class="tablink" onclick="openPage('Lokacija', this)" id="trenutnaLokacija">Trenutna lokacija</button>
 		<button class="tablink" onclick="openPage('Trenutna voznja', this)" id="trenutnaVoznja">Trenutna voznja</button>
@@ -697,6 +752,11 @@
 					<td colspan="2" align="center"><input type="submit" value="Zavrsi voznju" onclick="zavrsiVoznju()"></td>
 				</tr>
 			</table>
+		</div>
+
+		<div id="Prihvati voznju" class="tabcontent">
+			<table id="prihvatiVoznjuTabela" border="1"></table>
+			<input type="submit" value="Prihvati voznju" onclick="prihvatiVoznju()">
 		</div>
 </body>
 </html>
