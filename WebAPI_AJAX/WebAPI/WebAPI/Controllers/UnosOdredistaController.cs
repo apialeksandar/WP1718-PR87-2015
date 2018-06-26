@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Ok();
+            return Ok("OK");
         }
     }
 }

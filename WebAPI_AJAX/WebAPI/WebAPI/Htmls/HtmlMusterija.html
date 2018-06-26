@@ -106,43 +106,46 @@
 		}
 
 		function filtriraj() {
-			$.ajax({
-				url: 'api/filtrirajMusterija/post',
-				method: 'POST',
-				data: {
-					StatusVoznje: document.getElementById("sortStatusVoznja").value,
-				},
-				success: function (data) {
-					$("#sveVoznjeMusterijaTabela").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
-					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
-					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
-					var i;
-
-					for (i = 0; i < data.length; i++) {
-						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
-						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
-						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
-						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+			let voznja =
+			{
+				StatusVoznje: `${$('#sortStatusVoznja').val()}`,
+			}
+				$.ajax({
+					url: 'api/filtrirajMusterija/post',
+					method: 'POST',
+					data: JSON.stringify(voznja),
+					contentType: 'application/json; charset=utf-8',
+					dataType: 'json',
+					success: function (data)
+					{
+						$("#sveVoznjeMusterijaTabela").empty();
+						var s1 = $("<th></th>").text("Ulica(pocetak)");
+						var s2 = $("<th></th>").text("Broj(pocetak)");
+						var s3 = $("<th></th>").text("Grad(pocetak)");
+						var s4 = $("<th></th>").text("Dispecer");
+						var s5 = $("<th></th>").text("Iznos");
+						var s6 = $("<th></th>").text("Status voznje");
+						var s7 = $("<th></th>").text("Vozac");
+						var s8 = $("<th></th>").text("Ulica(odrediste)");
+						var s9 = $("<th></th>").text("Broj(odrediste)");
+						var s10 = $("<th></th>").text("Grad(odrediste)");
+						$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+	
+						var i;
+	
+						for (i = 0; i < data.length; i++) {
+							var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+							var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+							var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+							var txt4 = $("<td></td>").text(data[i].Dispecer);
+							var txt5 = $("<td></td>").text(data[i].Iznos);
+							var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+							var txt7 = $("<td></td>").text(data[i].Vozac);
+							$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						}
 					}
-				}
-			});
+				})
 		}
 
 		function sortirajDatum()
@@ -150,7 +153,11 @@
 			$.ajax({
 				url: 'api/sortirajDatumMusterija/post',
 				method: 'POST',
-				success: function (data) {
+				data: JSON.stringify(),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data)
+				{
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
 					var s2 = $("<th></th>").text("Broj(pocetak)");
@@ -159,9 +166,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -173,14 +177,11 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 		function sortirajOcena()
@@ -188,6 +189,9 @@
 			$.ajax({
 				url: 'api/sortirajOcenaMusterija/post',
 				method: 'POST',
+				data: JSON.stringify(),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
 				success: function (data) {
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
@@ -197,9 +201,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -211,26 +212,28 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 		function pretrazi()
 		{
+			let voznja =
+			{
+				Od: `${$('#od').val()}`,
+				Do: `${$('#do').val()}`,
+			}
 			$.ajax({
 				url: 'api/pretragaDatumMusterija/post',
 				method: 'POST',
-				data: {
-					Od: document.getElementById("od").value,
-					Do: document.getElementById("do").value,
-				},
-				success: function (data) {
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data)
+				{
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
 					var s2 = $("<th></th>").text("Broj(pocetak)");
@@ -239,9 +242,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -253,25 +253,26 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 		function pretraziOcena()
 		{
+			let voznja =
+			{
+				OdOcena: `${$('#odOcena').val()}`,
+				DoOcena: `${$('#doOcena').val()}`,
+			}
 			$.ajax({
 				url: 'api/pretragaOcenaMusterija/post',
 				method: 'POST',
-				data: {
-					OdOcena: document.getElementById("odOcena").value,
-					DoOcena: document.getElementById("doOcena").value,
-				},
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
 				success: function (data) {
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
@@ -281,9 +282,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -295,25 +293,26 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 		function pretraziCenu()
 		{
+			let voznja =
+			{
+				OdOcena: `${$('#odCena').val()}`,
+				DoOcena: `${$('#doCena').val()}`,
+			}
 			$.ajax({
 				url: 'api/pretragaCenaMusterija/post',
 				method: 'POST',
-				data: {
-					OdOcena: document.getElementById("odCena").value,
-					DoOcena: document.getElementById("doCena").value,
-				},
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
 				success: function (data) {
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
@@ -323,9 +322,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -337,30 +333,31 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 		function pretraziSve()
 		{
+			let voznja =
+			{
+				OdOcena: `${$('#odOcena').val()}`,
+				DoOcena: `${$('#doOcena').val()}`,
+				StatusVoznje1: `${$('#sortStatusVoznja').val()}`,
+				Od: `${$('#od').val()}`,
+				Do: `${$('#do').val()}`,
+				DoCena: `${$('#doCena').val()}`,
+				OdCena: `${$('#odCena').val()}`,
+			}
 			$.ajax({
 				url: 'api/pretragaSve/post',
 				method: 'POST',
-				data: {
-					StatusVoznje1: document.getElementById("sortStatusVoznja").value,
-					OdOcena: document.getElementById("odOcena").value,
-					DoOcena: document.getElementById("doOcena").value,
-					Od: document.getElementById("od").value,
-					Do: document.getElementById("do").value,
-					OdCena: document.getElementById("odCena").value,
-					DoCena: document.getElementById("doCena").value,
-				},
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
 				success: function (data) {
 					$("#sveVoznjeMusterijaTabela").empty();
 					var s1 = $("<th></th>").text("Ulica(pocetak)");
@@ -370,9 +367,6 @@
 					var s5 = $("<th></th>").text("Iznos");
 					var s6 = $("<th></th>").text("Status voznje");
 					var s7 = $("<th></th>").text("Vozac");
-					/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-					var s9 = $("<th></th>").text("Broj(odrediste)");
-					var s10 = $("<th></th>").text("Grad(odrediste)");*/
 					$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 					var i;
@@ -384,14 +378,11 @@
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
 						var txt5 = $("<td></td>").text(data[i].Iznos);
 						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-						var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-						var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
+						var txt7 = $("<td></td>").text(data[i].Vozac);
 						$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 					}
 				}
-			});
+			})
 		}
 
 	</script>
