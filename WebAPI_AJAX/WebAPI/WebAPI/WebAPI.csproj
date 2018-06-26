@@ -165,6 +165,7 @@
     <Compile Include="Controllers\Komentar2Controller.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KomentarVozacController.cs" />
+    <Compile Include="Controllers\KorisniciController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />

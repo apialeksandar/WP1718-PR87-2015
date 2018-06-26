@@ -36,6 +36,7 @@
 	<meta charset="utf-8" />
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
+	<script src="Scripts/globalVar.js"></script>
 
 	<script type="text/javascript">
 		function openPage(pageName, elmnt, color) {
@@ -436,6 +437,31 @@
 			})
 		}
 
+		function blokirajDugme()
+		{
+			var a;
+			var b = globalReturn2();
+			for(a = 0; a < b; a++)
+			{
+				if ($("#checkbox" + a).prop('checked'))
+				{
+					let korisnik =
+					{
+						Ulica: `${a}`,
+					}
+					$.ajax({
+						url: 'api/korisnici/post',
+						method: 'POST',
+						data: JSON.stringify(korisnik),
+						contentType: 'application/json; charset=utf-8',
+						dataType: 'json'
+					})
+				}
+
+			}
+			loadDispecer();
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -526,9 +552,6 @@
 			 	var s5 = $("<th></th>").text("Iznos");
 			 	var s6 = $("<th></th>").text("Status voznje");
 			 	var s7 = $("<th></th>").text("Vozac");
-			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-			 	var s9 = $("<th></th>").text("Broj(odrediste)");
-			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
 			 	$("#sveVoznjeee").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
 
 			 	$.get("/api/sveVoznje", function (data, status) {
@@ -542,11 +565,26 @@
 			 			var txt5 = $("<td></td>").text(data[i].Iznos);
 			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
 			 			var txt7 = $("<td></td>").text(data[i].Vozac)
-			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
 			 			$("#sveVoznjeee").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
 			 		}
+			 	});
+			 });
+
+			 $("#blokiraj").click(function ()
+			 {
+			 	$("#korisnici").empty();
+			 	var s1 = $("<th></th>").text("Korisnicko ime");
+			 	var s2 = $("<th></th>");
+			 	$("#korisnici").append("<tr>", s1, s2, "</tr>");
+
+			 	$.get("/api/korisnici", function (data, status) {
+			 		var i;
+			 		globalSet2(data.length);
+			 		for (i = 0; i < data.length; i++) {
+			 			var txt1 = $("<td></td>").text(data[i].KorisnickoIme);
+			 			$("#korisnici").append("<tr>", txt1, "<td><input type=\"checkbox\" name=\"korisnik\" id=\"checkbox" + i + "\">", "</td></tr>");
+			 		}
+			 		
 			 	});
 			 });
 		});
@@ -599,6 +637,7 @@
 	<button class="tablink" onclick="openPage('Formiraj voznju', this)" id="formirajVoznju">Formiraj voznju</button>
 	<button class="tablink" onclick="openPage('Obradi voznju', this)" id="obradi">Obradi voznju</button>
 	<button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
+	<button class="tablink" onclick="openPage('Blokiraj korisnika', this)" id="blokiraj">Blokiraj korisnika</button>
 
 	<div id="Napravi vozaca" class="tabcontent">
 		<p>
@@ -854,6 +893,15 @@
 		</p>
 		<p>
 			<input type="submit" value="PRETRAZI SVE" onclick="pretraziSve()">
+		</p>
+	</div>
+
+	<div class="tabcontent" id="Blokiraj korisnika">
+		<p>
+			<table id="korisnici" border="1">
+
+			</table>
+			<input type="submit" value="OK" onclick="blokirajDugme()">
 		</p>
 	</div>
 </body>

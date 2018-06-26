@@ -18,6 +18,7 @@ namespace WebAPI.Models
         public string Email { get; set; }
         public Uloga Uloga { get; set; }
         public List<Voznja> Voznje { get; set; }
+        public bool Blokiran { get; set; }
 
         public Korisnik() { }
         public Korisnik(string korisnickoIme, string lozinka, string ime, string prezime, Pol pol, string jmbg, string kontaktTelefon, string email, Uloga uloga)
@@ -32,6 +33,7 @@ namespace WebAPI.Models
             Email = email;
             Uloga = uloga;
             Voznje = new List<Voznja>();
+            Blokiran = false;
         }
     }
 }

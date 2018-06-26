@@ -20,9 +20,14 @@ namespace WebAPI.Controllers
             {
                 if (k.KorisnickoIme.Equals(korisnik.KorisnickoIme) && k.Lozinka.Equals(korisnik.Lozinka))
                 {
-                    UlogovaniKorisnici.Musterija = k as Musterija;
-                    HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Musterija;
-                    return Ok(k);
+                    if(!k.Blokiran)
+                    {
+                        UlogovaniKorisnici.Musterija = k as Musterija;
+                        HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Musterija;
+                        return Ok(k);
+                    }
+                    else
+                        return BadRequest("ERROR: Vas nalog je blokiran!");
                 }
             }
 
@@ -40,9 +45,14 @@ namespace WebAPI.Controllers
             {
                 if (v.KorisnickoIme.Equals(korisnik.KorisnickoIme) && v.Lozinka.Equals(korisnik.Lozinka))
                 {
-                    UlogovaniKorisnici.Vozac = v as Vozac;
-                    HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Vozac;
-                    return Ok(v);
+                    if(!v.Blokiran)
+                    {
+                        UlogovaniKorisnici.Vozac = v as Vozac;
+                        HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Vozac;
+                        return Ok(v);
+                    }
+                    else
+                        return BadRequest("ERROR: Vas nalog je blokiran!");
                 }
             }
 
