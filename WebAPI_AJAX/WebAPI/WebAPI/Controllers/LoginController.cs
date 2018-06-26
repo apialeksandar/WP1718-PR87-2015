@@ -21,6 +21,7 @@ namespace WebAPI.Controllers
                 if (k.KorisnickoIme.Equals(korisnik.KorisnickoIme) && k.Lozinka.Equals(korisnik.Lozinka))
                 {
                     UlogovaniKorisnici.Musterija = k as Musterija;
+                    HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Musterija;
                     return Ok(k);
                 }
             }
@@ -30,6 +31,7 @@ namespace WebAPI.Controllers
                 if(d.KorisnickoIme.Equals(korisnik.KorisnickoIme) && d.Lozinka.Equals(korisnik.Lozinka))
                 {
                     UlogovaniKorisnici.Dispecer = d as Dispecer;
+                    HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Dispecer;
                     return Ok(d);
                 }
             }
@@ -39,6 +41,7 @@ namespace WebAPI.Controllers
                 if (v.KorisnickoIme.Equals(korisnik.KorisnickoIme) && v.Lozinka.Equals(korisnik.Lozinka))
                 {
                     UlogovaniKorisnici.Vozac = v as Vozac;
+                    HttpContext.Current.Session["ulogovan"] = UlogovaniKorisnici.Vozac;
                     return Ok(v);
                 }
             }

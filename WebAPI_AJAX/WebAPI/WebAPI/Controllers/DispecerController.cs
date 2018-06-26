@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
 
         public Dispecer Get()
         {
-            return UlogovaniKorisnici.Dispecer;
+            return (Dispecer)HttpContext.Current.Session["ulogovan"];
         }
     }
 }
