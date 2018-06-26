@@ -651,3 +651,59 @@ function validateVozac2() {
         submitHandler: function (form) { addVozac() }
     });
 }
+
+function displayLocation(latitude, longitude) {
+    var request = new XMLHttpRequest();
+    var method = 'GET';
+    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='
+        + latitude + ',' + longitude + '&sensor=true';
+    var async = false;
+    var address;
+    request.open(method, url, async);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            var data = JSON.parse(request.responseText);
+            address = data.results[0];
+            var value = address.formatted_address.split(",");
+            count = value.length;
+            country = value[count - 1];
+            state = value[count - 2];
+            city = value[count - 3];
+        }
+    };
+    request.send();
+    return address.formatted_address;
+};
+
+function placeMarker(map, location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    var fullAdresa = displayLocation(location.lat(), location.lng());
+    var delovi = fullAdresa.split(",");
+    var ulicaIbroj = delovi[0];
+    var ulica = ulicaIbroj.split(" ");
+    var newUlica = ulica.slice(0, -1);
+    var broj = ulica[ulica.length - 1];
+    var temp = newUlica.join(' ');
+    var grad = delovi[1];
+    var drzava = delovi[2];
+    var fulAdresa = location.lat() + "," + location.lng() + "," + ulicaIbroj + "," + grad + "," + drzava;
+    $("#ulica").val(temp);
+    $("#broj").val(broj);
+    var infowindow = new google.maps.InfoWindow({
+        content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '<br>Ulica i broj: ' + ulicaIbroj + '<br>Grad: ' + grad + '<br>Drzava: ' + drzava + '<br>=' + displayLocation(location.lat(), location.lng())
+    });
+    infowindow.open(map, marker);
+}
+
+function myMap() {
+    var mapCanvas = document.getElementById("map");
+    var myCenter = new google.maps.LatLng(45.242630873254775, 19.842914435055945);
+    var mapOptions = { center: myCenter, zoom: 15 };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+    google.maps.event.addListener(map, 'click', function (event) {
+        placeMarker(map, event.latLng);
+    });
+}

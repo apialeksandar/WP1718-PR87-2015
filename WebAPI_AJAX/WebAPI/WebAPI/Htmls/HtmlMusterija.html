@@ -36,10 +36,20 @@
 			height: 100%;
 		}
 	</style>
+	<style>
+		/* Always set the map height explicitly to define the size of the div
+		* element that contains the map. */
+		#map {
+			height: 300px;
+			width: 100%;
+		}
+	</style>
 
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
 	<script src="Scripts/globalVar.js"></script>
+	<script src="Scripts/myFunctions.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrjeABCsOwW1rhi7eW6_b_fWF8OK2HeiA&callback=myMap" async defer></script>
 
 	<script type="text/javascript">
 
@@ -498,7 +508,12 @@
 							
 			 		}
 			 	});
-			});
+			 });
+
+			 $("#zahtevZaVoznjuTab").click(function ()
+			 {
+			 	myMap();
+			 });
 		});
 
 		
@@ -646,6 +661,7 @@
 	</div>
 
 	<div id="Zahtev za voznju" class="tabcontent">
+		<div id="map"></div>
 		<p>
 			<form action="post" id="zahtevVoznje">
 				<table>
