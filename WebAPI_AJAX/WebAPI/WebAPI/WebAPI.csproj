@@ -162,6 +162,7 @@
     <Compile Include="Controllers\DodajVozacaController.cs" />
     <Compile Include="Controllers\FiltrirajVozacController.cs" />
     <Compile Include="Controllers\IzmeniVoznjuController.cs" />
+    <Compile Include="Controllers\Komentar2Controller.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KomentarVozacController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -224,6 +225,7 @@
     <Content Include="Htmls\HtmlDispecer.html" />
     <Content Include="Htmls\HtmlError.html" />
     <Content Include="Htmls\HtmlKomentar.html" />
+    <Content Include="Htmls\HtmlKomentarMusterija.html" />
     <Content Include="Htmls\HtmlKomentarVozac.html" />
     <Content Include="Htmls\HtmlLogin.html" />
     <Content Include="Htmls\HtmlMusterija.html" />

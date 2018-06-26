@@ -35,6 +35,12 @@ function loadKomentarVozac() {
     $("#logdiv").load("./Htmls/HtmlKomentarVozac.html");
 }
 
+function loadKomentarMusterija() {
+    $("#regdiv").hide();
+    $("#errdiv").hide();
+    $("#logdiv").load("./Htmls/HtmlKomentarMusterija.html");
+}
+
 function loadUnosOdredista()
 {
     $("#regdiv").hide();

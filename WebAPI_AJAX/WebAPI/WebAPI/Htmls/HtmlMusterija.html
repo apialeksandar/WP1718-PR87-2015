@@ -385,6 +385,13 @@
 			})
 		}
 
+		function oceni(i)
+		{
+			var pom = i;
+			globalSet(pom);
+			loadKomentarMusterija();
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -463,10 +470,8 @@
 			 	var s5 = $("<th></th>").text("Iznos");
 			 	var s6 = $("<th></th>").text("Status voznje");
 			 	var s7 = $("<th></th>").text("Vozac");
-			 	/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-			 	var s9 = $("<th></th>").text("Broj(odrediste)");
-			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
-			 	$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+			 	var s8 = $("<th></th>").text("Oceni");
+			 	$("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 			 	$.get("/api/sveVoznjeMusterija", function (data, status)
 			 	{
@@ -479,11 +484,18 @@
 			 			var txt4 = $("<td></td>").text(data[i].Dispecer);
 			 			var txt5 = $("<td></td>").text(data[i].Iznos);
 			 			var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-			 			var txt7 = $("<td></td>").text(data[i].Vozac)
-			 			/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
-			 			$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+			 			var txt7 = $("<td></td>").text(data[i].Vozac);
+
+			 			if (data[i].Pomoc == 0)
+			 			{
+			 				$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "<td></td>", "</tr>");
+			 			}
+							
+			 			else
+			 			{
+			 				$("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+			 			}
+							
 			 		}
 			 	});
 			});

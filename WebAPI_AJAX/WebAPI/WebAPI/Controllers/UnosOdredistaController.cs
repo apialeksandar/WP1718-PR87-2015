@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
                     v.Odrediste.Adresa.Broj = int.Parse(voznja.Broj);
                     v.Odrediste.Adresa.Ulica = voznja.Ulica;
                     v.StatusVoznje = StatusVoznje.Uspesna;
+                    v.Pomoc = 1;
 
                     foreach(Vozac vozac in Korisnici.Vozaci)
                     {
@@ -39,10 +40,11 @@ namespace WebAPI.Controllers
                             v1.Odrediste.Adresa.Broj = int.Parse(voznja.Broj);
                             v1.Odrediste.Adresa.Ulica = voznja.Ulica;
                             v1.StatusVoznje = StatusVoznje.Uspesna;
+                            v1.Pomoc = 1;
                         }
                     }
 
-                    foreach (Voznja v2 in UlogovaniKorisnici.Dispecer.Voznje)
+                    /*foreach (Voznja v2 in UlogovaniKorisnici.Dispecer.Voznje)
                     {
                         if (v2.LokacijaNaKojuTaksiDolazi.Adresa.Ulica.Equals(v.LokacijaNaKojuTaksiDolazi.Adresa.Ulica) && v2.LokacijaNaKojuTaksiDolazi.Adresa.Broj == v.LokacijaNaKojuTaksiDolazi.Adresa.Broj)
                         {
@@ -50,8 +52,9 @@ namespace WebAPI.Controllers
                             v2.Odrediste.Adresa.Broj = int.Parse(voznja.Broj);
                             v2.Odrediste.Adresa.Ulica = voznja.Ulica;
                             v2.StatusVoznje = StatusVoznje.Uspesna;
+                            v2.Pomoc = 1;
                         }
-                    }
+                    }*/
 
                     /*foreach (Voznja v3 in UlogovaniKorisnici.Musterija.Voznje)
                     {

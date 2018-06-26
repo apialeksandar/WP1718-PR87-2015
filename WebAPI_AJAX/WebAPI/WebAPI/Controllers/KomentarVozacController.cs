@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
 
             foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
             {
-                if (voznja.StatusVoznje.Equals(StatusVoznje.Obradjena) || voznja.StatusVoznje.Equals(StatusVoznje.Formirana))
+                if (voznja.StatusVoznje.Equals(StatusVoznje.Obradjena) || voznja.StatusVoznje.Equals(StatusVoznje.Formirana) || voznja.StatusVoznje.Equals(StatusVoznje.Prihvacena))
                 {
                     foreach(Vozac vozac in Korisnici.Vozaci)
                     {
@@ -37,14 +37,14 @@ namespace WebAPI.Controllers
                         }
                     }
 
-                    foreach (Voznja v1 in UlogovaniKorisnici.Dispecer.Voznje)
+                    /*foreach (Voznja v1 in UlogovaniKorisnici.Dispecer.Voznje)
                     {
                         if (v1.LokacijaNaKojuTaksiDolazi.Adresa.Ulica.Equals(voznja.LokacijaNaKojuTaksiDolazi.Adresa.Ulica) && v1.LokacijaNaKojuTaksiDolazi.Adresa.Broj == voznja.LokacijaNaKojuTaksiDolazi.Adresa.Broj)
                         {
                             v1.StatusVoznje = StatusVoznje.Neuspesna;
                             v1.Komentar = retKom;
                         }
-                    }
+                    }*/
 
                     /*foreach (Voznja v2 in UlogovaniKorisnici.Musterija.Voznje)
                     {

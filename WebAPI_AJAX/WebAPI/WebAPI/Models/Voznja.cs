@@ -18,8 +18,9 @@ namespace WebAPI.Models
         public double Iznos { get; set; }
         public Komentar Komentar { get; set; }
         public StatusVoznje StatusVoznje { get; set; }
+        public int Pomoc { get; set; }
 
-        public Voznja() { }
+        public Voznja() {}
         public Voznja(DateTime datumIVremePorudzbine, Lokacija lokacijaNaKojuTaksiDolazi, TipAutomobila zeljeniTipAutomobila, string musterijaZaKojuJeKreiranaVoznja, Lokacija odrediste, string dispecer, string vozac, double iznos, Komentar komentar, StatusVoznje statusVoznje)
         {
             DatumIVremePorudzbine = datumIVremePorudzbine;
@@ -32,6 +33,7 @@ namespace WebAPI.Models
             Iznos = iznos;
             Komentar = komentar;
             StatusVoznje = statusVoznje;
+            Pomoc = 0;
         }
     }
 }

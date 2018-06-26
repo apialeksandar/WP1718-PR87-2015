@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
 
         public Musterija Get()
         {
-            return (Musterija)HttpContext.Current.Session["ulogovan"];
+            return UlogovaniKorisnici.Musterija;
         }
     }
 }
