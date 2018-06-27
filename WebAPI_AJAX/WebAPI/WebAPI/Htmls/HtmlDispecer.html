@@ -485,6 +485,82 @@
 			loadDispecer();
 		}
 
+		function formiranje5Najblizih()
+		{
+			let voznja =
+			{
+				Ulica: `${$('#ulica').val()}`,
+				Broj: `${$('#broj').val()}`,
+				NaseljenoMesto: `${$('#grad').val()}`,
+				PozivniBrojMesta: `${$('#pozivniBroj').val()}`,
+				ZeljeniTipAutomobila: `${$('#tipAutomobila').val()}`,
+			}
+
+			$.ajax({
+				url: '/api/formiranje5/post',
+				method: 'POST',
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data)
+				{
+					$("#vozac").empty();
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
+						$("#vozac").append(txt1);
+					}
+				},
+				error: function (jqXHR) {
+					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+				}
+			})
+		}
+
+		function obradiVoznju5Najblizih()
+		{
+			$.ajax({
+				url: 'api/voznjeDispecer/get',
+				method: 'GET',
+
+				success: function (data) {
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						if ($("#check" + i).prop('checked'))
+						{
+							let voznja =
+							{
+								Ulica: `${data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica}`,
+								Broj: `${data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj}`,
+							}
+
+							$.ajax({
+								url: '/api/obradi5/post',
+								method: 'POST',
+								data: JSON.stringify(voznja),
+								contentType: 'application/json; charset=utf-8',
+								dataType: 'json',
+								success: function (data) {
+									$("#vozac").empty();
+									var i;
+
+									for (i = 0; i < data.length; i++) {
+										var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
+										$("#vozac").append(txt1);
+									}
+								},
+								error: function (jqXHR) {
+									$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+								}
+							})
+						}
+					}
+				}
+			})
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -821,7 +897,7 @@
 				<tr>
 					<th>Vozac: </th>
 					<td>
-						<select id="vozac">
+						<select id="vozac" onclick="formiranje5Najblizih()">
 						</select>
 					</td>
 				</tr>
@@ -838,7 +914,7 @@
 		<table id="obradiVoznjuTabela" border="1">
 			
 		</table>
-		<select id="obradiVoznjuVozac">
+		<select id="obradiVoznjuVozac" onclick="obradiVoznju5Najblizih()">
 		
 		</select>
 		<input type="submit" value="Obradi" onclick="obradi()">
