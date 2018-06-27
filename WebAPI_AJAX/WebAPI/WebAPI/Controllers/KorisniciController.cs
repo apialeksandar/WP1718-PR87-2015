@@ -44,7 +44,14 @@ namespace WebAPI.Controllers
 
             ret[int.Parse(korisnik.Ulica)].Blokiran = !ret[int.Parse(korisnik.Ulica)].Blokiran;
 
-            return Ok("OK");
+            if(ret[int.Parse(korisnik.Ulica)].Blokiran)
+            {
+                return Ok("INFO: Uspesno ste blokirali korisika " + ret[int.Parse(korisnik.Ulica)].KorisnickoIme.ToString() + ".");
+            }
+            else
+            {
+                return Ok("INFO: Uspesno ste aktivirali korisika " + ret[int.Parse(korisnik.Ulica)].KorisnickoIme.ToString() + ".");
+            }
         }
     }
 }

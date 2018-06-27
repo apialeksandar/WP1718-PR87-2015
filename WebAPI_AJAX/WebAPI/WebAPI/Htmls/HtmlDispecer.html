@@ -474,7 +474,10 @@
 						method: 'POST',
 						data: JSON.stringify(korisnik),
 						contentType: 'application/json; charset=utf-8',
-						dataType: 'json'
+						dataType: 'json',
+						success: function (data) {
+							alert(data);
+						}
 					})
 				}
 

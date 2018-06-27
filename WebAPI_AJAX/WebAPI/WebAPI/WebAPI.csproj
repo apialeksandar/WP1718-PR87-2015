@@ -226,7 +226,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Htmls\HtmlDispecer.html" />
-    <Content Include="Htmls\HtmlError.html" />
     <Content Include="Htmls\HtmlKomentar.html" />
     <Content Include="Htmls\HtmlKomentarMusterija.html" />
     <Content Include="Htmls\HtmlKomentarVozac.html" />

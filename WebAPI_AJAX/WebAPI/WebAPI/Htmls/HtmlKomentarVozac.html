@@ -30,7 +30,9 @@
 				contentType: 'application/json; charset=utf-8',
 				dataType: 'json',
 				success: function (data) {
+					alert("INFO: Voznja je zavrsena neuspesno.");
 					loadVozac();
+
 				},
 				error: function (jqXHR) {
 					$("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
