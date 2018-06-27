@@ -35,6 +35,24 @@ namespace WebAPI.Controllers
                     }
                     else if(voznja.StatusVoznje.Equals(StatusVoznje.Uspesna))
                     {
+                        foreach(Voznja v1 in Voznje.SveVoznje)
+                        {
+                            if(v1.LokacijaNaKojuTaksiDolazi.Adresa.Broj == int.Parse(voznja.Broj) && v1.LokacijaNaKojuTaksiDolazi.Adresa.Ulica.Equals(voznja.Ulica))
+                            {
+                                UlogovaniKorisnici.Vozac.Lokacija.Adresa.Ulica = voznja.Ulica;
+                                UlogovaniKorisnici.Vozac.Lokacija.Adresa.Broj = int.Parse(voznja.Broj);
+                                UlogovaniKorisnici.Vozac.Lokacija.XKoordinata = v1.LokacijaNaKojuTaksiDolazi.XKoordinata;
+                                UlogovaniKorisnici.Vozac.Lokacija.YKoordinata = v1.LokacijaNaKojuTaksiDolazi.YKoordinata;
+
+                                foreach(Vozac k in Korisnici.Vozaci)
+                                {
+                                    if(k.KorisnickoIme.Equals(UlogovaniKorisnici.Vozac.KorisnickoIme))
+                                    {
+                                        k.Lokacija = UlogovaniKorisnici.Vozac.Lokacija;
+                                    }
+                                }
+                            }
+                        }
                         return "unos";
                     }
                 }

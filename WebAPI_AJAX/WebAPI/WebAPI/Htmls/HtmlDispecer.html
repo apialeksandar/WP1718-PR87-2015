@@ -36,7 +36,9 @@
 	<meta charset="utf-8" />
 	<script src="Scripts/jquery-1.10.2.js"></script>
 	<script src="Scripts/jquery.validate.js"></script>
+	<script src="Scripts/myFunctions.js"></script>
 	<script src="Scripts/globalVar.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrjeABCsOwW1rhi7eW6_b_fWF8OK2HeiA&callback=myMap" async defer></script>
 
 	<script type="text/javascript">
 		function openPage(pageName, elmnt, color) {
@@ -494,6 +496,7 @@
 			 });
 
 			$("#formirajVoznju").click(function () {
+				myMap();
 				$.ajax({
 					url: 'api/vozaci/get',
 					method: 'GET',
@@ -768,6 +771,7 @@
 	</div>
 
 	<div id="Formiraj voznju" class="tabcontent">
+		<div id="map"></div>
 		<table>
 			<tr>
 				<th>Ulica: </th>

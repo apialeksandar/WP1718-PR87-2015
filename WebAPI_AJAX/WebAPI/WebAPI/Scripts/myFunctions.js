@@ -169,6 +169,9 @@ function zahtevVoznje() {
             Ulica: `${$('#ulica').val()}`,
             Broj: `${$('#broj').val()}`,
             ZeljeniTipAutomobila: `${$('#tipAutomobila').val()}`,
+            XK: `${$('#xKoridnata').val()}`,
+            YK: `${$('#yKoridnata').val()}`,
+            PomocZaMapu: `${$('#pomoccc').val()}`,
         }
 
     $.ajax({
@@ -180,19 +183,12 @@ function zahtevVoznje() {
         success: function (data) {
             alert("INFO: Uspesno ste zatrazili voznju.");
             loadMusterija();
+            document.getElementById("pomoc").value = 0;
         },
         error: function (jqXHR) {
             $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
         }
     })
-    /*$.post('/api/zahtevVoznje/', $('form#zahtevVoznje').serialize())
-    .done(function (status, data, xhr) {
-        alert(data);
-        loadMusterija();
-    })
-    .fail(function (jqXHR, textStatus) {
-        alert(jqXHR.responseJSON["Message"]);
-    });*/
 }
 
 function validateZahtevVoznje() {
@@ -295,14 +291,6 @@ function editLokacijaVozac()
             $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
         }
     })
-    /*$.post('/api/lokacija/', $('form#editLokacija').serialize())
-    .done(function (status, data, xhr) {
-        alert(data);
-        loadVozac();
-    })
-    .fail(function (jqXHR, textStatus) {
-        alert(jqXHR.responseJSON["Message"]);
-    });*/
 }
 
 function validateEditLokacijaVozac() {
@@ -692,6 +680,9 @@ function placeMarker(map, location) {
     var fulAdresa = location.lat() + "," + location.lng() + "," + ulicaIbroj + "," + grad + "," + drzava;
     $("#ulica").val(temp);
     $("#broj").val(broj);
+    $("#xKordinata").val(location.lat());
+    $("#yKordinata").val(parseDouble(location.lng()));
+    $("#pomoccc").val(1);
     var infowindow = new google.maps.InfoWindow({
         content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '<br>Ulica i broj: ' + ulicaIbroj + '<br>Grad: ' + grad + '<br>Drzava: ' + drzava + '<br>=' + displayLocation(location.lat(), location.lng())
     });

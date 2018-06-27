@@ -23,6 +23,9 @@ namespace WebAPI.Models.Temp
         public string OdCena { get; set; }
         public string DoCena { get; set; }
         public string StatusVoznje1 { get; set; }
+        public double XK { get; set; }
+        public double YK { get; set; }
+        public int PomocZaMapu { get; set; }
 
         public FormirajVoznju() { }
 
@@ -33,6 +36,7 @@ namespace WebAPI.Models.Temp
             NaseljenoMesto = naseljenoMesto;
             PozivniBrojMesta = pozivniBrojMesta;
             Vozac = vozac;
+            PomocZaMapu = 0;
         }
     }
 }
