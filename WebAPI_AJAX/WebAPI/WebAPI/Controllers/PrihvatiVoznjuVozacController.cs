@@ -22,6 +22,7 @@ namespace WebAPI.Controllers
                     {
                         v.Vozac = UlogovaniKorisnici.Vozac.KorisnickoIme;
                         v.StatusVoznje = StatusVoznje.Prihvacena;
+                        UlogovaniKorisnici.Vozac.Lokacija = v.LokacijaNaKojuTaksiDolazi;
                         UlogovaniKorisnici.Vozac.Voznje.Add(v);
                         UlogovaniKorisnici.Vozac.Slobodan = false;
                     }

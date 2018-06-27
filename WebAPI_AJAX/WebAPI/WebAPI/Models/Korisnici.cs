@@ -42,7 +42,7 @@ namespace WebAPI.Models
 
             Dispeceri.Add(new Dispecer(lines[8], lines[9], lines[10], lines[11], p, lines[13], lines[14], lines[15], Uloga.Dispecer));
 
-            Vozaci.Add(new Vozac("vozac", "vozac", "vozac", "vozac", Pol.Muski, "2405996820189", "066064958", "vozac@gmail.com", Uloga.Vozac, new Lokacija("44°49'04.127", "44°49'04.127", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000")), new Automobil("vozac", "2005", "NS108-TX", 10, TipAutomobila.PutnickiAutomobil)));
+            Vozaci.Add(new Vozac("vozac", "vozac", "vozac", "vozac", Pol.Muski, "2405996820189", "066064958", "vozac@gmail.com", Uloga.Vozac, new Lokacija("15.0365984136987125", "15.0365984136987125", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000")), new Automobil("vozac", "2005", "NS108-TX", 10, TipAutomobila.PutnickiAutomobil)));
         }
     }
 }

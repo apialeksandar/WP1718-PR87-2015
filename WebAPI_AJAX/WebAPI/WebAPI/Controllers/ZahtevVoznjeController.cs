@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             if(v.PomocZaMapu == 0)
             {
                 Random r = new Random();
-                Voznja voznja = new Voznja(DateTime.Now, new Lokacija(string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), new Adresa(v.Ulica, int.Parse(v.Broj), "Novi Sad", "21000")), v.ZeljeniTipAutomobila, UlogovaniKorisnici.Musterija.KorisnickoIme, null, "", "", -1, null, StatusVoznje.NaCekanju);
+                Voznja voznja = new Voznja(DateTime.Now, new Lokacija(string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000)), string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000)), new Adresa(v.Ulica, int.Parse(v.Broj), "Novi Sad", "21000")), v.ZeljeniTipAutomobila, UlogovaniKorisnici.Musterija.KorisnickoIme, null, "", "", -1, null, StatusVoznje.NaCekanju);
 
                 foreach (Musterija musterija in Korisnici.Musterije)
                 {
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             else if(v.PomocZaMapu == 1)
             {
                 Random r = new Random();
-                Voznja voznja = new Voznja(DateTime.Now, new Lokacija(string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), new Adresa(v.Ulica, int.Parse(v.Broj), "Novi Sad", "21000")), v.ZeljeniTipAutomobila, UlogovaniKorisnici.Musterija.KorisnickoIme, null, "", "", -1, null, StatusVoznje.NaCekanju);
+                Voznja voznja = new Voznja(DateTime.Now, new Lokacija(v.XK.ToString(), v.YK.ToString(), new Adresa(v.Ulica, int.Parse(v.Broj), "Novi Sad", "21000")), v.ZeljeniTipAutomobila, UlogovaniKorisnici.Musterija.KorisnickoIme, null, "", "", -1, null, StatusVoznje.NaCekanju);
 
                 foreach (Musterija musterija in Korisnici.Musterije)
                 {

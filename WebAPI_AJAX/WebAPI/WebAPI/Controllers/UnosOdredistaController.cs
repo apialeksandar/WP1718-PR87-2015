@@ -24,8 +24,8 @@ namespace WebAPI.Controllers
                     v.Odrediste.Adresa = new Adresa();
                     v.Odrediste.Adresa.Broj = int.Parse(voznja.Broj);
                     v.Odrediste.Adresa.Ulica = voznja.Ulica;
-                    v.Odrediste.XKoordinata = string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
-                    v.Odrediste.YKoordinata = string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
+                    v.Odrediste.XKoordinata = string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000));
+                    v.Odrediste.YKoordinata = string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000));
                     v.StatusVoznje = StatusVoznje.Uspesna;
                     v.Pomoc = 1;
 
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
                         if(v1.LokacijaNaKojuTaksiDolazi.Adresa.Ulica.Equals(v.LokacijaNaKojuTaksiDolazi.Adresa.Ulica) && v1.LokacijaNaKojuTaksiDolazi.Adresa.Broj == v.LokacijaNaKojuTaksiDolazi.Adresa.Broj)
                         {
                             v1.Iznos = double.Parse(voznja.Iznos);
-                            v1.Odrediste = new Lokacija(string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130)), new Adresa(voznja.Ulica, int.Parse(voznja.Broj), "Novi Sad", "21000"));
+                            v1.Odrediste = new Lokacija(string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000), r.Next(0, 130)), string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000)), new Adresa(voznja.Ulica, int.Parse(voznja.Broj), "Novi Sad", "21000"));
                             v1.StatusVoznje = StatusVoznje.Uspesna;
                             v1.Pomoc = 1;
                         }

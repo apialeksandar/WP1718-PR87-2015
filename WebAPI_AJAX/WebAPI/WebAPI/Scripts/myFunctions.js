@@ -169,8 +169,8 @@ function zahtevVoznje() {
             Ulica: `${$('#ulica').val()}`,
             Broj: `${$('#broj').val()}`,
             ZeljeniTipAutomobila: `${$('#tipAutomobila').val()}`,
-            XK: `${$('#xKoridnata').val()}`,
-            YK: `${$('#yKoridnata').val()}`,
+            XK: `${$('#xKordinata').val()}`,
+            YK: `${$('#yKordinata').val()}`,
             PomocZaMapu: `${$('#pomoccc').val()}`,
         }
 
@@ -681,7 +681,7 @@ function placeMarker(map, location) {
     $("#ulica").val(temp);
     $("#broj").val(broj);
     $("#xKordinata").val(location.lat());
-    $("#yKordinata").val(parseDouble(location.lng()));
+    $("#yKordinata").val(location.lng());
     $("#pomoccc").val(1);
     var infowindow = new google.maps.InfoWindow({
         content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng() + '<br>Ulica i broj: ' + ulicaIbroj + '<br>Grad: ' + grad + '<br>Drzava: ' + drzava + '<br>=' + displayLocation(location.lat(), location.lng())

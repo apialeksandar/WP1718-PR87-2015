@@ -20,8 +20,8 @@ namespace WebAPI.Controllers
             {
                 if (UlogovaniKorisnici.Vozac.KorisnickoIme.Equals(vozac.KorisnickoIme))
                 {
-                    vozac.Lokacija.XKoordinata = string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
-                    vozac.Lokacija.YKoordinata = string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
+                    vozac.Lokacija.XKoordinata = string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000));
+                    vozac.Lokacija.YKoordinata = string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000));
                     vozac.Lokacija.Adresa.Broj = int.Parse(lokacija.Broj);
                     vozac.Lokacija.Adresa.Ulica = lokacija.Ulica;
                     return Ok(vozac);
