@@ -9,19 +9,16 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class FiltrirajMusterijaController : ApiController
+    public class FiltrirajDispecerController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju forma)
         {
             List<Voznja> ret = new List<Voznja>();
 
-            foreach(Voznja voznja in Voznje.SveVoznje)
+            foreach (Voznja voznja in Voznje.SveVoznje)
             {
-                if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                {
                     if (voznja.StatusVoznje.Equals(forma.StatusVoznje))
                         ret.Add(voznja);
-                }
             }
 
             return ret;

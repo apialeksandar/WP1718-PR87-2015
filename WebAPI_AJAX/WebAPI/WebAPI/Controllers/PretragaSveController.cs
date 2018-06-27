@@ -112,9 +112,12 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.StatusVoznje.ToString().Equals(temp.StatusVoznje1))
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        ret.Add(voznja);
+                        if (voznja.StatusVoznje.ToString().Equals(temp.StatusVoznje1))
+                        {
+                            ret.Add(voznja);
+                        }
                     }
                 }
             }
@@ -130,29 +133,32 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (!(voznja.Komentar == null))
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        if(ret.Count > 0)
+                        if (!(voznja.Komentar == null))
                         {
-                            foreach (Voznja v in ret)
+                            if (ret.Count > 0)
+                            {
+                                foreach (Voznja v in ret)
+                                {
+                                    if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+                                }
+                                if (a == ret.Count)
+                                {
+                                    ret.Add(voznja);
+                                    a = 0;
+                                }
+                            }
+                            else
                             {
                                 if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
                                 {
-                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                        a++;
+                                    ret.Add(voznja);
                                 }
-                            }
-                            if (a == ret.Count)
-                            {
-                                ret.Add(voznja);
-                                a = 0;
-                            }
-                        }
-                        else
-                        {
-                            if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
-                            {
-                                ret.Add(voznja);
                             }
                         }
                     }
@@ -163,29 +169,32 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (!(voznja.Komentar == null))
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        if (ret.Count > 0)
+                        if (!(voznja.Komentar == null))
                         {
-                            foreach (Voznja v in ret)
+                            if (ret.Count > 0)
+                            {
+                                foreach (Voznja v in ret)
+                                {
+                                    if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+                                }
+                                if (a == ret.Count)
+                                {
+                                    ret.Add(voznja);
+                                    a = 0;
+                                }
+                            }
+                            else
                             {
                                 if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
                                 {
-                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                        a++;
+                                    ret.Add(voznja);
                                 }
-                            }
-                            if (a == ret.Count)
-                            {
-                                ret.Add(voznja);
-                                a = 0;
-                            }
-                        }
-                        else
-                        {
-                            if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
-                            {
-                                ret.Add(voznja);
                             }
                         }
                     }
@@ -196,30 +205,33 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (!(voznja.Komentar == null))
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        if (ret.Count > 0)
+                        if (!(voznja.Komentar == null))
                         {
-                            foreach (Voznja v in ret)
+                            if (ret.Count > 0)
+                            {
+                                foreach (Voznja v in ret)
+                                {
+                                    if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+                                }
+
+                                if (a == ret.Count)
+                                {
+                                    ret.Add(voznja);
+                                    a = 0;
+                                }
+                            }
+                            else
                             {
                                 if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
                                 {
-                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                        a++;
+                                    ret.Add(voznja);
                                 }
-                            }
-
-                            if(a == ret.Count)
-                            {
-                                ret.Add(voznja);
-                                a = 0;
-                            }
-                        }
-                        else
-                        {
-                            if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
-                            {
-                                ret.Add(voznja);
                             }
                         }
                     }
@@ -233,27 +245,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if (voznja.DatumIVremePorudzbine >= temp.Od)
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if (voznja.DatumIVremePorudzbine >= temp.Od)
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (voznja.DatumIVremePorudzbine >= temp.Od)
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }
@@ -263,27 +278,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if (voznja.DatumIVremePorudzbine <= temp.Do)
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if (voznja.DatumIVremePorudzbine <= temp.Do)
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (voznja.DatumIVremePorudzbine <= temp.Do)
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }
@@ -293,27 +311,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if (voznja.DatumIVremePorudzbine >= temp.Od && voznja.DatumIVremePorudzbine <= temp.Do)
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if (voznja.DatumIVremePorudzbine >= temp.Od && voznja.DatumIVremePorudzbine <= temp.Do)
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (voznja.DatumIVremePorudzbine >= temp.Od && voznja.DatumIVremePorudzbine <= temp.Do)
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }
@@ -325,27 +346,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if ((int)voznja.Iznos >= int.Parse(temp.OdCena))
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if ((int)voznja.Iznos >= int.Parse(temp.OdCena))
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if ((int)voznja.Iznos >= int.Parse(temp.OdCena))
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }
@@ -355,27 +379,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if ((int)voznja.Iznos <= int.Parse(temp.DoCena))
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if ((int)voznja.Iznos <= int.Parse(temp.DoCena))
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if ((int)voznja.Iznos <= int.Parse(temp.DoCena))
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }
@@ -385,27 +412,30 @@ namespace WebAPI.Controllers
                 a = 0;
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (ret.Count > 0)
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                     {
-                        foreach (Voznja v in ret)
+                        if (ret.Count > 0)
+                        {
+                            foreach (Voznja v in ret)
+                            {
+                                if ((int)voznja.Iznos >= int.Parse(temp.OdCena) && (int)voznja.Iznos <= int.Parse(temp.DoCena))
+                                {
+                                    if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                        a++;
+                                }
+                            }
+                            if (a == ret.Count)
+                            {
+                                ret.Add(voznja);
+                                a = 0;
+                            }
+                        }
+                        else
                         {
                             if ((int)voznja.Iznos >= int.Parse(temp.OdCena) && (int)voznja.Iznos <= int.Parse(temp.DoCena))
                             {
-                                if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
-                                    a++;
+                                ret.Add(voznja);
                             }
-                        }
-                        if (a == ret.Count)
-                        {
-                            ret.Add(voznja);
-                            a = 0;
-                        }
-                    }
-                    else
-                    {
-                        if ((int)voznja.Iznos >= int.Parse(temp.OdCena) && (int)voznja.Iznos <= int.Parse(temp.DoCena))
-                        {
-                            ret.Add(voznja);
                         }
                     }
                 }

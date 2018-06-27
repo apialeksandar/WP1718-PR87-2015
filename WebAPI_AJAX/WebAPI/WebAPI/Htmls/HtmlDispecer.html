@@ -135,7 +135,7 @@
 				StatusVoznje: `${$('#sortStatusVoznja').val()}`,
 			}
 			$.ajax({
-				url: 'api/filtrirajMusterija/post',
+				url: 'api/filtrirajDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(voznja),
 				contentType: 'application/json; charset=utf-8',
@@ -171,7 +171,7 @@
 
 		function sortirajDatum() {
 			$.ajax({
-				url: 'api/sortirajDatumMusterija/post',
+				url: 'api/sortirajDatumDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(),
 				contentType: 'application/json; charset=utf-8',
@@ -207,7 +207,7 @@
 
 		function sortirajOcena() {
 			$.ajax({
-				url: 'api/sortirajOcenaMusterija/post',
+				url: 'api/sortirajOcenaDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(),
 				contentType: 'application/json; charset=utf-8',
@@ -249,7 +249,7 @@
 				Do: `${$('#do').val()}`,
 			}
 			$.ajax({
-				url: 'api/pretragaDatumMusterija/post',
+				url: 'api/pretragaDatumDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(voznja),
 				contentType: 'application/json; charset=utf-8',
@@ -291,7 +291,7 @@
 				DoOcena: `${$('#doOcena').val()}`,
 			}
 			$.ajax({
-				url: 'api/pretragaOcenaMusterija/post',
+				url: 'api/pretragaOcenaDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(voznja),
 				contentType: 'application/json; charset=utf-8',
@@ -333,7 +333,7 @@
 				DoOcena: `${$('#doCena').val()}`,
 			}
 			$.ajax({
-				url: 'api/pretragaCenaMusterija/post',
+				url: 'api/pretragaCenaDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(voznja),
 				contentType: 'application/json; charset=utf-8',

@@ -41,24 +41,34 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.DatumIVremePorudzbine >= datum.Od)
-                        ret.Add(voznja);
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
+                    {
+                        if (voznja.DatumIVremePorudzbine >= datum.Od)
+                            ret.Add(voznja);
+                    }
+                    
                 }
             }
             else if (temp.Equals("do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.DatumIVremePorudzbine <= datum.Do)
-                        ret.Add(voznja);
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
+                    {
+                        if (voznja.DatumIVremePorudzbine <= datum.Do)
+                            ret.Add(voznja);
+                    }
                 }
             }
             else if (temp.Equals("od-do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.DatumIVremePorudzbine >= datum.Od && voznja.DatumIVremePorudzbine <= datum.Do)
-                        ret.Add(voznja);
+                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
+                    {
+                        if (voznja.DatumIVremePorudzbine >= datum.Od && voznja.DatumIVremePorudzbine <= datum.Do)
+                            ret.Add(voznja);
+                    }
                 }
             }
 

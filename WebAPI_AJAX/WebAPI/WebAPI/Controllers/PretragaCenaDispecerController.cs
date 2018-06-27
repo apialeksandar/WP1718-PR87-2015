@@ -9,7 +9,7 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaCenaMusterijaController : ApiController
+    public class PretragaCenaDispecerController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
@@ -41,33 +41,26 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
                         if ((int)voznja.Iznos >= int.Parse(temp.OdOcena))
                             ret.Add(voznja);
-                    }
                 }
             }
             else if (pom.Equals("do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
+                    
                         if ((int)voznja.Iznos <= int.Parse(temp.DoOcena))
                             ret.Add(voznja);
-                    }
                 }
             }
             else if (pom.Equals("od-do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
+                    
                         if ((int)voznja.Iznos >= int.Parse(temp.OdOcena) && (int)voznja.Iznos <= int.Parse(temp.DoOcena))
                             ret.Add(voznja);
-                    }
                 }
             }
 

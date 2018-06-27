@@ -9,16 +9,16 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaCenaMusterijaController : ApiController
+    public class PretragaOcenaDispecerController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
             string pom = "";
             List<Voznja> ret = new List<Voznja>();
 
-            if (!String.IsNullOrEmpty(temp.OdOcena))
+            if (!temp.OdOcena.Equals("Izaberi..."))
             {
-                if (!String.IsNullOrEmpty(temp.DoOcena))
+                if (!temp.DoOcena.Equals("Izaberi..."))
                 {
                     pom = "od-do";
                 }
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             }
             else
             {
-                if (!String.IsNullOrEmpty(temp.DoOcena))
+                if (!temp.DoOcena.Equals("Izaberi..."))
                 {
                     pom = "do";
                 }
@@ -41,33 +41,33 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
-                        if ((int)voznja.Iznos >= int.Parse(temp.OdOcena))
-                            ret.Add(voznja);
-                    }
+                        if (!(voznja.Komentar == null))
+                        {
+                            if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
+                                ret.Add(voznja);
+                        }
                 }
             }
             else if (pom.Equals("do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
-                        if ((int)voznja.Iznos <= int.Parse(temp.DoOcena))
-                            ret.Add(voznja);
-                    }
+                        if (!(voznja.Komentar == null))
+                        {
+                            if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                ret.Add(voznja);
+                        }
                 }
             }
             else if (pom.Equals("od-do"))
             {
                 foreach (Voznja voznja in Voznje.SveVoznje)
                 {
-                    if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                    {
-                        if ((int)voznja.Iznos >= int.Parse(temp.OdOcena) && (int)voznja.Iznos <= int.Parse(temp.DoOcena))
-                            ret.Add(voznja);
-                    }
+                        if (!(voznja.Komentar == null))
+                        {
+                            if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
+                                ret.Add(voznja);
+                        }
                 }
             }
 

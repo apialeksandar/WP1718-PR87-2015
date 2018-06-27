@@ -160,6 +160,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DispecerController.cs" />
     <Compile Include="Controllers\DodajVozacaController.cs" />
+    <Compile Include="Controllers\FiltrirajDispecerController.cs" />
     <Compile Include="Controllers\FiltrirajVozacController.cs" />
     <Compile Include="Controllers\Formiranje5Controller.cs" />
     <Compile Include="Controllers\IzmeniVoznjuController.cs" />
@@ -171,11 +172,14 @@
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\Obradi5Controller.cs" />
+    <Compile Include="Controllers\PretragaCenaDispecerController.cs" />
     <Compile Include="Controllers\PretragaCenaMusterijaController.cs" />
     <Compile Include="Controllers\PretragaCenaVozacController.cs" />
+    <Compile Include="Controllers\PretragaDatumDispecerController.cs" />
     <Compile Include="Controllers\PretragaDatumMusterijaController.cs" />
     <Compile Include="Controllers\PretragaDatumVozacController.cs" />
     <Compile Include="Controllers\PretragaImeIPrezimeController.cs" />
+    <Compile Include="Controllers\PretragaOcenaDispecerController.cs" />
     <Compile Include="Controllers\PretragaOcenaMusterijaController.cs" />
     <Compile Include="Controllers\PretragaOcenaVozacController.cs" />
     <Compile Include="Controllers\PretragaSveController.cs" />
@@ -184,8 +188,10 @@
     <Compile Include="Controllers\PrihvatiVoznjuVozacController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\FiltrirajMusterijaController.cs" />
+    <Compile Include="Controllers\SortirajDatumDispecerController.cs" />
     <Compile Include="Controllers\SortirajDatumMusterijaController.cs" />
     <Compile Include="Controllers\SortirajDatumVozacController.cs" />
+    <Compile Include="Controllers\SortirajOcenaDispecerController.cs" />
     <Compile Include="Controllers\SortirajOcenaMusterijaController.cs" />
     <Compile Include="Controllers\SortirajOcenaVozacController.cs" />
     <Compile Include="Controllers\SveVoznjeController.cs" />

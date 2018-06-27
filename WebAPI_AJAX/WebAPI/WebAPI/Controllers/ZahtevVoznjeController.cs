@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         public IHttpActionResult Post(FormirajVoznju v)
         {
 
-            if(v.PomocZaMapu == 0)
+            if (v.PomocZaMapu == 0)
             {
                 Random r = new Random();
                 Voznja voznja = new Voznja(DateTime.Now, new Lokacija(string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000)), string.Format("{0}.{1}", r.Next(0, 50), r.Next(0, 1000000000)), new Adresa(v.Ulica, int.Parse(v.Broj), "Novi Sad", "21000")), v.ZeljeniTipAutomobila, UlogovaniKorisnici.Musterija.KorisnickoIme, null, "", "", -1, null, StatusVoznje.NaCekanju);

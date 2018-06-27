@@ -4,22 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebAPI.Enumerations;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class SortirajOcenaMusterijaController : ApiController
+    public class SortirajOcenaDispecerController : ApiController
     {
         public List<Voznja> Post()
         {
             List<Voznja> temp = new List<Voznja>();
             foreach (Voznja voznja in Voznje.SveVoznje)
             {
-                if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
-                {
                     temp.Add(voznja);
-                }
             }
             List<Voznja> ret = new List<Voznja>();
 

@@ -16,11 +16,14 @@ namespace WebAPI.Controllers
         {
             List<Voznja> ret = new List<Voznja>();
 
-            foreach(Voznja voznja in UlogovaniKorisnici.Musterija.Voznje)
+            foreach(Voznja voznja in Voznje.SveVoznje)
             {
-                if(voznja.StatusVoznje == StatusVoznje.NaCekanju)
+                if(voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(UlogovaniKorisnici.Musterija.KorisnickoIme))
                 {
-                    ret.Add(voznja);
+                    if (voznja.StatusVoznje == StatusVoznje.NaCekanju)
+                    {
+                        ret.Add(voznja);
+                    }
                 }
             }
             return ret;
