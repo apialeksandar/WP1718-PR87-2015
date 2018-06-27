@@ -9,7 +9,7 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaSveVozacController : ApiController
+    public class PretragaSveDispecerController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
             string datum = "";
             DateTime value = new DateTime(1, 1, 1);
             string cena = "";
+            string ime = "";
             List<Voznja> ret = new List<Voznja>();
             List<Voznja> re1 = new List<Voznja>();
             List<string> pomoc = new List<string>();
@@ -107,10 +108,33 @@ namespace WebAPI.Controllers
                 }
             }
 
+            // IME
+            if (!String.IsNullOrEmpty(temp.Ime))
+            {
+                if (!String.IsNullOrEmpty(temp.Prezime))
+                {
+                    ime = "imeIPrezime";
+                    pomoc.Add("imeIPrezime");
+                }
+                else
+                {
+                    ime = "ime";
+                    pomoc.Add("ime");
+                }
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(temp.Prezime))
+                {
+                    ime = "prezime";
+                    pomoc.Add("prezime");
+                }
+            }
+
             // STATUS VOZNJE
             if (statusVoznje.Equals("ima"))
             {
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (voznja.StatusVoznje.ToString().Equals(temp.StatusVoznje1))
                     {
@@ -128,7 +152,7 @@ namespace WebAPI.Controllers
             if (ocena.Equals("od"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
@@ -161,7 +185,7 @@ namespace WebAPI.Controllers
             else if (ocena.Equals("do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
@@ -194,7 +218,7 @@ namespace WebAPI.Controllers
             else if (ocena.Equals("od-do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
@@ -231,7 +255,7 @@ namespace WebAPI.Controllers
             if (datum.Equals("od"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -261,7 +285,7 @@ namespace WebAPI.Controllers
             else if (datum.Equals("do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -291,7 +315,7 @@ namespace WebAPI.Controllers
             else if (datum.Equals("od-do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -323,7 +347,7 @@ namespace WebAPI.Controllers
             if (cena.Equals("od"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -353,7 +377,7 @@ namespace WebAPI.Controllers
             else if (cena.Equals("do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -383,7 +407,7 @@ namespace WebAPI.Controllers
             else if (cena.Equals("od-do"))
             {
                 a = 0;
-                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
+                foreach (Voznja voznja in Voznje.SveVoznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -406,6 +430,194 @@ namespace WebAPI.Controllers
                         if ((int)voznja.Iznos >= int.Parse(temp.OdCena) && (int)voznja.Iznos <= int.Parse(temp.DoCena))
                         {
                             ret.Add(voznja);
+                        }
+                    }
+                }
+            }
+
+            // IME
+            if (ime.Equals("ime"))
+            {
+                a = 0;
+                foreach (Voznja voznja in Voznje.SveVoznje)
+                {
+                    foreach(Korisnik k in Korisnici.Musterije)
+                    {
+                        if(voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                        {
+                            if(k.Ime.Equals(temp.Ime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }   
+                            }
+                        }
+                    }
+                    a = 0;
+                    foreach (Korisnik k in Korisnici.Vozaci)
+                    {
+                        if (voznja.Vozac.Equals(k.KorisnickoIme))
+                        {
+                            if (k.Ime.Equals(temp.Ime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if(ime.Equals("prezime"))
+            {
+                a = 0;
+                foreach (Voznja voznja in Voznje.SveVoznje)
+                {
+                    foreach (Korisnik k in Korisnici.Musterije)
+                    {
+                        if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                        {
+                            if (k.Prezime.Equals(temp.Prezime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }
+                            }
+                        }
+                    }
+                    a = 0;
+                    foreach (Korisnik k in Korisnici.Vozaci)
+                    {
+                        if (voznja.Vozac.Equals(k.KorisnickoIme))
+                        {
+                            if (k.Prezime.Equals(temp.Prezime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                a = 0;
+                foreach (Voznja voznja in Voznje.SveVoznje)
+                {
+                    foreach (Korisnik k in Korisnici.Musterije)
+                    {
+                        if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                        {
+                            if (k.Prezime.Equals(temp.Prezime) && k.Ime.Equals(temp.Ime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }
+                            }
+                        }
+                    }
+                    a = 0;
+                    foreach (Korisnik k in Korisnici.Vozaci)
+                    {
+                        if (voznja.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                        {
+                            if (k.Prezime.Equals(temp.Prezime) && k.Ime.Equals(temp.Ime))
+                            {
+                                if (ret.Count > 0)
+                                {
+                                    foreach (Voznja v in ret)
+                                    {
+                                        if (!v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                                            a++;
+                                    }
+
+                                    if (a == ret.Count)
+                                    {
+                                        ret.Add(voznja);
+                                        a = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    ret.Add(voznja);
+                                }
+                            }
                         }
                     }
                 }
@@ -476,6 +688,105 @@ namespace WebAPI.Controllers
                     {
                         if (voznja.DatumIVremePorudzbine <= temp.Do)
                             aaa++;
+                    }
+
+                    if(opcija.Equals("ime"))
+                    {
+                        foreach(Voznja v in Voznje.SveVoznje)
+                        {
+                            if(v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                            {
+                                foreach(Korisnik k in Korisnici.Musterije)
+                                {
+                                    if(v.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Ime.Equals(temp.Ime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }  
+                                    }
+                                }
+
+                                foreach (Korisnik k in Korisnici.Vozaci)
+                                {
+                                    if (v.Vozac.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Ime.Equals(temp.Ime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (opcija.Equals("prezime"))
+                    {
+                        foreach (Voznja v in Voznje.SveVoznje)
+                        {
+                            if (v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                            {
+                                foreach(Korisnik k in Korisnici.Musterije)
+                                {
+                                    if (v.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Prezime.Equals(temp.Prezime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                foreach (Korisnik k in Korisnici.Vozaci)
+                                {
+                                    if (v.Vozac.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Prezime.Equals(temp.Prezime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (opcija.Equals("imeIPrezime"))
+                    {
+                        foreach (Voznja v in Voznje.SveVoznje)
+                        {
+                            if (v.DatumIVremePorudzbine.Equals(voznja.DatumIVremePorudzbine))
+                            {
+                                foreach (Korisnik k in Korisnici.Musterije)
+                                {
+                                    if (v.MusterijaZaKojuJeKreiranaVoznja.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Ime.Equals(temp.Ime) && k.Prezime.Equals(temp.Prezime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                foreach (Korisnik k in Korisnici.Vozaci)
+                                {
+                                    if (v.Vozac.Equals(k.KorisnickoIme))
+                                    {
+                                        if (k.Ime.Equals(temp.Ime) && k.Prezime.Equals(temp.Prezime))
+                                        {
+                                            aaa++;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 

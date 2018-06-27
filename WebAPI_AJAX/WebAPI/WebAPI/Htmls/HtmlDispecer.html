@@ -419,9 +419,11 @@
 				Do: `${$('#do').val()}`,
 				DoCena: `${$('#doCena').val()}`,
 				OdCena: `${$('#odCena').val()}`,
+				Ime: `${$('#imePretraga').val()}`,
+				Prezime: `${$('#prezimePretraga').val()}`,
 			}
 			$.ajax({
-				url: 'api/pretragaSve/post',
+				url: 'api/pretragaSveDispecer/post',
 				method: 'POST',
 				data: JSON.stringify(voznja),
 				contentType: 'application/json; charset=utf-8',

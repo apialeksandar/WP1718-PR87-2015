@@ -177,6 +177,7 @@
     <Compile Include="Controllers\PretragaOcenaMusterijaController.cs" />
     <Compile Include="Controllers\PretragaOcenaVozacController.cs" />
     <Compile Include="Controllers\PretragaSveController.cs" />
+    <Compile Include="Controllers\PretragaSveDispecerController.cs" />
     <Compile Include="Controllers\PretragaSveVozacController.cs" />
     <Compile Include="Controllers\PrihvatiVoznjuVozacController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />

@@ -26,6 +26,8 @@ namespace WebAPI.Models.Temp
         public double XK { get; set; }
         public double YK { get; set; }
         public int PomocZaMapu { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
 
         public FormirajVoznju() { }
 
