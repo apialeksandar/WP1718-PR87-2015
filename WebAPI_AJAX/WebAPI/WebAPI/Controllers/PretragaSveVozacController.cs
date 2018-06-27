@@ -9,7 +9,7 @@ using WebAPI.Models.Temp;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaSveController : ApiController
+    public class PretragaSveVozacController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
@@ -110,7 +110,7 @@ namespace WebAPI.Controllers
             // STATUS VOZNJE
             if (statusVoznje.Equals("ima"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (voznja.StatusVoznje.ToString().Equals(temp.StatusVoznje1))
                     {
@@ -127,11 +127,11 @@ namespace WebAPI.Controllers
             // OCENA
             if (ocena.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
-                        if(ret.Count > 0)
+                        if (ret.Count > 0)
                         {
                             foreach (Voznja v in ret)
                             {
@@ -159,7 +159,7 @@ namespace WebAPI.Controllers
             }
             else if (ocena.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
@@ -191,7 +191,7 @@ namespace WebAPI.Controllers
             }
             else if (ocena.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (!(voznja.Komentar == null))
                     {
@@ -206,7 +206,7 @@ namespace WebAPI.Controllers
                                 }
                             }
 
-                            if(a == ret.Count)
+                            if (a == ret.Count)
                             {
                                 ret.Add(voznja);
                                 a = 0;
@@ -227,7 +227,7 @@ namespace WebAPI.Controllers
             // DATUM
             if (datum.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -256,7 +256,7 @@ namespace WebAPI.Controllers
             }
             else if (datum.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -285,7 +285,7 @@ namespace WebAPI.Controllers
             }
             else if (datum.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -316,7 +316,7 @@ namespace WebAPI.Controllers
             // CENA
             if (cena.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -345,7 +345,7 @@ namespace WebAPI.Controllers
             }
             else if (cena.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -374,7 +374,7 @@ namespace WebAPI.Controllers
             }
             else if (cena.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in UlogovaniKorisnici.Vozac.Voznje)
                 {
                     if (ret.Count > 0)
                     {
@@ -403,8 +403,8 @@ namespace WebAPI.Controllers
             }
 
             int aaa = 0;
-            
-            foreach(Voznja voznja in ret)
+
+            foreach (Voznja voznja in ret)
             {
                 foreach (string opcija in pomoc)
                 {
@@ -476,7 +476,7 @@ namespace WebAPI.Controllers
                 }
                 aaa = 0;
             }
-                
+
 
             return re1;
         }

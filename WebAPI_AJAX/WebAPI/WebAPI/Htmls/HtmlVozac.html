@@ -368,6 +368,53 @@
 			})
 		}
 
+		function pretraziSve()
+		{
+			let voznja =
+			{
+				OdOcena: `${$('#odOcena').val()}`,
+				DoOcena: `${$('#doOcena').val()}`,
+				StatusVoznje1: `${$('#sortStatusVoznja').val()}`,
+				Od: `${$('#od').val()}`,
+				Do: `${$('#do').val()}`,
+				DoCena: `${$('#doCena').val()}`,
+				OdCena: `${$('#odCena').val()}`,
+			}
+			$.ajax({
+				url: 'api/pretragaSveVozac/post',
+				method: 'POST',
+				data: JSON.stringify(voznja),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				success: function (data) {
+					$("#voznje").empty();
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
+					var s4 = $("<th></th>").text("Dispecer");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
+
+					var i;
+
+					for (i = 0; i < data.length; i++) {
+						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
+						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
+						var txt4 = $("<td></td>").text(data[i].Dispecer);
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
+					}
+				}
+			})
+		}
+
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function () {
@@ -617,6 +664,9 @@
 				<label>DO: </label>
 				<input type="text" id="doCena" value="">
 				<input type="submit" value="Pretrazi" onclick="pretraziCenu()">
+			</p>
+			<p>
+				<input type="submit" value="PRETRAZI SVE" onclick="pretraziSve()">
 			</p>
 		</div>
 
