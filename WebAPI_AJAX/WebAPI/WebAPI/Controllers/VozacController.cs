@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
 
         public Vozac Get()
         {
-            return (Vozac)HttpContext.Current.Session["ulogovan"];
+            return UlogovaniKorisnici.Vozac;
         }
     }
 }

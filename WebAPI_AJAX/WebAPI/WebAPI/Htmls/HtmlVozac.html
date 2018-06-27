@@ -104,26 +104,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -138,26 +140,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -173,26 +177,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -213,26 +219,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -253,26 +261,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -293,26 +303,28 @@
 				dataType: 'json',
 				success: function (data) {
 					$("#voznje").empty();
-					var s1 = $("<th></th>").text("Ulica(pocetak)");
-					var s2 = $("<th></th>").text("Broj(pocetak)");
-					var s3 = $("<th></th>").text("Grad(pocetak)");
+					var s1 = $("<th></th>").text("Ulica(narudzba)");
+					var s2 = $("<th></th>").text("Broj(narudzba)");
+					var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 					var s4 = $("<th></th>").text("Dispecer");
-					var s5 = $("<th></th>").text("Iznos");
-					var s6 = $("<th></th>").text("Status voznje");
-					var s7 = $("<th></th>").text("Vozac");
-					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+					var s5 = $("<th></th>").text("Musterija");
+					var s6 = $("<th></th>").text("Vozac");
+					var s7 = $("<th></th>").text("Status voznje");
+					var s8 = $("<th></th>").text("Iznos");
+					$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 					var i;
 
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac);
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				}
 			})
@@ -450,17 +462,15 @@
 
 			$("#mojeVoznje").click(function () {
 				$("#voznje").empty();
-				var s1 = $("<th></th>").text("Ulica(pocetak)");
-				var s2 = $("<th></th>").text("Broj(pocetak)");
-				var s3 = $("<th></th>").text("Grad(pocetak)");
+				var s1 = $("<th></th>").text("Ulica(narudzba)");
+				var s2 = $("<th></th>").text("Broj(narudzba)");
+				var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 				var s4 = $("<th></th>").text("Dispecer");
-				var s5 = $("<th></th>").text("Iznos");
-				var s6 = $("<th></th>").text("Status voznje");
-				var s7 = $("<th></th>").text("Vozac");
-				/*var s8 = $("<th></th>").text("Ulica(odrediste)");
-			 	var s9 = $("<th></th>").text("Broj(odrediste)");
-			 	var s10 = $("<th></th>").text("Grad(odrediste)");*/
-				$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+				var s5 = $("<th></th>").text("Musterija");
+				var s6 = $("<th></th>").text("Vozac");
+				var s7 = $("<th></th>").text("Status voznje");
+				var s8 = $("<th></th>").text("Iznos");
+				$("#voznje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 				$.get("/api/sveVoznjeVozaca", function (data, status) {
 					var i;
@@ -468,29 +478,28 @@
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						/*var txt8 = $("<td></td>").text(data[i].Odrediste.Adresa.Ulica);
-			 			var txt9 = $("<td></td>").text(data[i].Odrediste.Adresa.Broj);
-			 			var txt10 = $("<td></td>").text(data[i].Odrediste.Adresa.NaseljenoMesto);*/
-						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				});
 			});
 
 			$("#voznjeNaCekanju").click(function () {
 				$("#voznjeCekanje").empty();
-				var s1 = $("<th></th>").text("Ulica(pocetak)");
-				var s2 = $("<th></th>").text("Broj(pocetak)");
-				var s3 = $("<th></th>").text("Grad(pocetak)");
+				var s1 = $("<th></th>").text("Ulica(narudzba)");
+				var s2 = $("<th></th>").text("Broj(narudzba)");
+				var s3 = $("<th></th>").text("Datum kreiranja narudzbe");
 				var s4 = $("<th></th>").text("Dispecer");
-				var s5 = $("<th></th>").text("Iznos");
-				var s6 = $("<th></th>").text("Status voznje");
-				var s7 = $("<th></th>").text("Vozac");
-				$("#voznjeCekanje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, "</tr>");
+				var s5 = $("<th></th>").text("Musterija");
+				var s6 = $("<th></th>").text("Vozac");
+				var s7 = $("<th></th>").text("Status voznje");
+				var s8 = $("<th></th>").text("Iznos");
+				$("#voznjeCekanje").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, "</tr>");
 
 				$.get("/api/voznje", function (data, status) {
 					var i;
@@ -498,12 +507,13 @@
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Ulica);
 						var txt2 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.Broj);
-						var txt3 = $("<td></td>").text(data[i].LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto);
+						var txt3 = $("<td></td>").text(data[i].DatumIVremePorudzbine);
 						var txt4 = $("<td></td>").text(data[i].Dispecer);
-						var txt5 = $("<td></td>").text(data[i].Iznos);
-						var txt6 = $("<td></td>").text(data[i].StatusVoznje);
-						var txt7 = $("<td></td>").text(data[i].Vozac)
-						$("#voznjeCekanje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, "</tr>");
+						var txt5 = $("<td></td>").text(data[i].MusterijaZaKojuJeKreiranaVoznja);
+						var txt6 = $("<td></td>").text(data[i].Vozac);
+						var txt7 = $("<td></td>").text(data[i].StatusVoznje);
+						var txt8 = $("<td></td>").text(data[i].Iznos);
+						$("#voznjeCekanje").append("<tr>", txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, "</tr>");
 					}
 				});
 			});
