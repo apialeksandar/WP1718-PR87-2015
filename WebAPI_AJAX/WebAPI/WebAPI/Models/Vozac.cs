@@ -14,7 +14,7 @@ namespace WebAPI.Models
         public double Rastojanje { get; set; }
 
         public Vozac() { }
-        public Vozac(string korisnickoIme, string lozinka, string ime, string prezime, Pol pol, string jmbg, string kontaktTelefon, string email, Uloga uloga, Lokacija lokacija, Automobil automobil)
+        public Vozac(string korisnickoIme, string lozinka, string ime, string prezime, Pol pol, string jmbg, string kontaktTelefon, string email, Uloga uloga, Lokacija lokacija, Automobil automobil, bool slobodan, double rastojanje)
         {
             KorisnickoIme = korisnickoIme;
             Lozinka = lozinka;
@@ -28,7 +28,8 @@ namespace WebAPI.Models
             Voznje = new List<Voznja>();
             Lokacija = lokacija;
             Automobil = automobil;
-            Slobodan = true;
+            Slobodan = slobodan;
+            Rastojanje = rastojanje;
         }
     }
 }

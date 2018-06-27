@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using WebAPI.Enumerations;
@@ -18,7 +19,20 @@ namespace WebAPI.Models
             Dispeceri = new List<Dispecer>();
             Vozaci = new List<Vozac>();
 
-            Musterije.Add(new Musterija("musterija", "12345", "Mušterija", "Mušterić", Enumerations.Pol.Zenski, "0365995931198", "0381654009687", "musterija@yahoo.com", Enumerations.Uloga.Musterija));
+            string[] linesMusterija = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaKorisnici.txt");
+            for (int i = 0; i < linesMusterija.Count(); i++)
+            {
+                string[] line = linesMusterija[i].Split(',');
+                Pol pol;
+
+                if (line[4].Equals("Muski"))
+                {
+                    pol = Pol.Muski;
+                }
+                else
+                    pol = Pol.Zenski;
+                Musterije.Add(new Musterija(line[0], line[1], line[2], line[3], pol, line[5], line[6], line[7], Uloga.Musterija));
+            }
 
             string[] lines = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\dispeceri.txt");
 
@@ -42,7 +56,57 @@ namespace WebAPI.Models
 
             Dispeceri.Add(new Dispecer(lines[8], lines[9], lines[10], lines[11], p, lines[13], lines[14], lines[15], Uloga.Dispecer));
 
-            Vozaci.Add(new Vozac("vozac", "vozac", "vozac", "vozac", Pol.Muski, "2405996820189", "066064958", "vozac@gmail.com", Uloga.Vozac, new Lokacija("15.0365984136987125", "15.0365984136987125", new Adresa("PocetnaUlica", 5, "Novi Sad", "21000")), new Automobil("vozac", "2005", "NS108-TX", 10, TipAutomobila.PutnickiAutomobil)));
+            int k = 0;
+            foreach (Dispecer dispecer in Dispeceri)
+            {
+                string lineSendDispecer = String.Empty;
+                lineSendDispecer = dispecer.KorisnickoIme + "," + dispecer.Lozinka + "," + dispecer.Ime + "," + dispecer.Prezime + "," + dispecer.Pol.ToString() + "," + dispecer.Jmbg + "," + dispecer.KontaktTelefon + "," + dispecer.Email + "," + dispecer.Uloga.ToString() + Environment.NewLine;
+
+                if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaDispeceri.txt"))
+                {
+                    File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaDispeceri.txt", lineSendDispecer);
+                }
+                else
+                {
+                    if(k == 0)
+                    {
+                        System.IO.File.WriteAllText((@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaDispeceri.txt"), string.Empty);
+                        k++;
+                    }
+                    File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaDispeceri.txt", lineSendDispecer);
+                }
+            }
+
+            string[] linesVozac = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt");
+            for (int i = 0; i < linesVozac.Count(); i++)
+            {
+                string[] line = linesVozac[i].Split(',');
+                Pol pol;
+                TipAutomobila auto;
+                bool slobodan;
+
+                if (line[4].Equals("Muski"))
+                {
+                    pol = Pol.Muski;
+                }
+                else
+                    pol = Pol.Zenski;
+
+                if (line[19].Equals("PutnickiAutomobil"))
+                {
+                    auto = TipAutomobila.PutnickiAutomobil;
+                }
+                else
+                    auto = TipAutomobila.KombiVozilo;
+
+                if (line[20].Equals("True"))
+                {
+                    slobodan = true;
+                }
+                else
+                    slobodan = false;
+                Vozaci.Add(new Vozac(line[0], line[1], line[2], line[3], pol, line[5], line[6], line[7], Uloga.Vozac, new Lokacija(line[9], line[10], new Adresa(line[11], int.Parse(line[12]), line[13], line[14])), new Automobil(line[15], line[16], line[17], int.Parse(line[18]), auto), slobodan, double.Parse(line[21])));
+            }
         }
     }
 }

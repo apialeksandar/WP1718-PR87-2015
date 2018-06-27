@@ -715,7 +715,7 @@
 
 				success: function (data) {
 					var i;
-
+					$("#obradiVoznjuVozac").empty();
 					for (i = 0; i < data.length; i++) {
 						var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
 						$("#obradiVoznjuVozac").append(txt1);

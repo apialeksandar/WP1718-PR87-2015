@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,10 +30,63 @@ namespace WebAPI.Controllers
                     v.StatusVoznje = StatusVoznje.Uspesna;
                     v.Pomoc = 1;
 
-                    foreach(Vozac vozac in Korisnici.Vozaci)
+                    string[] linesVoznja = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt");
+                    for (int i = 0; i < linesVoznja.Count(); i++)
+                    {
+                        string[] line = linesVoznja[i].Split(',');
+
+                        /*if (v.DatumIVremePorudzbine.Equals(DateTime.Parse(line[i])))
+                        {
+                            var file = new List<string>(System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt"));
+                            file.RemoveAt(i);
+                            File.WriteAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", file.ToArray());
+                        }*/
+                    }
+
+                    string lineSendVoznja = String.Empty;
+                    lineSendVoznja = v.DatumIVremePorudzbine.ToString() + "," + v.LokacijaNaKojuTaksiDolazi.XKoordinata + "," + v.LokacijaNaKojuTaksiDolazi.YKoordinata + "," + v.LokacijaNaKojuTaksiDolazi.Adresa.Ulica + "," + v.LokacijaNaKojuTaksiDolazi.Adresa.Broj + "," + v.LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto + "," + v.LokacijaNaKojuTaksiDolazi.Adresa.PozivniBrojMesta + "," + v.ZeljeniTipAutomobila.ToString() + "," + v.MusterijaZaKojuJeKreiranaVoznja + "," + v.Odrediste.XKoordinata + "," + v.Odrediste.YKoordinata + "," + v.Odrediste.Adresa.Ulica + "," + v.Odrediste.Adresa.Broj + "," + v.Odrediste.Adresa.NaseljenoMesto + "," + v.Odrediste.Adresa.PozivniBrojMesta + "," + v.Dispecer + "," + v.Vozac + "," + v.Iznos + "," + v.Komentar.Opis + "," + v.Komentar.DatumObjave + "," + v.Komentar.KorisnikKojiJeOstavioKomentar + "," + v.Komentar.KorisnikKojiJeOstavioKomentar + "," + v.Komentar.OcenaVoznje.ToString() + "," + v.StatusVoznje.ToString() + "," + v.Pomoc + Environment.NewLine;
+
+                    if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt"))
+                    {
+                        File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", lineSendVoznja);
+                    }
+                    else
+                    {
+                        File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", lineSendVoznja);
+                    }
+
+                    foreach (Vozac vozac in Korisnici.Vozaci)
                     {
                         if (vozac.KorisnickoIme.Equals(UlogovaniKorisnici.Vozac.KorisnickoIme))
+                        {
                             vozac.Slobodan = true;
+
+                            string[] linesVozac = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt");
+                            for (int i = 0; i < linesVozac.Count(); i++)
+                            {
+                                string[] line = linesVozac[i].Split(',');
+
+                                if (vozac.KorisnickoIme.Equals(line[0]))
+                                {
+                                    var file = new List<string>(System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt"));
+                                    file.RemoveAt(i);
+                                    File.WriteAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", file.ToArray());
+                                }
+                            }
+
+                            string lineSendVozac = String.Empty;
+                            lineSendVozac = vozac.KorisnickoIme + "," + vozac.Lozinka + "," + vozac.Ime + "," + vozac.Prezime + "," + vozac.Pol.ToString() + "," + vozac.Jmbg + "," + vozac.KontaktTelefon + "," + vozac.Email + "," + vozac.Uloga.ToString() + "," + vozac.Lokacija.XKoordinata + "," + vozac.Lokacija.YKoordinata + "," + vozac.Lokacija.Adresa.Ulica + "," + vozac.Lokacija.Adresa.Broj + "," + vozac.Lokacija.Adresa.NaseljenoMesto + "," + vozac.Lokacija.Adresa.PozivniBrojMesta + "," + vozac.Automobil.Vozac + "," + vozac.Automobil.GodisteAutomobila + "," + vozac.Automobil.BrojRegistarskeOznake + "," + vozac.Automobil.BrojTaksiVozila + "," + vozac.Automobil.TipAutomobila.ToString() + "," + vozac.Slobodan.ToString() + "," + vozac.Rastojanje + Environment.NewLine;
+
+                            if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt"))
+                            {
+                                File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", lineSendVozac);
+                            }
+                            else
+                            {
+                                File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", lineSendVozac);
+                            }
+                        }
+                            
                     }
 
                     foreach(Voznja v1 in Voznje.SveVoznje)
@@ -61,6 +115,31 @@ namespace WebAPI.Controllers
                                 {
                                     k.Lokacija = UlogovaniKorisnici.Vozac.Lokacija;
                                 }
+                            }
+
+                            string[] linesVozac = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt");
+                            for (int i = 0; i < linesVozac.Count(); i++)
+                            {
+                                string[] line = linesVozac[i].Split(',');
+
+                                if (UlogovaniKorisnici.Vozac.KorisnickoIme.Equals(line[0]))
+                                {
+                                    var file = new List<string>(System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt"));
+                                    file.RemoveAt(i);
+                                    File.WriteAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", file.ToArray());
+                                }
+                            }
+
+                            string lineSendVozac = String.Empty;
+                            lineSendVozac = UlogovaniKorisnici.Vozac.KorisnickoIme + "," + UlogovaniKorisnici.Vozac.Lozinka + "," + UlogovaniKorisnici.Vozac.Ime + "," + UlogovaniKorisnici.Vozac.Prezime + "," + UlogovaniKorisnici.Vozac.Pol.ToString() + "," + UlogovaniKorisnici.Vozac.Jmbg + "," + UlogovaniKorisnici.Vozac.KontaktTelefon + "," + UlogovaniKorisnici.Vozac.Email + "," + UlogovaniKorisnici.Vozac.Uloga.ToString() + "," + UlogovaniKorisnici.Vozac.Lokacija.XKoordinata + "," + UlogovaniKorisnici.Vozac.Lokacija.YKoordinata + "," + UlogovaniKorisnici.Vozac.Lokacija.Adresa.Ulica + "," + UlogovaniKorisnici.Vozac.Lokacija.Adresa.Broj + "," + UlogovaniKorisnici.Vozac.Lokacija.Adresa.NaseljenoMesto + "," + UlogovaniKorisnici.Vozac.Lokacija.Adresa.PozivniBrojMesta + "," + UlogovaniKorisnici.Vozac.Automobil.Vozac + "," + UlogovaniKorisnici.Vozac.Automobil.GodisteAutomobila + "," + UlogovaniKorisnici.Vozac.Automobil.BrojRegistarskeOznake + "," + UlogovaniKorisnici.Vozac.Automobil.BrojTaksiVozila + "," + UlogovaniKorisnici.Vozac.Automobil.TipAutomobila.ToString() + "," + UlogovaniKorisnici.Vozac.Slobodan.ToString() + "," + UlogovaniKorisnici.Vozac.Rastojanje + Environment.NewLine;
+
+                            if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt"))
+                            {
+                                File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", lineSendVozac);
+                            }
+                            else
+                            {
+                                File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVozaci.txt", lineSendVozac);
                             }
 
                             break;

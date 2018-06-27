@@ -1,0 +1,2 @@
+vozac1,vozac,Vozac,Vozac,Zenski,2601989820122,0632033035,vozacZ@yahoo.com,Vozac,15.0365984136987125,15.0365984136987125,PocetnaUlica,5,Novi Sad,21000,vozac1,2000,NS170-TX,1,PutnickiAutomobil,False,NaN
+vozac,vozac,Vozac,Vozac,Muski,0505982820962,0643250968,vozac@gmail.com,Vozac,30.581780123,17.599787689,Ulica,66,Novi Sad,21000,vozac,2005,NS108-TX,10,PutnickiAutomobil,False,NaN

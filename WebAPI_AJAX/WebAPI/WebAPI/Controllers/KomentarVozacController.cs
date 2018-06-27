@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,7 +29,32 @@ namespace WebAPI.Controllers
                     retKom.VoznjaNaKojuJeKomentarOstavljen = voznja.DatumIVremePorudzbine;
                     voznja.Komentar = retKom;
 
-                    foreach(Voznja v in Voznje.SveVoznje)
+                    string[] linesVoznja = System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt");
+                    for (int i = 0; i < linesVoznja.Count(); i++)
+                    {
+                        string[] line = linesVoznja[i].Split(',');
+
+                        if (voznja.DatumIVremePorudzbine.Equals(DateTime.Parse(line[0])))
+                        {
+                            var file = new List<string>(System.IO.File.ReadAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt"));
+                            file.RemoveAt(i);
+                            File.WriteAllLines(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", file.ToArray());
+                        }
+                    }
+
+                    string lineSendVoznja = String.Empty;
+                    /*lineSendVoznja = voznja.DatumIVremePorudzbine.ToString() + "," + voznja.LokacijaNaKojuTaksiDolazi.XKoordinata + "," + voznja.LokacijaNaKojuTaksiDolazi.YKoordinata + "," + voznja.LokacijaNaKojuTaksiDolazi.Adresa.Ulica + "," + voznja.LokacijaNaKojuTaksiDolazi.Adresa.Broj + "," + voznja.LokacijaNaKojuTaksiDolazi.Adresa.NaseljenoMesto + "," + voznja.LokacijaNaKojuTaksiDolazi.Adresa.PozivniBrojMesta + "," + voznja.ZeljeniTipAutomobila.ToString() + "," + voznja.MusterijaZaKojuJeKreiranaVoznja + "," + voznja.Odrediste.XKoordinata + "," + voznja.Odrediste.YKoordinata + "," + voznja.Odrediste.Adresa.Ulica + "," + voznja.Odrediste.Adresa.Broj + "," + voznja.Odrediste.Adresa.NaseljenoMesto + "," + voznja.Odrediste.Adresa.PozivniBrojMesta + "," + voznja.Dispecer + "," + voznja.Vozac + "," + voznja.Iznos + "," + voznja.Komentar.Opis + "," + voznja.Komentar.DatumObjave + "," + voznja.Komentar.KorisnikKojiJeOstavioKomentar + "," + voznja.Komentar.KorisnikKojiJeOstavioKomentar + "," + voznja.Komentar.OcenaVoznje.ToString() + "," + voznja.StatusVoznje.ToString() + "," + voznja.Pomoc + Environment.NewLine;
+
+                    if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt"))
+                    {
+                        File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", lineSendVoznja);
+                    }
+                    else
+                    {
+                        File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaVoznje.txt", lineSendVoznja);
+                    }*/
+
+                    foreach (Voznja v in Voznje.SveVoznje)
                     {
                         if(v.LokacijaNaKojuTaksiDolazi.Adresa.Ulica.Equals(voznja.LokacijaNaKojuTaksiDolazi.Adresa.Ulica) && v.LokacijaNaKojuTaksiDolazi.Adresa.Broj == voznja.LokacijaNaKojuTaksiDolazi.Adresa.Broj)
                         {

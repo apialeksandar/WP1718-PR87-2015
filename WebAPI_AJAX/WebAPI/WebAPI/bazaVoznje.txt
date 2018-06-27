@@ -1,0 +1,6 @@
+27-Jun-18 18:43:55,45.2405420879178,19.8281730143101,Bulevar cara Lazara,79,Novi Sad,21000,PutnickiAutomobil,musterija,46.2405420879178,20.8281730143101,Ulica,0,Novi Sad,21000,admin1,vozac,500,Bila je dobra voznja.,27-Jun-18 19:43:55,musterija,27-Jun-18 18:43:55,Pet,Uspesna,0
+27-Jun-18 21:56:38,45.2413881874341,19.8318208185704,Bulevar cara Lazara,73,Novi Sad,21000,PutnickiAutomobil,musterija,,,,0,,,,,-1,,01-Jan-01 00:00:00,,,Nula,NaCekanju,0
+27-Jun-18 21:56:38,45.2413881874341,19.8318208185704,Bulevar cara Lazara,73,Novi Sad,21000,PutnickiAutomobil,musterija,,,,0,,,,,-1,obirsana,27-Jun-18 21:58:49,musterija,musterija,Nula,Otkazana,0
+27-Jun-18 22:01:46,45.24398684288,19.8250831095249,Teodora Pavlovića,2,Novi Sad,21000,PutnickiAutomobil,musterija,,,,0,,,,,-1,,01-Jan-01 00:00:00,,,Nula,NaCekanju,0
+27-Jun-18 22:02:12,15.786995937,2.120228456,Teodora Pavlovića,4,Novi Sad,21000,PutnickiAutomobil,musterija,,,,0,,,,,-1,,01-Jan-01 00:00:00,,,Nula,NaCekanju,0
+27-Jun-18 22:02:12,15.786995937,2.120228456,Teodora Pavlovića,4,Novi Sad,21000,PutnickiAutomobil,musterija,44.749552409,14.346431909,Ulica,66,,,admin1,vozac,300,,01-Jan-01 00:00:00,,,Nula,Uspesna,1

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -50,6 +51,19 @@ namespace WebAPI.Controllers
                     {
                         korisnik.Voznje = new List<Voznja>();
                         Korisnici.Musterije.Add(korisnik);
+
+                        string lineSendMusterija = String.Empty;
+                        lineSendMusterija = korisnik.KorisnickoIme + "," + korisnik.Lozinka + "," + korisnik.Ime + "," + korisnik.Prezime + "," + korisnik.Pol.ToString() + "," + korisnik.Jmbg + "," + korisnik.KontaktTelefon + "," + korisnik.Email + "," + korisnik.Uloga.ToString() + Environment.NewLine;
+
+                        if (!File.Exists(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaKorisnici.txt"))
+                        {
+                            File.WriteAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaKorisnici.txt", lineSendMusterija);
+                        }
+                        else
+                        {
+                            File.AppendAllText(@"E:\FAX\III godina\2. semestar\Web programiranje [6 ESPB]\projekat\WP1718-PR87-2015\WebAPI_AJAX\WebAPI\WebAPI\bazaKorisnici.txt", lineSendMusterija);
+                        }
+
                         return CreatedAtRoute("DefaultApi", new { korisnickoIme = korisnik.KorisnickoIme }, korisnik);
                     }
                     else
